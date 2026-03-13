@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>v2.4.1 — Gran revisión del sistema de combate | DEVLOG</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../post.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="scanline-overlay"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-block">
+        <span class="logo-tag">//</span>
+        <h1 class="logo-title"><a href="../index.html" style="color:inherit;text-decoration:none">DEVLOG</a></h1>
+        <span class="logo-sub">patch notes & updates</span>
+      </div>
+      <nav class="site-nav">
+        <a href="../index.html" class="nav-link">INDEX</a>
+        <a href="#" class="nav-link">ABOUT</a>
+        <a href="#" class="nav-link">ARCHIVE</a>
+      </nav>
+    </div>
+    <div class="header-bar"></div>
+  </header>
+
+  <main class="post-main">
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+      <a href="../index.html">← Volver al índice</a>
+    </div>
+
+    <!-- POST HEADER -->
+    <header class="post-header">
+      <div class="post-meta">
+        <span class="post-version">v2.4.1</span>
+        <span class="post-date">2026-03-10</span>
+        <span class="post-tag tag-balance">BALANCE</span>
+      </div>
+      <h1 class="post-heading">Gran revisión del sistema de combate</h1>
+      <p class="post-lead">
+        Se rediseñó desde cero el cálculo de daño crítico. Ahora los valores base escalan con nivel
+        en lugar de usarse multiplicadores fijos. Varios personajes afectados.
+      </p>
+      <div class="post-summary-bar">
+        <span class="change buff">↑ 3 buffs</span>
+        <span class="change nerf">↓ 5 nerfs</span>
+        <span class="change fix">✦ 8 fixes</span>
+      </div>
+    </header>
+
+    <!-- POST BODY -->
+    <article class="post-body">
+
+      <section class="patch-section">
+        <h2 class="section-title">
+          <span class="section-icon buff-icon">↑</span>
+          BUFFS
+        </h2>
+
+        <div class="change-entry">
+          <div class="change-entry-header">
+            <span class="character-name">KIRA</span>
+            <span class="change-type buff">BUFF</span>
+          </div>
+          <ul class="change-list">
+            <li>Velocidad de ataque aumentada de <code>1.2</code> a <code>1.35</code></li>
+            <li>Daño base de habilidad pasiva incrementado un <code>15%</code></li>
+          </ul>
+          <p class="change-reason">Kira se encontraba por debajo del promedio en partidas de alto nivel. Este ajuste busca reposicionarla como una opción viable en el meta competitivo sin hacerla dominante.</p>
+        </div>
+
+        <div class="change-entry">
+          <div class="change-entry-header">
+            <span class="character-name">VOLTAN</span>
+            <span class="change-type buff">BUFF</span>
+          </div>
+          <ul class="change-list">
+            <li>HP base aumentado de <code>820</code> a <code>900</code></li>
+          </ul>
+          <p class="change-reason">Con el nuevo cálculo de críticos, Voltan era especialmente vulnerable al burst. Se compensa la exposición.</p>
+        </div>
+
+        <div class="change-entry">
+          <div class="change-entry-header">
+            <span class="character-name">SISTEMA: ESCUDOS</span>
+            <span class="change-type buff">BUFF</span>
+          </div>
+          <ul class="change-list">
+            <li>Los escudos ahora absorben hasta un <code>30%</code> del daño crítico (antes ignorado por completo)</li>
+            <li>Duración de escudo temporal extendida de <code>3s</code> a <code>4.5s</code></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="patch-section">
+        <h2 class="section-title">
+          <span class="section-icon nerf-icon">↓</span>
+          NERFS
+        </h2>
+
+        <div class="change-entry">
+          <div class="change-entry-header">
+            <span class="character-name">DRATH</span>
+            <span class="change-type nerf">NERF</span>
+          </div>
+          <ul class="change-list">
+            <li>Multiplicador de daño crítico reducido de <code>2.8x</code> a <code>2.2x</code></li>
+            <li>Cooldown de habilidad <em>Sombra Veloz</em> aumentado de <code>8s</code> a <code>12s</code></li>
+          </ul>
+          <p class="change-reason">Con el nuevo sistema de escalado, Drath acumulaba valores de crítico no intencionales. Estos cambios lo traen a un rango saludable.</p>
+        </div>
+
+        <div class="change-entry">
+          <div class="change-entry-header">
+            <span class="character-name">NEXARA</span>
+            <span class="change-type nerf">NERF</span>
+          </div>
+          <ul class="change-list">
+            <li>Rango de habilidad <em>Cadena de Hielo</em> reducido de <code>14m</code> a <code>10m</code></li>
+            <li>Duración de congelación reducida de <code>2.5s</code> a <code>1.8s</code></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="patch-section">
+        <h2 class="section-title">
+          <span class="section-icon fix-icon">✦</span>
+          CORRECCIONES
+        </h2>
+
+        <div class="change-entry no-character">
+          <ul class="change-list">
+            <li>Corregido error donde los críticos de área aplicaban el multiplicador dos veces</li>
+            <li>Solucionado bug visual en el que los escudos aparecían como rotos sin estarlo</li>
+            <li>El tutorial ahora explica correctamente la mecánica de críticos</li>
+            <li>Corregido crash al usar <em>Teletransportación</em> en ciertos bordes del mapa</li>
+            <li>Los tooltips de daño ahora muestran el valor post-escudo correctamente</li>
+            <li>Eliminado lag de 1 frame en el registro de golpes de borde (<em>hitbox edge case</em>)</li>
+            <li>Corregida inconsistencia entre el daño mostrado y el daño real en modo espectador</li>
+            <li>Arreglado texto desbordado en el panel de estadísticas en pantallas de <code>1280px</code></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="patch-section developer-notes">
+        <h2 class="section-title">
+          <span class="section-icon">//</span>
+          NOTA DEL DESARROLLADOR
+        </h2>
+        <div class="dev-note">
+          <p>
+            Este parche representa la mayor revisión de combate desde la v1.8. El sistema de críticos anterior
+            usaba multiplicadores planos que no envejecieron bien al agregar personajes con pools de daño distintas.
+          </p>
+          <p>
+            El nuevo sistema escala con nivel, lo que hace que los críticos en rangos altos sean poderosos pero predecibles.
+            Estaremos monitoreando de cerca los datos de partidas competitivas durante las próximas dos semanas
+            y haremos ajustes finos si es necesario.
+          </p>
+          <p>
+            Gracias a todos los que reportaron los bugs de hitbox. Los informes detallados ayudan mucho.
+          </p>
+        </div>
+      </section>
+
+    </article>
+
+    <!-- NAVIGATION -->
+    <nav class="post-nav">
+      <a href="#" class="post-nav-link prev">← v2.3.0: Nuevo mapa</a>
+      <a href="../index.html" class="post-nav-link index">ÍNDICE COMPLETO</a>
+      <span class="post-nav-link next disabled">Siguiente →</span>
+    </nav>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-logo">// DEVLOG</span>
+      <span class="footer-info">Hecho a mano con HTML · Ningún framework fue dañado en este proceso</span>
+    </div>
+  </footer>
+
+</body>
+</html>
