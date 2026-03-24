@@ -70,7 +70,7 @@
 /* Title */
 .post-toc-title {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.04em;
   color: var(--text-dim);
   margin-bottom: 12px;
