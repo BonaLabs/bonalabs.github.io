@@ -383,16 +383,12 @@ body {
 /* ── READ MORE ── */
 .read-more {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0;
   color: var(--text-dim);
   text-decoration: none;
   transition: color 0.2s ease;
   font-weight: 500;
-}
-
-.read-more:hover {
-  color: var(--accent);
 }
 
 /* ── FOOTER ── */
