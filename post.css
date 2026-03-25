@@ -276,12 +276,28 @@ em {
   margin-bottom: 0;
 }
 
-/* ── TABLE STYLING (REWORKED) ── */
+/* TABLE WRAPPER (SCROLL CONTAINER) */
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 28px 0;
+}
+
+/* TABLE */
 .post-main table {
   border-collapse: collapse;
-  margin: 28px 0;
-  width: auto; /* important fix */
-  max-width: 100%;
+  width: max-content; /* 👈 key change */
+  min-width: 100%;    /* 👈 prevents it from being too small */
+}
+
+/* Optional: nicer scroll */
+.table-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
 }
 
 /* HEADER */
@@ -302,6 +318,11 @@ em {
   font-size: 14px;
   color: var(--text-primary); /* 👈 key change */
   vertical-align: middle;
+}
+
+.post-main td,
+.post-main th {
+  white-space: nowrap;
 }
 
 /* ROW HOVER */
