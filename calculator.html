@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enchant Calculator | BonaLabs</title>
+
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../post.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&display=swap"
+    rel="stylesheet">
+</head>
+
+<body id="top">
+
+  <div class="scanline-overlay"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-block">
+        <h1 class="logo-title"><a href="../" style="color:inherit;text-decoration:none">BonaLabs</a></h1>
+        <span class="logo-sub">From Bona with Love</span>
+      </div>
+    </div>
+    <div class="header-bar"></div>
+  </header>
+
+  <main class="post-main">
+
+    <header class="post-header">
+      <div class="post-meta">
+        <span class="post-tag tag-feature">TOOL</span>
+      </div>
+      <h1 class="post-heading">Enchant Calculator</h1>
+      <p class="post-lead">For Lineage 2 Essence</p>
+    </header>
+
+    <article class="post-body">
+
+      <section class="calculator-section">
+
+        <div class="calculator-box">
+
+          <label>Item</label>
+          <select id="itemSelect"></select>
+
+          <label>Target Enchant Level (optional)</label>
+          <input type="number" id="targetLevel" placeholder="Max Enchant Level by default">
+
+          <label>Item Value (optional)</label>
+          <input type="number" id="itemValue" placeholder="Adena / L-Coins">
+
+          <label style="margin-top:10px;">
+            <div class="checkbox-row">
+              <input type="checkbox" id="usePity">
+              <span>Guaranteed Enchant Simulation</span>
+            </div>
+          </label>
+
+          <button onclick="calculate()">Calculate</button>
+
+          <div class="tableWrapper" id="tableWrapper" style="display:none;">
+            <table>
+              <thead id="tableHead"></thead>
+              <tbody id="resultTable"></tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </section>
+
+    </article>
+
+    <nav class="post-nav">
+      <a href="../index.html" class="post-nav-link home">Home</a>
+    </nav>
+
+    <a href="#top" class="back-to-top-btn" id="backToTop">
+      <span>↑</span>
+    </a>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-logo">BonaLabs</span>
+      <span class="footer-info">Fan-made content. No copyright infringement intended.</span>
+    </div>
+  </footer>
+
+  <script>
+
+    const pityCache = {};
+
+    // Back to top
+    window.addEventListener('scroll', function () {
+      const btn = document.getElementById('backToTop');
+      btn.style.display = window.scrollY > 200 ? 'block' : 'none';
+    });
+
+    // ================= DATA =================
+
+    const items = [
+
+      // TALISMANS
+      { name: "Talisman of Aden / Blessed Talisman of Aden", category: "Talismans", max: 10, rates: [100, 80, 70, 60, 40, 30, 24, 16, 10, 10] },
+      { name: "Talisman of Eva / Blessed Talisman of Eva", category: "Talismans", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
+      { name: "Talisman of Speed / Blessed Talisman of Speed", category: "Talismans", max: 10, rates: [60, 50, 45, 40, 35, 30, 25, 20, 10, 5] },
+      { name: "Heavenly Talisman / Blessed Heavenly Talisman", category: "Talismans", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
+      { name: "Transcendent Venir's Talisman", category: "Talismans", max: 5, rates: [50, 40, 30, 20, 10] },
+
+      // AGATHIONS
+      { name: "Agathion Ignis", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
+      { name: "Agathion Nebula", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
+      { name: "Agathion Procella", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
+      { name: "Agathion Petram", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
+      { name: "Agathion Joy", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
+      { name: "Agathion Dragon Egg", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
+
+      { name: "Fire Spirit King Ignis", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Water Spirit Queen Nebula", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Wind Spirit King Procella", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Earth Spirit King Petram", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Light Spirit King Lumiel", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
+
+      // SPECIAL EQUIPMENT
+      { name: "Cloak of Protection", category: "Special Equipment", max: 10, rates: [85, 80, 75, 60, 50, 40, 30, 20, 15, 7] },
+      { name: "Dragon Belt / Blessed Dragon Belt", category: "Special Equipment", max: 10, rates: [60, 50, 45, 40, 35, 30, 25, 20, 10, 5] },
+      { name: "Phantom Mask / Blessed Phantom Mask", category: "Special Equipment", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
+      { name: "Piercing Mask / Blessed Piercing Mask", category: "Special Equipment", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
+      { name: "Circlet of Hero / Blessed Circlet of Hero", category: "Special Equipment", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
+      { name: "Heavenly Cloak", category: "Special Equipment", max: 8, rates: [50, 40, 30, 20, 10, 10, 10, 10] },
+      { name: "Gran Kain's Pendant", category: "Special Equipment", max: 5, rates: [50, 40, 30, 20, 10] }
+
+    ];
+
+    // Populate select with categories
+    const select = document.getElementById("itemSelect");
+    const categories = {};
+
+    items.forEach(item => {
+      if (!categories[item.category]) {
+        categories[item.category] = document.createElement("optgroup");
+        categories[item.category].label = item.category;
+        select.appendChild(categories[item.category]);
+      }
+
+      let opt = document.createElement("option");
+      opt.value = item.name;
+      opt.textContent = item.name;
+
+      categories[item.category].appendChild(opt);
+    });
+
+    // ================= HELPERS =================
+
+    function format(num) {
+      return Math.round(num).toLocaleString();
+    }
+
+    function formatPercent(num) {
+      let str = num.toFixed(6);
+      return str.replace(/\.0+$/, '').replace(/(\.[0-9]*?)0+$/, '$1');
+    }
+
+    // ================= PITY =================
+    function simulatePity(rate) {
+
+      const isMobile = window.innerWidth < 768;
+      const iterations = isMobile ? 10000 : 100000;
+
+      const key = rate + "_" + iterations;
+
+      if (pityCache[key]) {
+        return pityCache[key];
+      }
+
+      let total = 0;
+
+      for (let i = 0; i < iterations; i++) {
+        let gauge = 0;
+        let attempts = 0;
+
+        while (true) {
+          attempts++;
+
+          if (gauge >= 100) break;
+
+          if (Math.random() * 100 < rate) break;
+
+          gauge += rate;
+        }
+
+        total += attempts;
+      }
+
+      const result = total / iterations;
+      pityCache[key] = result;
+
+      return result;
+    }
+
+    // ================= CALCULATE =================
+
+    function calculate() {
+
+      for (let key in pityCache) {
+  delete pityCache[key];
+}
+
+      const selected = items.find(i => i.name === document.getElementById("itemSelect").value);
+
+      // VALIDATION
+      if (!selected) {
+        alert("Please select a valid item.");
+        return;
+      }
+
+      const targetInput = parseInt(document.getElementById("targetLevel").value);
+const itemValueRaw = document.getElementById("itemValue").value;
+const itemValue = itemValueRaw ? parseFloat(itemValueRaw) : null;
+      const usePity = document.getElementById("usePity").checked;
+
+      const maxLevel = selected.max;
+      const target = (!targetInput || targetInput > maxLevel) ? maxLevel : targetInput;
+
+      const table = document.getElementById("resultTable");
+      const head = document.getElementById("tableHead");
+
+      table.innerHTML = '';
+      document.getElementById("tableWrapper").style.display = 'block';
+
+      // Dynamic header
+      head.innerHTML = `
+  <tr>
+    <th>Enchant Level</th>
+    <th>Success Rate</th>
+    <th>No-Fail Success Rate</th>
+    <th>Required Items</th>
+    <th>Cost</th>
+    ${usePity ? `
+      <th>Avg No-Fail Success Rate</th>
+      <th>Avg Required Items</th>
+      <th>Avg Cost</th>
+    ` : ''}
+  </tr>
+  `;
+
+      let expected = 1;
+      let avgExpected = 1;
+      let perfect = 1;
+      let avgPerfect = 1;
+
+      for (let i = 0; i < target; i++) {
+
+        let rate = selected.rates[i] / 100;
+
+        expected *= (1 / rate);
+        perfect *= rate;
+
+        let requiredItems = Math.ceil(expected);
+        let totalCost = itemValue ? requiredItems * itemValue : null;
+
+        let extra = '';
+
+        if (usePity) {
+          let pityAttempts = simulatePity(selected.rates[i]);
+
+          avgExpected *= pityAttempts;
+
+          let effectiveRate = 1 / pityAttempts;
+          avgPerfect *= effectiveRate;
+
+          let avgRequired = Math.ceil(avgExpected);
+          let avgCost = itemValue ? avgRequired * itemValue : null;
+
+          extra = `
+        <td>${formatPercent(avgPerfect * 100)}%</td>
+        <td>${format(avgRequired)}</td>
+        <td>${avgCost ? format(avgCost) : ''}</td>
+      `;
+        }
+
+        let row = `
+      <tr>
+        <td>+${i + 1}</td>
+        <td>${selected.rates[i]}%</td>
+        <td>${formatPercent(perfect * 100)}%</td>
+        <td>${format(requiredItems)}</td>
+        <td>${totalCost ? format(totalCost) : ''}</td>
+        ${extra}
+      </tr>
+    `;
+
+        table.innerHTML += row;
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>
