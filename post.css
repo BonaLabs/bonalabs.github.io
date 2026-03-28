@@ -517,7 +517,6 @@ em {
 /* ── TABLE FIX (NO HORIZONTAL SCROLL) ── */
 .post-main table {
   width: 100%;            /* 👈 clave */
-  table-layout: fixed;    /* 👈 fuerza ajuste */
 }
 
 /* CELLS */
