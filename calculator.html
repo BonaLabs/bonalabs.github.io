@@ -13,6 +13,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&display=swap"
     rel="stylesheet">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
   <style>
     /* Custom select styles */
     .custom-select {
@@ -512,7 +514,7 @@
         <span>${item.name}</span>
       `;
 
-      itemDiv.addEventListener('click', function() {
+      itemDiv.addEventListener('click', function () {
         selectSelected.innerHTML = `
           <div class="select-item-icon" style="background-image: url('icons/${item.icon}');"></div>
           <span>${item.name}</span>
@@ -528,12 +530,12 @@
     });
 
     // Handle custom select open/close
-    selectSelected.addEventListener('click', function() {
+    selectSelected.addEventListener('click', function () {
       selectContainer.classList.toggle('open');
     });
 
     // Close when clicking outside
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
       if (!selectContainer.contains(e.target)) {
         selectContainer.classList.remove('open');
       }
@@ -561,7 +563,7 @@
         <span>${item.name}</span>
       `;
 
-      itemDiv.addEventListener('click', function() {
+      itemDiv.addEventListener('click', function () {
         compoundSelectSelected.innerHTML = `
           <div class="select-item-icon" style="background-image: url('icons/${item.icon}');"></div>
           <span>${item.name}</span>
@@ -577,12 +579,12 @@
     });
 
     // Handle compound custom select open/close
-    compoundSelectSelected.addEventListener('click', function() {
+    compoundSelectSelected.addEventListener('click', function () {
       compoundSelectContainer.classList.toggle('open');
     });
 
     // Close when clicking outside
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
       if (!compoundSelectContainer.contains(e.target)) {
         compoundSelectContainer.classList.remove('open');
       }
