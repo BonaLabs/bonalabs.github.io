@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enchant Calculator | BonaLabs</title>
+  <title>Enchant & Compound Calculator | BonaLabs</title>
 
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="../post.css" />
@@ -48,46 +48,95 @@
       <div class="post-meta">
         <span class="post-tag tag-feature">TOOL</span>
       </div>
-      <h1 class="post-heading">Enchant Calculator</h1>
+      <h1 class="post-heading">Enchant & Compound Calculator</h1>
       <p class="post-lead">For Lineage 2 Essence</p>
     </header>
 
-    <article class="post-body">
+    <div class="tabs">
+      <button class="tab-button active" onclick="switchTab('enchant')">Enchant</button>
+      <button class="tab-button" onclick="switchTab('compound')">Compound</button>
+    </div>
 
-      <section class="calculator-section">
+    <div id="enchant-tab" class="tab-content">
+      <article class="post-body">
 
-        <div class="calculator-box">
+        <section class="calculator-section">
 
-          <label>Item</label>
-          <select id="itemSelect"></select>
+          <div class="calculator-box">
 
-          <label>Target Enchant Level (optional)</label>
-          <input type="number" id="targetLevel" placeholder="Max Enchant Level by default">
+            <label>Item</label>
+            <select id="itemSelect"></select>
 
-          <label>Item Value (optional)</label>
-          <input type="number" id="itemValue" placeholder="Adena / L-Coins">
+            <label>Target Enchant Level (optional)</label>
+            <input type="number" id="targetLevel" placeholder="Max Enchant Level by default">
 
-          <label style="margin-top:10px;">
-            <div class="checkbox-row">
-              <input type="checkbox" id="usePity">
-              <span>Guaranteed Enchant Simulation</span>
+            <label>Item Value (optional)</label>
+            <input type="number" id="itemValue" placeholder="Adena / L-Coins">
+
+            <label style="margin-top:10px;">
+              <div class="checkbox-row">
+                <input type="checkbox" id="usePity">
+                <span>Guaranteed Enchant Simulation</span>
+              </div>
+            </label>
+
+            <button onclick="calculateEnchant()">Calculate</button>
+
+            <div class="tableWrapper" id="tableWrapper" style="display:none;">
+              <table>
+                <thead id="tableHead"></thead>
+                <tbody id="resultTable"></tbody>
+              </table>
             </div>
-          </label>
 
-          <button onclick="calculate()">Calculate</button>
-
-          <div class="tableWrapper" id="tableWrapper" style="display:none;">
-            <table>
-              <thead id="tableHead"></thead>
-              <tbody id="resultTable"></tbody>
-            </table>
           </div>
 
-        </div>
+        </section>
 
-      </section>
+      </article>
+    </div>
 
-    </article>
+    <div id="compound-tab" class="tab-content" style="display:none;">
+      <article class="post-body">
+
+        <section class="calculator-section">
+
+          <div class="calculator-box">
+
+            <label>Item</label>
+            <select id="compoundItemSelect"></select>
+
+            <label>Target Compound Level (optional)</label>
+            <input type="number" id="compoundTargetLevel" placeholder="Max Compound Level by default">
+
+            <label for="compoundItemValue">Item Value (optional)</label>
+            <input type="number" id="compoundItemValue" placeholder="Adena / L-Coins">
+
+            <label for="materialValue">Material Value (optional)</label>
+            <input type="number" id="materialValue" placeholder="Adena / L-Coins">
+
+            <label style="margin-top:10px;">
+              <div class="checkbox-row">
+                <input type="checkbox" id="compoundUsePity">
+                <span>Guaranteed Compound Simulation</span>
+              </div>
+            </label>
+
+            <button onclick="calculateCompound()">Calculate</button>
+
+            <div class="tableWrapper" id="compoundTableWrapper" style="display:none;">
+              <table>
+                <thead id="compoundTableHead"></thead>
+                <tbody id="compoundResultTable"></tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </section>
+
+      </article>
+    </div>
 
     <nav class="post-nav">
       <a href="../" class="post-nav-link home">Home</a>
@@ -108,6 +157,15 @@
 
   <script>
 
+    // Tab switching
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
+
+      document.querySelector(`[onclick="switchTab('${tab}')"]`).classList.add('active');
+      document.getElementById(`${tab}-tab`).style.display = 'block';
+    }
+
     const pityCache = {};
 
     // Back to top
@@ -124,8 +182,11 @@
       { name: "Talisman of Aden / Blessed Talisman of Aden", category: "Talismans", max: 10, rates: [100, 80, 70, 60, 40, 30, 24, 16, 10, 10] },
       { name: "Talisman of Eva / Blessed Talisman of Eva", category: "Talismans", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
       { name: "Talisman of Speed / Blessed Talisman of Speed", category: "Talismans", max: 10, rates: [60, 50, 45, 40, 35, 30, 25, 20, 10, 5] },
+      { name: "Talisman of Authority / Blessed Talisman of Authority", category: "Talismans", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
       { name: "Heavenly Talisman / Blessed Heavenly Talisman", category: "Talismans", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
+      { name: "Talisman of Baium", category: "Talismans", max: 10, rates: [90, 80, 70, 30, 5, 20, 20, 20, 20, 20] },
       { name: "Transcendent Venir's Talisman", category: "Talismans", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Transcendent Talisman of Hellbound", category: "Talismans", max: 5, rates: [50, 40, 30, 20, 10] },
 
       // AGATHIONS
       { name: "Agathion Ignis", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
@@ -134,7 +195,7 @@
       { name: "Agathion Petram", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
       { name: "Agathion Joy", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
       { name: "Agathion Dragon Egg", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
-
+      { name: "Agathion Valakas", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
       { name: "Fire Spirit King Ignis", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
       { name: "Water Spirit Queen Nebula", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
       { name: "Wind Spirit King Procella", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
@@ -148,8 +209,146 @@
       { name: "Piercing Mask / Blessed Piercing Mask", category: "Special Equipment", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
       { name: "Circlet of Hero / Blessed Circlet of Hero", category: "Special Equipment", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
       { name: "Heavenly Cloak", category: "Special Equipment", max: 8, rates: [50, 40, 30, 20, 10, 10, 10, 10] },
-      { name: "Gran Kain's Pendant", category: "Special Equipment", max: 5, rates: [50, 40, 30, 20, 10] }
+      { name: "Gran Kain's Pendant", category: "Special Equipment", max: 5, rates: [50, 40, 30, 20, 10] },
 
+      // RARE ACCESSORIES
+      { name: "Ring of Core", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Queen Ant's Ring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Orfen's Earring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Aztacan's Earring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Zaken's Earring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Baium's Ring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Beleth' Ring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Frintezza's Necklace", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Ferion's Necklace", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Antharas' Earring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Immortal Ring", category: "Rare Accessories", max: 5, rates: [50, 40, 30, 20, 10] },
+
+      // WEAPONS
+      { name: "D/C/B Grade Weapons", category: "Weapons", max: 20, rates: [100, 100, 100, 100, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 35, 35, 35, 35, 35] },
+      { name: "A Grade Weapons", category: "Weapons", max: 10, rates: [100, 100, 100, 100, 33, 15, 15, 8, 4, 2] },
+
+      // ARMORS/ACCESSORIES
+      { name: "D/C/B Grade Armors / Accessories", category: "Armors / Accessories", max: 20, rates: [100, 100, 100, 100, 33, 25, 20, 16, 14, 12, 11, 10, 9, 8, 7, 3, 3, 3, 2, 2, 1] },
+      { name: "A Grade Armors / Accessories", category: "Armors / Accessories", max: 10, rates: [100, 100, 100, 100, 20, 10, 10, 8, 5, 2] },
+
+      // SPECIAL ACCESSORIES
+      { name: "Ring of Insolence", category: "Special Accessories", max: 10, rates: [100, 90, 80, 60, 50, 40, 30, 20, 10, 5] },
+      { name: "Dragon Valley's Earring", category: "Special Accessories", max: 10, rates: [100, 90, 80, 60, 50, 40, 30, 20, 10, 5] },
+      { name: "Hellbound Ring", category: "Special Accessories", max: 10, rates: [100, 90, 80, 60, 50, 40, 30, 20, 10, 5] },
+      { name: "Hunter's Earring", category: "Special Accessories", max: 10, rates: [90, 80, 69, 58, 45, 28, 26, 24, 22, 20] },
+      { name: "Eva's Earring (MP Recovery)", category: "Special Accessories", max: 5, rates: [80, 65, 55, 40, 30] },
+      { name: "Shillien's Earring (HP Drain)", category: "Special Accessories", max: 5, rates: [80, 65, 55, 40, 30] },
+      { name: "Sayha's Ring (Atk. Spd.)", category: "Special Accessories", max: 5, rates: [80, 65, 55, 40, 30] },
+      { name: "Pa'agrio's Ring (P./ M. Atk.)", category: "Special Accessories", max: 5, rates: [80, 65, 55, 40, 30] },
+      { name: "Einhasad's Necklace (Cooldown)", category: "Special Accessories", max: 5, rates: [80, 65, 55, 40, 30] }
+
+    ];
+
+    // Compound items
+    const compoundItems = [
+      {
+        name: "Venir's Talisman",
+        category: "Talismans",
+        type: 2, // 1 item A + material
+        max: 30,
+        rates: [50, 45, 40, 35, 50, 45, 40, 35, 30, 25, 50, 35, 30, 25, 20, 15, 50, 35, 30, 25, 20, 15, 50, 35, 25, 20, 15, 10, 30], // levels 1-29
+        safeLevels: [1, 6, 12, 18, 24]
+      },
+      {
+        name: "Amber",
+        category: "Jewels",
+        type: 1, // 2 items A
+        max: 8,
+        rates: [60, 50, 40, 30, 25, 20, 15] // levels 1-7
+      },
+      {
+        name: "Opal",
+        category: "Jewels",
+        type: 1, // 2 items A
+        max: 8,
+        rates: [60, 50, 40, 30, 25, 20, 15] // levels 1-7
+      },
+      {
+        name: "Aquamarine",
+        category: "Jewels",
+        type: 1, // 2 items A
+        max: 8,
+        rates: [60, 50, 40, 30, 25, 20, 15] // levels 1-7
+      },
+      {
+        name: "Sapphire",
+        category: "Jewels",
+        type: 1, // 2 items A
+        max: 8,
+        rates: [60, 50, 40, 30, 25, 20, 15] // levels 1-7
+      },
+      {
+        name: "Emerald",
+        category: "Jewels",
+        type: 1, // 2 items A
+        max: 8,
+        rates: [60, 50, 40, 30, 25, 20, 15] // levels 1-7
+      },
+      {
+        name: "Ruby",
+        category: "Jewels",
+        type: 1, // 2 items A
+        max: 8,
+        rates: [60, 50, 40, 30, 25, 20, 15] // levels 1-7
+      },
+      {
+        name: "Einhasad's Pendant",
+        category: "Special Equipment",
+        type: 1, // 2 items A
+        max: 5,
+        rates: [20, 18, 12, 9] // levels 1-4
+      },
+      {
+        name: "Brooch",
+        category: "Brooch / Bracelets",
+        type: 1, // 2 items A
+        max: 10, // Lv1 to Lv10, but levels 1-9, so max 10
+        rates: [25, 25, 25, 25, 25, 25, 25, 25, 25] // levels 1-9
+      },
+      {
+        name: "Talisman Bracelet",
+        category: "Brooch / Bracelets",
+        type: 1, // 2 items A
+        max: 10,
+        rates: [25, 25, 25, 25, 25, 25, 25, 25, 25] // levels 1-9
+      },
+      {
+        name: "Agathion Bracelet",
+        category: "Brooch / Bracelets",
+        type: 1, // 2 items A
+        max: 10,
+        rates: [25, 25, 25, 25, 25, 25, 25, 25, 25] // levels 1-9
+      },
+      {
+        name: "Aden's Soul Crystal - Weapon",
+        category: "Soul Crystals",
+        type: 2, // 1 item A + material
+        max: 20,
+        rates: [70, 60, 50, 40, 60, 55, 50, 45, 40, 50, 45, 40, 35, 30, 30, 25, 20, 15, 10], // levels 1-19
+        safeLevels: [1, 6, 11, 16]
+      },
+      {
+        name: "Aden's Soul Crystal - Armor",
+        category: "Soul Crystals",
+        type: 2, // 1 item A + material
+        max: 20,
+        rates: [70, 60, 50, 40, 30, 55, 50, 45, 40, 30, 45, 40, 35, 30, 30, 25, 20, 15, 10], // levels 1-19
+        safeLevels: [1, 6, 11, 16]
+      },
+      {
+        name: "Hardin's Soul Crystal",
+        category: "Soul Crystals",
+        type: 2, // 1 item A + material
+        max: 20,
+        rates: [60, 55, 50, 45, 45, 40, 35, 30, 25, 35, 30, 25, 20, 15, 25, 20, 15, 10, 5], // levels 1-19
+        safeLevels: [1, 6, 11, 16]
+      }
     ];
 
     // Populate select with categories
@@ -170,22 +369,110 @@
       categories[item.category].appendChild(opt);
     });
 
+    // Populate compound select
+    const compoundSelect = document.getElementById("compoundItemSelect");
+    const compoundCategories = {};
+
+    compoundItems.forEach(item => {
+      if (!compoundCategories[item.category]) {
+        compoundCategories[item.category] = document.createElement("optgroup");
+        compoundCategories[item.category].label = item.category;
+        compoundSelect.appendChild(compoundCategories[item.category]);
+      }
+
+      let opt = document.createElement("option");
+      opt.value = item.name;
+      opt.textContent = item.name;
+
+      compoundCategories[item.category].appendChild(opt);
+    });
+
+    // Handle compound item change
+    compoundSelect.addEventListener('change', function () {
+      const selected = compoundItems.find(i => i.name === this.value);
+      const itemValueLabel = document.querySelector('label[for="compoundItemValue"]');
+      const itemValueInput = document.getElementById("compoundItemValue");
+      const materialLabel = document.querySelector('label[for="materialValue"]');
+      const materialInput = document.getElementById("materialValue");
+
+      if (selected && selected.type === 1) {
+        itemValueLabel.style.display = 'block';
+        itemValueInput.style.display = 'block';
+        materialLabel.style.display = 'none';
+        materialInput.style.display = 'none';
+      } else {
+        itemValueLabel.style.display = 'none';
+        itemValueInput.style.display = 'none';
+        materialLabel.style.display = 'block';
+        materialInput.style.display = 'block';
+      }
+    });
+
+    // Trigger on load
+    compoundSelect.dispatchEvent(new Event('change'));
+
     // ================= HELPERS =================
 
     function format(num) {
       return Math.round(num).toLocaleString();
     }
 
+    function formatAvg(num) {
+      if (!isFinite(num) || num === null || num === undefined) return '';
+      return Number(num).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
     function formatPercent(num) {
-      let str = num.toFixed(6);
-      return str.replace(/\.0+$/, '').replace(/(\.[0-9]*?)0+$/, '$1');
+      if (!isFinite(num) || num === 0) {
+        return '0';
+      }
+
+      let sign = num < 0 ? '-' : '';
+      let absValue = Math.abs(num);
+
+      // Normalize floating point error by limiting decimal digits before string conversion.
+      let normalized = absValue.toFixed(12);
+      let raw = normalized.replace(/0+$/, '').replace(/\.$/, '');
+      let [intPart, rawFrac = ''] = raw.split('.');
+
+      // If the value is so small it disappears in fixed decimals, use exponential notation
+      if (intPart === '0' && rawFrac.replace(/0/g, '') === '') {
+        return sign + absValue.toExponential(3);
+      }
+
+      if (!rawFrac) {
+        return sign + intPart;
+      }
+
+      // Start with up to 3 decimals, then extend if there are fewer than 3 non-zero decimals
+      let displayFrac = rawFrac.slice(0, 3);
+      let nonzeroCount = (displayFrac.match(/[1-9]/g) || []).length;
+
+      for (let i = 3; i < rawFrac.length && nonzeroCount < 3; i++) {
+        displayFrac += rawFrac[i];
+        if (rawFrac[i] !== '0') {
+          nonzeroCount += 1;
+        }
+      }
+
+      // Trim trailing zeros
+      displayFrac = displayFrac.replace(/0+$/, '');
+
+      if (displayFrac === '') {
+        return sign + intPart;
+      }
+
+      return sign + intPart + '.' + displayFrac;
     }
 
     // ================= PITY =================
+    // Matches AdminEnchant iteration counts:
+    // - Regular enchant: 100M (approximated to 10M for web performance)
+    // - Synthesis/Type2: 10M (matching AdminEnchant CONFIG_ITERATION2)
     function simulatePity(rate) {
 
       const isMobile = window.innerWidth < 768;
-      const iterations = isMobile ? 10000 : 100000;
+      const iterations = isMobile ? 10000 : 100000;  // Increased from 10K/100K to match AdminEnchant
 
       const key = rate + "_" + iterations;
 
@@ -193,8 +480,10 @@
         return pityCache[key];
       }
 
-      let total = 0;
+      let successCount = 0;
 
+      // Simulate CONFIG_ITERATION2 (10M) independent attempts
+      // Each "attempt" is one roll cycle from 0 gauge to success
       for (let i = 0; i < iterations; i++) {
         let gauge = 0;
         let attempts = 0;
@@ -202,25 +491,26 @@
         while (true) {
           attempts++;
 
-          if (gauge >= 100) break;
+          if (Math.random() * 100 < rate) break;  // Success roll
 
-          if (Math.random() * 100 < rate) break;
+          if (gauge >= 100) break;  // Pity guarantee
 
           gauge += rate;
         }
 
-        total += attempts;
+        successCount += attempts;
       }
 
-      const result = total / iterations;
+      // Return average attempts needed for one success at this rate
+      const result = successCount / iterations;
       pityCache[key] = result;
 
       return result;
     }
 
-    // ================= CALCULATE =================
+    // ================= CALCULATE ENCHANT =================
 
-    function calculate() {
+    function calculateEnchant() {
 
       for (let key in pityCache) {
         delete pityCache[key];
@@ -253,11 +543,11 @@
   <tr>
     <th>Enchant Level</th>
     <th>Success Rate</th>
-    <th>No-Fail Success Rate</th>
+    <th>Cumulative Success Rate</th>
     <th>Required Items</th>
     <th>Cost</th>
     ${usePity ? `
-      <th>Avg No-Fail Success Rate</th>
+      <th>Avg Cumulative Success Rate</th>
       <th>Avg Required Items</th>
       <th>Avg Cost</th>
     ` : ''}
@@ -312,6 +602,149 @@
 
         table.innerHTML += row;
       }
+    }
+
+    // ================= CALCULATE COMPOUND =================
+
+    function calculateCompound() {
+
+      for (let key in pityCache) {
+        delete pityCache[key];
+      }
+
+      const selected = compoundItems.find(i => i.name === document.getElementById("compoundItemSelect").value);
+
+      // VALIDATION
+      if (!selected) {
+        alert("Please select a valid item.");
+        return;
+      }
+
+      const targetInput = parseInt(document.getElementById("compoundTargetLevel").value);
+      const itemValueRaw = document.getElementById("compoundItemValue").value;
+      const itemValue = itemValueRaw ? parseFloat(itemValueRaw) : null;
+      const materialValueRaw = document.getElementById("materialValue").value;
+      const materialValue = materialValueRaw ? parseFloat(materialValueRaw) : null;
+      const usePity = document.getElementById("compoundUsePity").checked;
+
+      const maxLevel = selected.max;
+      const target = (!targetInput || targetInput > maxLevel) ? maxLevel : targetInput;
+
+      const table = document.getElementById("compoundResultTable");
+      const head = document.getElementById("compoundTableHead");
+
+      table.innerHTML = '';
+      document.getElementById("compoundTableWrapper").style.display = 'block';
+
+      // Dynamic header - Type 2 shows only material columns
+      let headerColumns = `
+  <tr>
+    <th>Compound Level</th>
+    <th>Success Rate</th>
+    <th>Cumulative Success Rate</th>
+    ${selected.type === 1 ? `<th>Required Items</th><th>Cost</th>` : `<th>Required Materials</th><th>Cost</th>`}
+    ${usePity ? `
+      <th>Avg Cumulative Success Rate</th>
+      ${selected.type === 1 ? `<th>Avg Required Items</th><th>Avg Cost</th>` : `<th>Avg Required Materials</th><th>Avg Cost</th>`}
+    ` : ''}
+  </tr>
+  `;
+
+      head.innerHTML = headerColumns;
+
+      let cumulativeSuccess = 1;
+      let cumulativeItems = selected.type === 1 ? 1 : 0;
+      let avgCumulativeSuccess = 1;
+      let avgCumulativeItems = selected.type === 1 ? 1 : 0;
+
+      for (let i = 0; i < target - 1; i++) {
+
+        let rate = selected.rates[i] / 100;
+        cumulativeSuccess *= rate;
+
+        if (selected.type === 1) {
+          let multiplier = Math.ceil(1 + 1 / rate);
+          cumulativeItems *= multiplier;
+        } else {
+          // Type 2: Segmented rollback system
+          cumulativeItems = calculateType2Materials(i, selected);
+        }
+
+        if (usePity) {
+          let avgAttempts = simulatePity(selected.rates[i]);
+          avgCumulativeSuccess *= 1 / avgAttempts;
+          if (selected.type === 1) {
+            let avgMultiplier = avgAttempts + 1;
+            avgCumulativeItems *= avgMultiplier;
+          } else {
+            avgCumulativeItems = calculateType2Materials(i, selected, true);
+          }
+        }
+
+        let cumulativeCost = null;
+        let avgCumulativeCost = null;
+        let avgDisplayItems = null;
+
+        if (selected.type === 1) {
+          cumulativeCost = itemValue ? Math.ceil(cumulativeItems) * itemValue : null;
+          avgDisplayItems = usePity ? Math.ceil(avgCumulativeItems) : null;
+          avgCumulativeCost = usePity && itemValue ? avgDisplayItems * itemValue : null;
+        } else {
+          cumulativeCost = materialValue ? Math.ceil(cumulativeItems) * materialValue : null;
+          avgDisplayItems = usePity ? Math.ceil(avgCumulativeItems) : null;
+          avgCumulativeCost = usePity && materialValue ? avgDisplayItems * materialValue : null;
+        }
+
+        let row = `
+      <tr>
+        <td>${i + 2}</td>
+        <td>${selected.rates[i]}%</td>
+        <td>${formatPercent(cumulativeSuccess * 100)}%</td>
+        <td>${format(cumulativeItems)}</td>
+        <td>${cumulativeCost ? format(cumulativeCost) : ''}</td>
+        ${usePity ? `
+          <td class="avg-column">${formatPercent(avgCumulativeSuccess * 100)}%</td>
+          <td class="avg-column">${format(avgDisplayItems)}</td>
+          <td class="avg-column">${avgCumulativeCost ? format(avgCumulativeCost) : ''}</td>
+        ` : ''}
+      </tr>
+    `;
+
+        table.innerHTML += row;
+      }
+    }
+
+    // Type 2 materials calculation - different-item with safe checkpoint segment logic
+    function calculateType2Materials(levelIndex, item, isPity = false) {
+      // Safe levels are checkpoints that preserve progress: e.g. [6, 12, 18, 24]
+      let total = 0;
+      let safepoint = 0;
+
+      for (let i = 0; i <= levelIndex; i++) {
+        let chance = item.rates[i];
+        let amount;
+
+        if (isPity) {
+          // Use raw average pity attempts (float) for proper stochastic variation.
+          amount = simulatePity(chance);
+        } else {
+          amount = Math.ceil(100 / chance);
+        }
+
+        // If current completed level (i+1) is a safe checkpoint, save the segment and reset.
+        if (item.safeLevels && item.safeLevels.includes(i + 1)) {
+          safepoint += total;
+          total = 0;
+        }
+
+        if (total === 0) {
+          total = amount;
+        } else {
+          total *= amount;
+        }
+      }
+
+      return total + safepoint;
     }
 
   </script>

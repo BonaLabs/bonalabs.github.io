@@ -53,6 +53,38 @@
   max-width: 580px;
 }
 
+/* ── TABS ── */
+.tabs {
+  display: flex;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tab-button {
+  padding: 12px 24px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tab-button.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.tab-button:hover {
+  color: var(--text-primary);
+}
+
+.tab-content {
+  display: block;
+}
+
 .post-summary-bar {
   display: flex;
   gap: 12px;
@@ -555,6 +587,11 @@ em {
 .post-main td:nth-child(5),
 .post-main td:nth-child(8) {
   color: var(--text-primary);
+}
+
+/* AVG COLUMNS (GREEN) */
+.avg-column {
+  color: var(--buff);
 }
 
 /* ── MOBILE ── */
