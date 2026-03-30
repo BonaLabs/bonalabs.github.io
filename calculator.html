@@ -6,15 +6,132 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Enchant & Compound Calculator | BonaLabs</title>
 
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet" href="../post.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="post.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&display=swap"
     rel="stylesheet">
-  <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="apple-touch-icon" href="/favicon.png">
+  <style>
+    /* Custom select styles */
+    .custom-select {
+      position: relative;
+      width: 100%;
+    }
+
+    .select-selected {
+      width: 100%;
+      padding: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-family: var(--font-body);
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      min-height: 24px;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+
+    .select-selected:hover {
+      border-color: var(--accent-dim);
+    }
+
+    .select-selected:focus {
+      outline: none;
+      border-color: var(--accent-dim);
+    }
+
+    .select-selected:after {
+      content: "▼";
+      position: absolute;
+      right: 10px;
+      font-size: 12px;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    .select-items {
+      position: absolute;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      max-height: 300px;
+      overflow-y: auto;
+      width: 100%;
+      z-index: 99;
+      display: none;
+      box-shadow: 0 4px 8px var(--bg-overlay);
+    }
+
+    .select-items div {
+      padding: 6px 16px 6px 10px;
+      cursor: pointer;
+      display: block;
+      min-height: 20px;
+      font-size: 14px;
+      font-family: var(--font-body);
+      font-weight: 400;
+      color: var(--text-primary);
+      transition: background-color 0.2s ease;
+    }
+
+    .select-items .select-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .select-items div:hover {
+      background-color: var(--accent-glow);
+    }
+
+    .select-items .select-item-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      flex-shrink: 0;
+    }
+
+    .select-items .optgroup-label {
+      font-weight: 600;
+      background-color: var(--bg-subtle);
+      padding: 4px 16px 4px 10px;
+      cursor: default;
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-family: var(--font-body);
+      letter-spacing: 0.5px;
+    }
+
+    .select-items .optgroup-label:hover {
+      background-color: var(--bg-subtle);
+    }
+
+    .custom-select.open .select-selected {
+      border-radius: 4px 4px 0 0;
+      border-bottom-color: var(--bg-card);
+    }
+
+    .custom-select.open .select-items {
+      display: block;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .select-items .select-item-icon {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  </style>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KJ6L9Z34M7"></script>
@@ -65,7 +182,10 @@
           <div class="calculator-box">
 
             <label>Item</label>
-            <select id="itemSelect"></select>
+            <div class="custom-select" id="itemSelect">
+              <div class="select-selected">Select an item...</div>
+              <div class="select-items"></div>
+            </div>
 
             <label>Target Enchant Level (optional)</label>
             <input type="number" id="targetLevel" placeholder="Max Enchant Level by default">
@@ -104,7 +224,10 @@
           <div class="calculator-box">
 
             <label>Item</label>
-            <select id="compoundItemSelect"></select>
+            <div class="custom-select" id="compoundItemSelect">
+              <div class="select-selected">Select an item...</div>
+              <div class="select-items"></div>
+            </div>
 
             <label>Target Compound Level (optional)</label>
             <input type="number" id="compoundTargetLevel" placeholder="Max Compound Level by default">
@@ -179,69 +302,69 @@
     const items = [
 
       // TALISMANS
-      { name: "Talisman of Aden / Blessed Talisman of Aden", category: "Talismans", max: 10, rates: [100, 80, 70, 60, 40, 30, 24, 16, 10, 10] },
-      { name: "Talisman of Eva / Blessed Talisman of Eva", category: "Talismans", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
-      { name: "Talisman of Speed / Blessed Talisman of Speed", category: "Talismans", max: 10, rates: [60, 50, 45, 40, 35, 30, 25, 20, 10, 5] },
-      { name: "Talisman of Authority / Blessed Talisman of Authority", category: "Talismans", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
-      { name: "Heavenly Talisman / Blessed Heavenly Talisman", category: "Talismans", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
-      { name: "Talisman of Baium", category: "Talismans", max: 10, rates: [90, 80, 70, 30, 5, 20, 20, 20, 20, 20] },
-      { name: "Transcendent Venir's Talisman", category: "Talismans", max: 5, rates: [50, 40, 30, 20, 10] },
-      { name: "Transcendent Talisman of Hellbound", category: "Talismans", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Talisman of Aden (and Blessed)", category: "Talismans", icon: "bm_aden_talisman.png", max: 10, rates: [100, 80, 70, 60, 40, 30, 24, 16, 10, 10] },
+      { name: "Talisman of Eva (and Blessed)", category: "Talismans", icon: "bm_eva_talisman.png", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
+      { name: "Talisman of Speed (and Blessed)", category: "Talismans", icon: "tallisman_rapid.png", max: 10, rates: [60, 50, 45, 40, 35, 30, 25, 20, 10, 5] },
+      { name: "Talisman of Authority (and Blessed)", category: "Talismans", icon: "sayhas_talisman_new.png", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
+      { name: "Heavenly Talisman (and Blessed)", category: "Talismans", icon: "talisman_of_heaven_i00.png", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
+      { name: "Talisman of Baium", category: "Talismans", icon: "baium_talisman_new.png", max: 10, rates: [90, 80, 70, 30, 5, 20, 20, 20, 20, 20] },
+      { name: "Transcendent Venir's Talisman", category: "Talismans", icon: "defend_talisman_energy_upgrade.png", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Transcendent Talisman of Hellbound", category: "Talismans", icon: "transcend_hellbound_talisman_i00.png", max: 5, rates: [50, 40, 30, 20, 10] },
 
       // AGATHIONS
-      { name: "Agathion Ignis", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
-      { name: "Agathion Nebula", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
-      { name: "Agathion Procella", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
-      { name: "Agathion Petram", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
-      { name: "Agathion Joy", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
-      { name: "Agathion Dragon Egg", category: "Agathions", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
-      { name: "Agathion Valakas", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
-      { name: "Fire Spirit King Ignis", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
-      { name: "Water Spirit Queen Nebula", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
-      { name: "Wind Spirit King Procella", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
-      { name: "Earth Spirit King Petram", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
-      { name: "Light Spirit King Lumiel", category: "Agathions", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Agathion Ignis", category: "Agathions", icon: "agathion_fire_1.png", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
+      { name: "Agathion Nebula", category: "Agathions", icon: "agathion_water_1.png", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
+      { name: "Agathion Procella", category: "Agathions", icon: "agathion_wind_1.png", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
+      { name: "Agathion Petram", category: "Agathions", icon: "agathion_earth_1.png", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
+      { name: "Agathion Joy", category: "Agathions", icon: "pleasure_agathion_i00.png", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
+      { name: "Agathion Dragon Egg", category: "Agathions", icon: "agathion_valakas_i00.png", max: 10, rates: [100, 100, 100, 65, 50, 35, 24, 18, 14, 8] },
+      { name: "Agathion Valakas", category: "Agathions", icon: "agathion_valakas_i01.png", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Fire Spirit King Ignis", category: "Agathions", icon: "agathion_high_ignis.png", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Water Spirit Queen Nebula", category: "Agathions", icon: "agathion_high_nebula.png", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Wind Spirit King Procella", category: "Agathions", icon: "agathion_high_procella.png", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Earth Spirit King Petram", category: "Agathions", icon: "agathion_high_petram.png", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Light Spirit King Lumiel", category: "Agathions", icon: "agathion_high_shabang.png", max: 5, rates: [50, 40, 30, 20, 10] },
 
       // SPECIAL EQUIPMENT
-      { name: "Cloak of Protection", category: "Special Equipment", max: 10, rates: [85, 80, 75, 60, 50, 40, 30, 20, 15, 7] },
-      { name: "Dragon Belt / Blessed Dragon Belt", category: "Special Equipment", max: 10, rates: [60, 50, 45, 40, 35, 30, 25, 20, 10, 5] },
-      { name: "Phantom Mask / Blessed Phantom Mask", category: "Special Equipment", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
-      { name: "Piercing Mask / Blessed Piercing Mask", category: "Special Equipment", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
-      { name: "Circlet of Hero / Blessed Circlet of Hero", category: "Special Equipment", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
-      { name: "Heavenly Cloak", category: "Special Equipment", max: 8, rates: [50, 40, 30, 20, 10, 10, 10, 10] },
-      { name: "Gran Kain's Pendant", category: "Special Equipment", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Cloak of Protection", category: "Special Equipment", icon: "bm_2018_sayha_cloak_back_i01.png", max: 10, rates: [85, 80, 75, 60, 50, 40, 30, 20, 15, 7] },
+      { name: "Dragon Belt (and Blessed)", category: "Special Equipment", icon: "r2_belt_i01.png", max: 10, rates: [60, 50, 45, 40, 35, 30, 25, 20, 10, 5] },
+      { name: "Phantom Mask (and Blessed)", category: "Special Equipment", icon: "mask_of_phantom_i00.png", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
+      { name: "Piercing Mask (and Blessed)", category: "Special Equipment", icon: "accessory_black_half_face_i00.png", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
+      { name: "Circlet of Hero (and Blessed)", category: "Special Equipment", icon: "accessory_barka_karm_i00.png", max: 10, rates: [60, 50, 40, 35, 30, 28, 26, 24, 22, 20] },
+      { name: "Heavenly Cloak", category: "Special Equipment", icon: "nobless_cloak_i00.png", max: 8, rates: [50, 40, 30, 20, 10, 10, 10, 10] },
+      { name: "Gran Kain's Pendant", category: "Special Equipment", icon: "bm_pendant_of_grankain_i00.png", max: 5, rates: [50, 40, 30, 20, 10] },
 
       // RARE ACCESSORIES
-      { name: "Ring of Core", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
-      { name: "Queen Ant's Ring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
-      { name: "Orfen's Earring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
-      { name: "Aztacan's Earring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
-      { name: "Zaken's Earring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
-      { name: "Baium's Ring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
-      { name: "Beleth' Ring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
-      { name: "Frintezza's Necklace", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
-      { name: "Ferion's Necklace", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
-      { name: "Antharas' Earring", category: "Rare Accessories", max: 6, rates: [100, 50, 40, 30, 20, 8] },
-      { name: "Immortal Ring", category: "Rare Accessories", max: 5, rates: [50, 40, 30, 20, 10] },
+      { name: "Ring of Core", category: "Rare Accessories", icon: "accessory_ring_of_core_i03.png", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Queen Ant's Ring", category: "Rare Accessories", icon: "accessory_ring_of_queen_ant_i03.png", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Orfen's Earring", category: "Rare Accessories", icon: "accessory_earring_of_orfen_i03.png", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Aztacan's Earring", category: "Rare Accessories", icon: "accessory_earring_of_tantaar_i02.png", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Zaken's Earring", category: "Rare Accessories", icon: "accessory_earring_of_zaken_i03.png", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Baium's Ring", category: "Rare Accessories", icon: "accessory_ring_of_baium_i03.png", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Beleth' Ring", category: "Rare Accessories", icon: "accessary_dynasty_ring_i03.png", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Frintezza's Necklace", category: "Rare Accessories", icon: "accessory_necklace_of_frintessa_i04.png", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Ferion's Necklace", category: "Rare Accessories", icon: "accessory_necklace_of_perion_i02.png", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Antharas' Earring", category: "Rare Accessories", icon: "accessory_earring_of_antaras_i02.png", max: 6, rates: [100, 50, 40, 30, 20, 8] },
+      { name: "Immortal Ring", category: "Rare Accessories", icon: "level_reward_immortal_ring_i01.png", max: 5, rates: [50, 40, 30, 20, 10] },
 
       // WEAPONS
-      { name: "D/C/B Grade Weapons", category: "Weapons", max: 20, rates: [100, 100, 100, 100, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 35, 35, 35, 35, 35] },
-      { name: "A Grade Weapons", category: "Weapons", max: 10, rates: [100, 100, 100, 100, 33, 15, 15, 8, 4, 2] },
+      { name: "D/C/B Grade Weapons", category: "Weapons", icon: "bm_weapon_ticket_b.png", max: 20, rates: [100, 100, 100, 100, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 35, 35, 35, 35, 35] },
+      { name: "A Grade Weapons", category: "Weapons", icon: "bm_weapon_ticket_a.png", max: 10, rates: [100, 100, 100, 100, 33, 15, 15, 8, 4, 2] },
 
       // ARMORS/ACCESSORIES
-      { name: "D/C/B Grade Armors / Accessories", category: "Armors / Accessories", max: 20, rates: [100, 100, 100, 100, 33, 25, 20, 16, 14, 12, 11, 10, 9, 8, 7, 3, 3, 3, 2, 2, 1] },
-      { name: "A Grade Armors / Accessories", category: "Armors / Accessories", max: 10, rates: [100, 100, 100, 100, 20, 10, 10, 8, 5, 2] },
+      { name: "D/C/B Grade Armors / Accessories", category: "Armors / Accessories", icon: "bm_armor_ticket_b.png", max: 20, rates: [100, 100, 100, 100, 33, 25, 20, 16, 14, 12, 11, 10, 9, 8, 7, 3, 3, 3, 2, 2, 1] },
+      { name: "A Grade Armors / Accessories", category: "Armors / Accessories", icon: "bm_armor_ticket_a.png", max: 10, rates: [100, 100, 100, 100, 20, 10, 10, 8, 5, 2] },
 
       // SPECIAL ACCESSORIES
-      { name: "Ring of Insolence", category: "Special Accessories", max: 10, rates: [100, 90, 80, 60, 50, 40, 30, 20, 10, 5] },
-      { name: "Dragon Valley's Earring", category: "Special Accessories", max: 10, rates: [100, 90, 80, 60, 50, 40, 30, 20, 10, 5] },
-      { name: "Hellbound Ring", category: "Special Accessories", max: 10, rates: [100, 90, 80, 60, 50, 40, 30, 20, 10, 5] },
-      { name: "Hunter's Earring", category: "Special Accessories", max: 10, rates: [90, 80, 69, 58, 45, 28, 26, 24, 22, 20] },
-      { name: "Eva's Earring (MP Recovery)", category: "Special Accessories", max: 5, rates: [80, 65, 55, 40, 30] },
-      { name: "Shillien's Earring (HP Drain)", category: "Special Accessories", max: 5, rates: [80, 65, 55, 40, 30] },
-      { name: "Sayha's Ring (Atk. Spd.)", category: "Special Accessories", max: 5, rates: [80, 65, 55, 40, 30] },
-      { name: "Pa'agrio's Ring (P./ M. Atk.)", category: "Special Accessories", max: 5, rates: [80, 65, 55, 40, 30] },
-      { name: "Einhasad's Necklace (Cooldown)", category: "Special Accessories", max: 5, rates: [80, 65, 55, 40, 30] }
+      { name: "Ring of Insolence", category: "Special Accessories", icon: "ring_of_oman.png", max: 10, rates: [100, 90, 80, 60, 50, 40, 30, 20, 10, 5] },
+      { name: "Dragon Valley's Earring", category: "Special Accessories", icon: "accessary_catseye_earing_i00.png", max: 10, rates: [100, 90, 80, 60, 50, 40, 30, 20, 10, 5] },
+      { name: "Hellbound Ring", category: "Special Accessories", icon: "accessary_ring_of_anguish_i00.png", max: 10, rates: [100, 90, 80, 60, 50, 40, 30, 20, 10, 5] },
+      { name: "Hunter's Earring", category: "Special Accessories", icon: "accessary_earing_of_blessing_i00.png", max: 10, rates: [90, 80, 69, 58, 45, 28, 26, 24, 22, 20] },
+      { name: "Eva's Earring (MP Recovery)", category: "Special Accessories", icon: "r95_earring_i01.png", max: 5, rates: [80, 65, 55, 40, 30] },
+      { name: "Shillien's Earring (HP Drain)", category: "Special Accessories", icon: "accessary_sages_earing_i00.png", max: 5, rates: [80, 65, 55, 40, 30] },
+      { name: "Sayha's Ring (Atk. Spd.)", category: "Special Accessories", icon: "accessary_ring_of_aurakyria_i00.png", max: 5, rates: [80, 65, 55, 40, 30] },
+      { name: "Pa'agrio's Ring (P./ M. Atk.)", category: "Special Accessories", icon: "accessary_another_worlds_ring_i00.png", max: 5, rates: [80, 65, 55, 40, 30] },
+      { name: "Einhasad's Necklace (Cooldown)", category: "Special Accessories", icon: "r95_necklace_i00.png", max: 5, rates: [80, 65, 55, 40, 30] }
 
     ];
 
@@ -250,6 +373,7 @@
       {
         name: "Venir's Talisman",
         category: "Talismans",
+        icon: "benir_talisman_i00.png",
         type: 2, // 1 item A + material
         max: 30,
         rates: [50, 45, 40, 35, 50, 45, 40, 35, 30, 25, 50, 35, 30, 25, 20, 15, 50, 35, 30, 25, 20, 15, 50, 35, 25, 20, 15, 10, 30], // levels 1-29
@@ -258,6 +382,7 @@
       {
         name: "Amber",
         category: "Jewels",
+        icon: "etc_bm_jewel_amber_i00.png",
         type: 1, // 2 items A
         max: 8,
         rates: [60, 50, 40, 30, 25, 20, 15] // levels 1-7
@@ -265,6 +390,7 @@
       {
         name: "Opal",
         category: "Jewels",
+        icon: "etc_bm_jewel_opal_i00.png",
         type: 1, // 2 items A
         max: 8,
         rates: [60, 50, 40, 30, 25, 20, 15] // levels 1-7
@@ -272,6 +398,7 @@
       {
         name: "Aquamarine",
         category: "Jewels",
+        icon: "etc_bm_jewel_aquamarine_i00.png",
         type: 1, // 2 items A
         max: 8,
         rates: [60, 50, 40, 30, 25, 20, 15] // levels 1-7
@@ -279,6 +406,7 @@
       {
         name: "Sapphire",
         category: "Jewels",
+        icon: "etc_bm_jewel_sapphire_i00.png",
         type: 1, // 2 items A
         max: 8,
         rates: [60, 50, 40, 30, 25, 20, 15] // levels 1-7
@@ -286,6 +414,7 @@
       {
         name: "Emerald",
         category: "Jewels",
+        icon: "etc_bm_jewel_emerald_i00.png",
         type: 1, // 2 items A
         max: 8,
         rates: [60, 50, 40, 30, 25, 20, 15] // levels 1-7
@@ -293,6 +422,7 @@
       {
         name: "Ruby",
         category: "Jewels",
+        icon: "etc_bm_jewel_ruby_i00.png",
         type: 1, // 2 items A
         max: 8,
         rates: [60, 50, 40, 30, 25, 20, 15] // levels 1-7
@@ -300,6 +430,7 @@
       {
         name: "Einhasad's Pendant",
         category: "Special Equipment",
+        icon: "bm_pendant_pve_white_pack.png",
         type: 1, // 2 items A
         max: 5,
         rates: [20, 18, 12, 9] // levels 1-4
@@ -307,6 +438,7 @@
       {
         name: "Brooch",
         category: "Brooch / Bracelets",
+        icon: "etc_bm_brooch_lavianrose_i00.png",
         type: 1, // 2 items A
         max: 10, // Lv1 to Lv10, but levels 1-9, so max 10
         rates: [25, 25, 25, 25, 25, 25, 25, 25, 25] // levels 1-9
@@ -314,6 +446,7 @@
       {
         name: "Talisman Bracelet",
         category: "Brooch / Bracelets",
+        icon: "dimension_bracelet_i00.png",
         type: 1, // 2 items A
         max: 10,
         rates: [25, 25, 25, 25, 25, 25, 25, 25, 25] // levels 1-9
@@ -321,6 +454,7 @@
       {
         name: "Agathion Bracelet",
         category: "Brooch / Bracelets",
+        icon: "agathion_magmeld_teleport.png",
         type: 1, // 2 items A
         max: 10,
         rates: [25, 25, 25, 25, 25, 25, 25, 25, 25] // levels 1-9
@@ -328,6 +462,7 @@
       {
         name: "Aden's Soul Crystal - Weapon",
         category: "Soul Crystals",
+        icon: "aden_rune_i01.png",
         type: 2, // 1 item A + material
         max: 20,
         rates: [70, 60, 50, 40, 60, 55, 50, 45, 40, 50, 45, 40, 35, 30, 30, 25, 20, 15, 10], // levels 1-19
@@ -336,6 +471,7 @@
       {
         name: "Aden's Soul Crystal - Armor",
         category: "Soul Crystals",
+        icon: "aden_rune_am_i01.png",
         type: 2, // 1 item A + material
         max: 20,
         rates: [70, 60, 50, 40, 30, 55, 50, 45, 40, 30, 45, 40, 35, 30, 30, 25, 20, 15, 10], // levels 1-19
@@ -344,6 +480,7 @@
       {
         name: "Hardin's Soul Crystal",
         category: "Soul Crystals",
+        icon: "aden_rune_high_i01.png",
         type: 2, // 1 item A + material
         max: 20,
         rates: [60, 55, 50, 45, 45, 40, 35, 30, 25, 35, 30, 25, 20, 15, 25, 20, 15, 10, 5], // levels 1-19
@@ -351,45 +488,109 @@
       }
     ];
 
-    // Populate select with categories
-    const select = document.getElementById("itemSelect");
+    // Populate custom select with categories
+    const selectContainer = document.getElementById("itemSelect");
+    const selectSelected = selectContainer.querySelector('.select-selected');
+    const selectItems = selectContainer.querySelector('.select-items');
     const categories = {};
+    const isMobile = window.innerWidth < 768;
+    const iconSize = isMobile ? '18px 18px' : '20px 20px';
 
     items.forEach(item => {
       if (!categories[item.category]) {
-        categories[item.category] = document.createElement("optgroup");
-        categories[item.category].label = item.category;
-        select.appendChild(categories[item.category]);
+        categories[item.category] = document.createElement("div");
+        categories[item.category].className = "optgroup-label";
+        categories[item.category].textContent = item.category;
+        selectItems.appendChild(categories[item.category]);
       }
 
-      let opt = document.createElement("option");
-      opt.value = item.name;
-      opt.textContent = item.name;
+      let itemDiv = document.createElement("div");
+      itemDiv.setAttribute('data-value', item.name);
+      itemDiv.className = 'select-item';
+      itemDiv.innerHTML = `
+        <div class="select-item-icon" style="background-image: url('icons/${item.icon}');"></div>
+        <span>${item.name}</span>
+      `;
 
-      categories[item.category].appendChild(opt);
+      itemDiv.addEventListener('click', function() {
+        selectSelected.innerHTML = `
+          <div class="select-item-icon" style="background-image: url('icons/${item.icon}');"></div>
+          <span>${item.name}</span>
+        `;
+        selectSelected.setAttribute('data-value', item.name);
+        selectContainer.classList.remove('open');
+        // Trigger change event if needed
+        const event = new CustomEvent('change', { detail: { value: item.name } });
+        selectContainer.dispatchEvent(event);
+      });
+
+      categories[item.category].appendChild(itemDiv);
     });
 
-    // Populate compound select
-    const compoundSelect = document.getElementById("compoundItemSelect");
+    // Handle custom select open/close
+    selectSelected.addEventListener('click', function() {
+      selectContainer.classList.toggle('open');
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!selectContainer.contains(e.target)) {
+        selectContainer.classList.remove('open');
+      }
+    });
+
+    // Populate compound custom select
+    const compoundSelectContainer = document.getElementById("compoundItemSelect");
+    const compoundSelectSelected = compoundSelectContainer.querySelector('.select-selected');
+    const compoundSelectItems = compoundSelectContainer.querySelector('.select-items');
     const compoundCategories = {};
 
     compoundItems.forEach(item => {
       if (!compoundCategories[item.category]) {
-        compoundCategories[item.category] = document.createElement("optgroup");
-        compoundCategories[item.category].label = item.category;
-        compoundSelect.appendChild(compoundCategories[item.category]);
+        compoundCategories[item.category] = document.createElement("div");
+        compoundCategories[item.category].className = "optgroup-label";
+        compoundCategories[item.category].textContent = item.category;
+        compoundSelectItems.appendChild(compoundCategories[item.category]);
       }
 
-      let opt = document.createElement("option");
-      opt.value = item.name;
-      opt.textContent = item.name;
+      let itemDiv = document.createElement("div");
+      itemDiv.setAttribute('data-value', item.name);
+      itemDiv.className = 'select-item';
+      itemDiv.innerHTML = `
+        <div class="select-item-icon" style="background-image: url('icons/${item.icon}');"></div>
+        <span>${item.name}</span>
+      `;
 
-      compoundCategories[item.category].appendChild(opt);
+      itemDiv.addEventListener('click', function() {
+        compoundSelectSelected.innerHTML = `
+          <div class="select-item-icon" style="background-image: url('icons/${item.icon}');"></div>
+          <span>${item.name}</span>
+        `;
+        compoundSelectSelected.setAttribute('data-value', item.name);
+        compoundSelectContainer.classList.remove('open');
+        // Trigger change event
+        const event = new CustomEvent('change', { detail: { value: item.name } });
+        compoundSelectContainer.dispatchEvent(event);
+      });
+
+      compoundCategories[item.category].appendChild(itemDiv);
+    });
+
+    // Handle compound custom select open/close
+    compoundSelectSelected.addEventListener('click', function() {
+      compoundSelectContainer.classList.toggle('open');
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!compoundSelectContainer.contains(e.target)) {
+        compoundSelectContainer.classList.remove('open');
+      }
     });
 
     // Handle compound item change
-    compoundSelect.addEventListener('change', function () {
-      const selected = compoundItems.find(i => i.name === this.value);
+    compoundSelectContainer.addEventListener('change', function (e) {
+      const selected = compoundItems.find(i => i.name === e.detail.value);
       const itemValueLabel = document.querySelector('label[for="compoundItemValue"]');
       const itemValueInput = document.getElementById("compoundItemValue");
       const materialLabel = document.querySelector('label[for="materialValue"]');
@@ -409,7 +610,7 @@
     });
 
     // Trigger on load
-    compoundSelect.dispatchEvent(new Event('change'));
+    compoundSelectContainer.dispatchEvent(new CustomEvent('change', { detail: { value: compoundSelectSelected.getAttribute('data-value') || '' } }));
 
     // ================= HELPERS =================
 
@@ -516,7 +717,7 @@
         delete pityCache[key];
       }
 
-      const selected = items.find(i => i.name === document.getElementById("itemSelect").value);
+      const selected = items.find(i => i.name === document.querySelector("#itemSelect .select-selected").getAttribute('data-value'));
 
       // VALIDATION
       if (!selected) {
@@ -612,7 +813,7 @@
         delete pityCache[key];
       }
 
-      const selected = compoundItems.find(i => i.name === document.getElementById("compoundItemSelect").value);
+      const selected = compoundItems.find(i => i.name === document.querySelector("#compoundItemSelect .select-selected").getAttribute('data-value'));
 
       // VALIDATION
       if (!selected) {
