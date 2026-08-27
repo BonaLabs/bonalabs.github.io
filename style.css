@@ -317,13 +317,13 @@ body {
   background: var(--fix-muted);
 }
 
-.tag-feature { 
+.tag-new { 
   color: var(--buff); 
   border-color: var(--buff-muted);
   background: var(--buff-muted);
 }
 
-.tag-hotfix  { 
+.tag-tool  { 
   color: var(--nerf); 
   border-color: var(--nerf-muted);
   background: var(--nerf-muted);
