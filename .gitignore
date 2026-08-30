@@ -1,2 +1,19 @@
-# Local-only PlayNC patchnote tool
+# Private editorial utilities must never enter the public repository.
+local-tools/
 importer.html
+
+# Internal project guidance and working notes.
+AGENTS.md
+CUSTOMIZATION_GUIDE.md
+DESIGN_CHANGES.md
+EDITORIAL_SEO_GUIDE.md
+MONETIZATION_READINESS.md
+README_DESIGN.md
+STYLE_REFERENCE.md
+
+# Operating-system metadata and local review artifacts.
+.DS_Store
+Thumbs.db
+desktop.ini
+preview-*.png
+article-*.png

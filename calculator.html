@@ -4,136 +4,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enchant & Compound Calculator | BonaLabs</title>
+  <meta name="description" content="Estimate enchant and compound success rates, required items, and upgrade costs with BonaLabs." />
+  <meta name="theme-color" content="#0b0e13" />
+  <link rel="canonical" href="https://bonalabs.net/calculator.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BonaLabs" />
+  <meta property="og:title" content="Enchant &amp; Compound Calculator | BonaLabs" />
+  <meta property="og:description" content="Estimate enchant and compound success rates, required items, and upgrade costs with BonaLabs." />
+  <meta property="og:url" content="https://bonalabs.net/calculator.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Enchant &amp; Compound Calculator | BonaLabs" />
+  <meta name="twitter:description" content="Estimate enchant and compound success rates, required items, and upgrade costs with BonaLabs." />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"BonaLabs Enchant & Compound Calculator","url":"https://bonalabs.net/calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <title>Enchant &amp; Compound Calculator | BonaLabs</title>
 
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="post.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&display=swap"
-    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
-  <style>
-    /* Custom select styles */
-    .custom-select {
-      position: relative;
-      width: 100%;
-    }
-
-    .select-selected {
-      width: 100%;
-      padding: 10px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      color: var(--text-primary);
-      font-size: 14px;
-      font-family: var(--font-body);
-      font-weight: 400;
-      display: flex;
-      align-items: center;
-      min-height: 24px;
-      cursor: pointer;
-      transition: border-color 0.2s ease;
-    }
-
-    .select-selected:hover {
-      border-color: var(--accent-dim);
-    }
-
-    .select-selected:focus {
-      outline: none;
-      border-color: var(--accent-dim);
-    }
-
-    .select-selected:after {
-      content: "▼";
-      position: absolute;
-      right: 10px;
-      font-size: 12px;
-      color: var(--text-dim);
-      pointer-events: none;
-    }
-
-    .select-items {
-      position: absolute;
-      background-color: var(--bg-card);
-      border: 1px solid var(--border);
-      border-top: none;
-      border-radius: 0 0 4px 4px;
-      max-height: 300px;
-      overflow-y: auto;
-      width: 100%;
-      z-index: 99;
-      display: none;
-      box-shadow: 0 4px 8px var(--bg-overlay);
-    }
-
-    .select-items div {
-      padding: 6px 16px 6px 10px;
-      cursor: pointer;
-      display: block;
-      min-height: 20px;
-      font-size: 14px;
-      font-family: var(--font-body);
-      font-weight: 400;
-      color: var(--text-primary);
-      transition: background-color 0.2s ease;
-    }
-
-    .select-items .select-item {
-      display: flex;
-      align-items: center;
-    }
-
-    .select-items div:hover {
-      background-color: var(--accent-glow);
-    }
-
-    .select-items .select-item-icon {
-      width: 24px;
-      height: 24px;
-      margin-right: 8px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      flex-shrink: 0;
-    }
-
-    .select-items .optgroup-label {
-      font-weight: 600;
-      background-color: var(--bg-subtle);
-      padding: 4px 16px 4px 10px;
-      cursor: default;
-      color: var(--text-secondary);
-      font-size: 12px;
-      font-family: var(--font-body);
-      letter-spacing: 0.5px;
-    }
-
-    .select-items .optgroup-label:hover {
-      background-color: var(--bg-subtle);
-    }
-
-    .custom-select.open .select-selected {
-      border-radius: 4px 4px 0 0;
-      border-bottom-color: var(--bg-card);
-    }
-
-    .custom-select.open .select-items {
-      display: block;
-    }
-
-    /* Mobile adjustments */
-    @media (max-width: 768px) {
-      .select-items .select-item-icon {
-        width: 18px;
-        height: 18px;
-      }
-    }
-  </style>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KJ6L9Z34M7"></script>
@@ -149,62 +41,59 @@
 
 <body id="top" class="calculator-page">
 
-  <div class="scanline-overlay"></div>
+  <a class="skip-link" href="#content">Skip to calculator</a>
 
   <header class="site-header">
     <div class="header-inner">
-      <div class="logo-block">
-        <h1 class="logo-title"><a href="../" style="color:inherit;text-decoration:none">BonaLabs</a></h1>
-        <span class="logo-sub">From Bona with Love</span>
-      </div>
+      <a class="brand" href="/" aria-label="BonaLabs home"><span class="brand-mark" aria-hidden="true">B</span><span><strong>BonaLabs</strong><small>Lineage 2 guides &amp; tools</small></span></a>
+      <nav class="site-nav" aria-label="Primary navigation"><a href="/#articles">Articles</a><a href="/#tools" aria-current="page">Tools</a><a href="/#about">About</a></nav>
     </div>
-    <div class="header-bar"></div>
   </header>
 
-  <main class="post-main">
+  <main class="post-main" id="content">
 
     <header class="post-header">
       <div class="post-meta">
         <span class="post-tag tag-tool">TOOL</span>
       </div>
-      <h1 class="post-heading">Enchant & Compound Calculator</h1>
-      <p class="post-lead">For Lineage 2 Essence</p>
+      <h1 class="post-heading">Enchant &amp; Compound Calculator</h1>
+      <p class="post-lead">Compare upgrade odds, required items, and estimated costs before committing resources.</p>
     </header>
 
-    <div class="tabs">
-      <button class="tab-button active" onclick="switchTab('enchant')">Enchant</button>
-      <button class="tab-button" onclick="switchTab('compound')">Compound</button>
+    <div class="tabs" role="tablist" aria-label="Calculator mode">
+      <button class="tab-button active" id="enchant-tab-button" type="button" role="tab" aria-selected="true" aria-controls="enchant-tab" onclick="switchTab('enchant')">Enchant</button>
+      <button class="tab-button" id="compound-tab-button" type="button" role="tab" aria-selected="false" aria-controls="compound-tab" tabindex="-1" onclick="switchTab('compound')">Compound</button>
     </div>
 
-    <div id="enchant-tab" class="tab-content">
+    <div id="enchant-tab" class="tab-content" role="tabpanel" aria-labelledby="enchant-tab-button">
       <article class="post-body">
 
         <section class="calculator-section">
 
           <div class="calculator-box">
 
-            <label>Item</label>
+            <span class="field-label" id="itemSelectLabel">Item</span>
             <div class="custom-select" id="itemSelect">
-              <div class="select-selected">Select an item...</div>
-              <div class="select-items"></div>
+              <div class="select-selected" role="combobox" aria-labelledby="itemSelectLabel" aria-controls="itemSelectOptions" aria-expanded="false" aria-haspopup="listbox" tabindex="0">Select an item...</div>
+              <div class="select-items" id="itemSelectOptions" role="listbox" aria-labelledby="itemSelectLabel"></div>
             </div>
 
-            <label>Target Enchant Level (optional)</label>
-            <input type="number" id="targetLevel" placeholder="Max Enchant Level by default">
+            <label for="targetLevel">Target Enchant Level <span>(optional)</span></label>
+            <input type="number" id="targetLevel" min="1" inputmode="numeric" placeholder="Max Enchant Level by default">
 
-            <label>Item Value (optional)</label>
-            <input type="number" id="itemValue" placeholder="Adena / L-Coins">
+            <label for="itemValue">Item Value <span>(optional)</span></label>
+            <input type="number" id="itemValue" min="0" inputmode="decimal" placeholder="Currency per item">
 
-            <label style="margin-top:10px;">
+            <label>
               <div class="checkbox-row">
                 <input type="checkbox" id="usePity">
                 <span>Guaranteed Enchant Simulation</span>
               </div>
             </label>
 
-            <button onclick="calculateEnchant()">Calculate</button>
+            <button type="button" onclick="calculateEnchant()">Calculate enchant</button>
 
-            <div class="tableWrapper" id="tableWrapper" style="display:none;">
+            <div class="tableWrapper" id="tableWrapper" hidden tabindex="0" aria-label="Enchant calculation results" aria-live="polite">
               <table>
                 <thead id="tableHead"></thead>
                 <tbody id="resultTable"></tbody>
@@ -218,38 +107,38 @@
       </article>
     </div>
 
-    <div id="compound-tab" class="tab-content" style="display:none;">
+    <div id="compound-tab" class="tab-content" role="tabpanel" aria-labelledby="compound-tab-button" hidden>
       <article class="post-body">
 
         <section class="calculator-section">
 
           <div class="calculator-box">
 
-            <label>Item</label>
+            <span class="field-label" id="compoundItemSelectLabel">Item</span>
             <div class="custom-select" id="compoundItemSelect">
-              <div class="select-selected">Select an item...</div>
-              <div class="select-items"></div>
+              <div class="select-selected" role="combobox" aria-labelledby="compoundItemSelectLabel" aria-controls="compoundItemSelectOptions" aria-expanded="false" aria-haspopup="listbox" tabindex="0">Select an item...</div>
+              <div class="select-items" id="compoundItemSelectOptions" role="listbox" aria-labelledby="compoundItemSelectLabel"></div>
             </div>
 
-            <label>Target Compound Level (optional)</label>
-            <input type="number" id="compoundTargetLevel" placeholder="Max Compound Level by default">
+            <label for="compoundTargetLevel">Target Compound Level <span>(optional)</span></label>
+            <input type="number" id="compoundTargetLevel" min="2" inputmode="numeric" placeholder="Max Compound Level by default">
 
-            <label for="compoundItemValue">Item Value (optional)</label>
-            <input type="number" id="compoundItemValue" placeholder="Adena / L-Coins">
+            <label for="compoundItemValue">Item Value <span>(optional)</span></label>
+            <input type="number" id="compoundItemValue" min="0" inputmode="decimal" placeholder="Currency per item">
 
-            <label for="materialValue">Material Value (optional)</label>
-            <input type="number" id="materialValue" placeholder="Adena / L-Coins">
+            <label for="materialValue">Material Value <span>(optional)</span></label>
+            <input type="number" id="materialValue" min="0" inputmode="decimal" placeholder="Currency per material">
 
-            <label style="margin-top:10px;">
+            <label>
               <div class="checkbox-row">
                 <input type="checkbox" id="compoundUsePity">
                 <span>Guaranteed Compound Simulation</span>
               </div>
             </label>
 
-            <button onclick="calculateCompound()">Calculate</button>
+            <button type="button" onclick="calculateCompound()">Calculate compound</button>
 
-            <div class="tableWrapper" id="compoundTableWrapper" style="display:none;">
+            <div class="tableWrapper" id="compoundTableWrapper" hidden tabindex="0" aria-label="Compound calculation results" aria-live="polite">
               <table>
                 <thead id="compoundTableHead"></thead>
                 <tbody id="compoundResultTable"></tbody>
@@ -263,11 +152,11 @@
       </article>
     </div>
 
-    <nav class="post-nav">
-      <a href="../" class="post-nav-link home">Home</a>
+    <nav class="post-nav" aria-label="Page navigation">
+      <a href="/" class="post-nav-link home">Home</a>
     </nav>
 
-    <a href="#top" class="back-to-top-btn" id="backToTop">
+    <a href="#top" class="back-to-top-btn" id="backToTop" aria-label="Back to top" hidden>
       <span>↑</span>
     </a>
 
@@ -275,33 +164,53 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <span class="footer-logo">BonaLabs</span>
-      <span class="footer-info">Fan-made content. No copyright infringement intended.</span>
+      <div><strong>BonaLabs</strong><p>Updates, guides &amp; tools.</p></div>
+      <nav class="footer-socials" aria-label="BonaLabs social links"><a class="footer-social-link social-discord" href="https://discord.com/invite/RKMz5gC" target="_blank" rel="noopener noreferrer" aria-label="Discord"></a><a class="footer-social-link social-telegram" href="https://t.me/BonaLabs" target="_blank" rel="noopener noreferrer" aria-label="Telegram"></a><a class="footer-social-link social-twitch" href="https://www.twitch.tv/bonalabs" target="_blank" rel="noopener noreferrer" aria-label="Twitch"></a><a class="footer-social-link social-kick" href="https://kick.com/bonalabs" target="_blank" rel="noopener noreferrer" aria-label="Kick"></a><a class="footer-social-link social-youtube" href="https://www.youtube.com/@Bona_Labs" target="_blank" rel="noopener noreferrer" aria-label="YouTube"></a></nav>
+      <a href="#content">Back to calculator &uarr;</a>
     </div>
   </footer>
 
+  <script src="site.js"></script>
   <script>
 
     // Tab switching
     function switchTab(tab) {
-      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
-
-      document.querySelector(`[onclick="switchTab('${tab}')"]`).classList.add('active');
-      document.getElementById(`${tab}-tab`).style.display = 'block';
+      document.querySelectorAll('[role="tab"]').forEach(button => {
+        const isActive = button.id === `${tab}-tab-button`;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-selected', String(isActive));
+        button.tabIndex = isActive ? 0 : -1;
+      });
+      document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
+        panel.hidden = panel.id !== `${tab}-tab`;
+      });
     }
 
-    const pityCache = {};
-
-    // Back to top
-    window.addEventListener('scroll', function () {
-      const btn = document.getElementById('backToTop');
-      btn.style.display = window.scrollY > 200 ? 'block' : 'none';
+    document.querySelector('.tabs').addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      const tabs = [...document.querySelectorAll('[role="tab"]')];
+      const currentIndex = tabs.indexOf(document.activeElement);
+      let nextIndex = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : currentIndex;
+      if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+      if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+      event.preventDefault();
+      tabs[nextIndex].click();
+      tabs[nextIndex].focus();
     });
+
+    const pityCache = {};
 
     // ================= DATA =================
 
     const items = [
+
+      // WEAPONS
+      { name: "D/C/B Grade Weapons", category: "Weapons", icon: "bm_weapon_ticket_b.png", max: 20, rates: [100, 100, 100, 100, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 35, 35, 35, 35, 35] },
+      { name: "A Grade Weapons", category: "Weapons", icon: "bm_weapon_ticket_a.png", max: 10, rates: [100, 100, 100, 100, 33, 15, 15, 8, 4, 2] },
+
+      // ARMORS/ACCESSORIES
+      { name: "D/C/B Grade Armors / Accessories", category: "Armors / Accessories", icon: "bm_armor_ticket_b.png", max: 20, rates: [100, 100, 100, 100, 33, 25, 20, 16, 14, 12, 11, 10, 9, 8, 7, 3, 3, 3, 2, 2, 1] },
+      { name: "A Grade Armors / Accessories", category: "Armors / Accessories", icon: "bm_armor_ticket_a.png", max: 10, rates: [100, 100, 100, 100, 20, 10, 10, 8, 5, 2] },
 
       // TALISMANS
       { name: "Talisman of Aden (and Blessed)", category: "Talismans", icon: "bm_aden_talisman.png", max: 10, rates: [100, 80, 70, 60, 40, 30, 24, 16, 10, 10] },
@@ -348,14 +257,6 @@
       { name: "Ferion's Necklace", category: "Rare Accessories", icon: "accessory_necklace_of_perion_i02.png", max: 6, rates: [100, 50, 40, 30, 20, 8] },
       { name: "Antharas' Earring", category: "Rare Accessories", icon: "accessory_earring_of_antaras_i02.png", max: 6, rates: [100, 50, 40, 30, 20, 8] },
       { name: "Immortal Ring", category: "Rare Accessories", icon: "level_reward_immortal_ring_i01.png", max: 5, rates: [50, 40, 30, 20, 10] },
-
-      // WEAPONS
-      { name: "D/C/B Grade Weapons", category: "Weapons", icon: "bm_weapon_ticket_b.png", max: 20, rates: [100, 100, 100, 100, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 35, 35, 35, 35, 35] },
-      { name: "A Grade Weapons", category: "Weapons", icon: "bm_weapon_ticket_a.png", max: 10, rates: [100, 100, 100, 100, 33, 15, 15, 8, 4, 2] },
-
-      // ARMORS/ACCESSORIES
-      { name: "D/C/B Grade Armors / Accessories", category: "Armors / Accessories", icon: "bm_armor_ticket_b.png", max: 20, rates: [100, 100, 100, 100, 33, 25, 20, 16, 14, 12, 11, 10, 9, 8, 7, 3, 3, 3, 2, 2, 1] },
-      { name: "A Grade Armors / Accessories", category: "Armors / Accessories", icon: "bm_armor_ticket_a.png", max: 10, rates: [100, 100, 100, 100, 20, 10, 10, 8, 5, 2] },
 
       // SPECIAL ACCESSORIES
       { name: "Ring of Insolence", category: "Special Accessories", icon: "ring_of_oman.png", max: 10, rates: [100, 90, 80, 60, 50, 40, 30, 20, 10, 5] },
@@ -503,11 +404,15 @@
         categories[item.category] = document.createElement("div");
         categories[item.category].className = "optgroup-label";
         categories[item.category].textContent = item.category;
+        categories[item.category].setAttribute('role', 'presentation');
         selectItems.appendChild(categories[item.category]);
       }
 
       let itemDiv = document.createElement("div");
       itemDiv.setAttribute('data-value', item.name);
+      itemDiv.setAttribute('role', 'option');
+      itemDiv.setAttribute('aria-selected', 'false');
+      itemDiv.tabIndex = -1;
       itemDiv.className = 'select-item';
       itemDiv.innerHTML = `
         <div class="select-item-icon" style="background-image: url('icons/${item.icon}');"></div>
@@ -520,24 +425,28 @@
           <span>${item.name}</span>
         `;
         selectSelected.setAttribute('data-value', item.name);
+        selectItems.querySelectorAll('[role="option"]').forEach(option => option.setAttribute('aria-selected', String(option === itemDiv)));
         selectContainer.classList.remove('open');
+        selectSelected.setAttribute('aria-expanded', 'false');
         // Trigger change event if needed
         const event = new CustomEvent('change', { detail: { value: item.name } });
         selectContainer.dispatchEvent(event);
       });
 
-      categories[item.category].appendChild(itemDiv);
+      selectItems.appendChild(itemDiv);
     });
 
     // Handle custom select open/close
     selectSelected.addEventListener('click', function () {
       selectContainer.classList.toggle('open');
+      selectSelected.setAttribute('aria-expanded', String(selectContainer.classList.contains('open')));
     });
 
     // Close when clicking outside
     document.addEventListener('click', function (e) {
       if (!selectContainer.contains(e.target)) {
         selectContainer.classList.remove('open');
+        selectSelected.setAttribute('aria-expanded', 'false');
       }
     });
 
@@ -552,11 +461,15 @@
         compoundCategories[item.category] = document.createElement("div");
         compoundCategories[item.category].className = "optgroup-label";
         compoundCategories[item.category].textContent = item.category;
+        compoundCategories[item.category].setAttribute('role', 'presentation');
         compoundSelectItems.appendChild(compoundCategories[item.category]);
       }
 
       let itemDiv = document.createElement("div");
       itemDiv.setAttribute('data-value', item.name);
+      itemDiv.setAttribute('role', 'option');
+      itemDiv.setAttribute('aria-selected', 'false');
+      itemDiv.tabIndex = -1;
       itemDiv.className = 'select-item';
       itemDiv.innerHTML = `
         <div class="select-item-icon" style="background-image: url('icons/${item.icon}');"></div>
@@ -569,26 +482,73 @@
           <span>${item.name}</span>
         `;
         compoundSelectSelected.setAttribute('data-value', item.name);
+        compoundSelectItems.querySelectorAll('[role="option"]').forEach(option => option.setAttribute('aria-selected', String(option === itemDiv)));
         compoundSelectContainer.classList.remove('open');
+        compoundSelectSelected.setAttribute('aria-expanded', 'false');
         // Trigger change event
         const event = new CustomEvent('change', { detail: { value: item.name } });
         compoundSelectContainer.dispatchEvent(event);
       });
 
-      compoundCategories[item.category].appendChild(itemDiv);
+      compoundSelectItems.appendChild(itemDiv);
     });
 
     // Handle compound custom select open/close
     compoundSelectSelected.addEventListener('click', function () {
       compoundSelectContainer.classList.toggle('open');
+      compoundSelectSelected.setAttribute('aria-expanded', String(compoundSelectContainer.classList.contains('open')));
     });
 
     // Close when clicking outside
     document.addEventListener('click', function (e) {
       if (!compoundSelectContainer.contains(e.target)) {
         compoundSelectContainer.classList.remove('open');
+        compoundSelectSelected.setAttribute('aria-expanded', 'false');
       }
     });
+
+    function enableCustomSelectKeyboard(container, trigger, optionsContainer) {
+      const options = () => [...optionsContainer.querySelectorAll('[role="option"]')];
+      const open = () => {
+        container.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      };
+      const close = () => {
+        container.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      };
+
+      trigger.addEventListener('keydown', event => {
+        if (!['Enter', ' ', 'ArrowDown', 'ArrowUp', 'Escape'].includes(event.key)) return;
+        event.preventDefault();
+        if (event.key === 'Escape') return close();
+        open();
+        const selectedIndex = options().findIndex(option => option.getAttribute('aria-selected') === 'true');
+        const fallbackIndex = event.key === 'ArrowUp' ? options().length - 1 : 0;
+        options()[selectedIndex >= 0 ? selectedIndex : fallbackIndex]?.focus();
+      });
+
+      optionsContainer.addEventListener('keydown', event => {
+        const itemOptions = options();
+        const currentIndex = itemOptions.indexOf(document.activeElement);
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          close();
+          trigger.focus();
+        } else if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          document.activeElement.click();
+          trigger.focus();
+        } else if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+          event.preventDefault();
+          const direction = event.key === 'ArrowDown' ? 1 : -1;
+          itemOptions[(currentIndex + direction + itemOptions.length) % itemOptions.length].focus();
+        }
+      });
+    }
+
+    enableCustomSelectKeyboard(selectContainer, selectSelected, selectItems);
+    enableCustomSelectKeyboard(compoundSelectContainer, compoundSelectSelected, compoundSelectItems);
 
     // Handle compound item change
     compoundSelectContainer.addEventListener('change', function (e) {
@@ -724,6 +684,14 @@
       // VALIDATION
       if (!selected) {
         alert("Please select a valid item.");
+        selectSelected.focus();
+        return;
+      }
+
+      const enchantInputs = [document.getElementById("targetLevel"), document.getElementById("itemValue")];
+      const invalidEnchantInput = enchantInputs.find(input => !input.checkValidity());
+      if (invalidEnchantInput) {
+        invalidEnchantInput.reportValidity();
         return;
       }
 
@@ -739,7 +707,7 @@
       const head = document.getElementById("tableHead");
 
       table.innerHTML = '';
-      document.getElementById("tableWrapper").style.display = 'block';
+      document.getElementById("tableWrapper").hidden = false;
 
       // Dynamic header
       head.innerHTML = `
@@ -820,6 +788,14 @@
       // VALIDATION
       if (!selected) {
         alert("Please select a valid item.");
+        compoundSelectSelected.focus();
+        return;
+      }
+
+      const compoundInputs = [document.getElementById("compoundTargetLevel"), document.getElementById("compoundItemValue"), document.getElementById("materialValue")];
+      const invalidCompoundInput = compoundInputs.find(input => !input.checkValidity());
+      if (invalidCompoundInput) {
+        invalidCompoundInput.reportValidity();
         return;
       }
 
@@ -837,7 +813,7 @@
       const head = document.getElementById("compoundTableHead");
 
       table.innerHTML = '';
-      document.getElementById("compoundTableWrapper").style.display = 'block';
+      document.getElementById("compoundTableWrapper").hidden = false;
 
       // Dynamic header - Type 2 shows only material columns
       let headerColumns = `
