@@ -18,4 +18,27 @@
       wrapper.setAttribute('aria-label', `Data table ${index + 1}: ${pageTitle}`);
     }
   });
+
+  const revealTrackerUpdate = () => {
+    if (!window.location.hash) return;
+
+    let targetId;
+    try {
+      targetId = decodeURIComponent(window.location.hash.slice(1));
+    } catch {
+      return;
+    }
+
+    const target = document.getElementById(targetId);
+    const update = target?.matches('details.weekly-update')
+      ? target
+      : target?.closest('details.weekly-update');
+
+    if (!update) return;
+    update.open = true;
+    window.requestAnimationFrame(() => update.scrollIntoView({ block: 'start' }));
+  };
+
+  revealTrackerUpdate();
+  window.addEventListener('hashchange', revealTrackerUpdate);
 })();
