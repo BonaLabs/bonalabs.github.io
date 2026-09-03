@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Calculate exact EXP between levels, estimate hunting time and kills, and explore the Lineage 2 Essence level curve.">
+  <meta name="theme-color" content="#0b0e13">
+  <link rel="canonical" href="https://bonalabs.net/xp-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BonaLabs">
+  <meta property="og:title" content="XP Calculator | BonaLabs">
+  <meta property="og:description" content="Calculate exact EXP between levels, estimate hunting time and kills, and explore the Lineage 2 Essence level curve.">
+  <meta property="og:url" content="https://bonalabs.net/xp-calculator.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="XP Calculator | BonaLabs">
+  <meta name="twitter:description" content="Calculate exact EXP between levels, estimate hunting time and kills, and explore the Lineage 2 Essence level curve.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"BonaLabs XP Calculator","url":"https://bonalabs.net/xp-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <title>XP Calculator | BonaLabs</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="post.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KJ6L9Z34M7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-KJ6L9Z34M7');</script>
+</head>
+<body id="top" class="calculator-page xp-page">
+  <a class="skip-link" href="#content">Skip to calculator</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="BonaLabs home"><span class="brand-mark" aria-hidden="true">B</span><span><strong>BonaLabs</strong><small>Lineage 2 guides &amp; tools</small></span></a>
+    <nav class="site-nav" aria-label="Primary navigation"><a href="/#articles">Articles</a><a href="/#tools" aria-current="page">Tools</a><a href="/#about">About</a></nav>
+  </div></header>
+
+  <main class="post-main" id="content">
+    <header class="post-header">
+      <div class="post-meta"><span class="post-tag tag-tool">TOOL</span></div>
+      <h1 class="post-heading">XP Calculator</h1>
+      <p class="post-lead">Turn percentages into exact EXP, estimate the grind ahead, and see where the level curve really takes off.</p>
+    </header>
+
+    <article class="post-body">
+      <section class="xp-workspace" aria-labelledby="journey-title">
+        <div class="xp-form-panel">
+          <div class="xp-section-heading">
+            <div><p class="xp-kicker">Plan a journey</p><h2 id="journey-title">Where are you going?</h2></div>
+            <button class="xp-swap" id="maxJourney" type="button">Target Lv. 100</button>
+          </div>
+
+          <form id="xpForm">
+            <fieldset class="xp-position-group">
+              <legend>Starting point</legend>
+              <div class="xp-field-pair">
+                <label for="currentLevel">Level<select id="currentLevel" name="currentLevel"></select></label>
+                <label for="currentProgress">Progress <span>%</span><input id="currentProgress" name="currentProgress" type="number" min="0" max="99.9999" step="any" value="0" inputmode="decimal"></label>
+              </div>
+            </fieldset>
+            <fieldset class="xp-position-group">
+              <legend>Target</legend>
+              <div class="xp-field-pair">
+                <label for="targetLevel">Level<select id="targetLevel" name="targetLevel"></select></label>
+                <label for="targetProgress">Progress <span>%</span><input id="targetProgress" name="targetProgress" type="number" min="0" max="99.9999" step="any" value="0" inputmode="decimal"></label>
+              </div>
+            </fieldset>
+
+            <details class="xp-pace-options" open>
+              <summary>Hunting pace <span>Optional estimates</span></summary>
+              <div class="xp-field-pair">
+                <label for="xpPerHour">EXP per hour<input id="xpPerHour" name="xpPerHour" type="text" value="500,000,000" inputmode="numeric" autocomplete="off"></label>
+                <label for="xpPerKill">EXP per kill<input id="xpPerKill" name="xpPerKill" type="text" placeholder="e.g. 125,000" inputmode="numeric" autocomplete="off"></label>
+              </div>
+            </details>
+            <p class="xp-error" id="xpError" role="alert" hidden></p>
+            <button class="xp-calculate" type="submit">Calculate journey</button>
+          </form>
+        </div>
+
+        <aside class="xp-result-panel" id="xpResults" aria-live="polite" aria-labelledby="result-title">
+          <p class="xp-kicker">Your result</p>
+          <h2 id="result-title"><span id="resultRoute">Lv. 80 → 85</span></h2>
+          <div class="xp-total"><span>EXP required</span><strong id="xpRequired">2,275,027,154</strong></div>
+          <div class="xp-progress-track" aria-hidden="true"><span id="journeyProgressBar"></span></div>
+          <p class="xp-progress-copy" id="journeyProgressText">0% of this journey completed</p>
+          <dl class="xp-stats">
+            <div><dt>Estimated time</dt><dd id="timeRequired">4h 34m</dd></div>
+            <div><dt>Enemies</dt><dd id="killsRequired">Add EXP / kill</dd></div>
+            <div><dt>Levels crossed</dt><dd id="levelsCrossed">5</dd></div>
+            <div><dt>Of Lv. 1–100</dt><dd id="worldShare">&lt;0.01%</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="xp-insight-grid" aria-label="EXP perspective">
+        <article class="xp-insight"><span class="xp-insight-icon" aria-hidden="true">×</span><div><p>Difficulty spike</p><strong id="spikeFact">Loading…</strong></div></article>
+        <article class="xp-insight"><span class="xp-insight-icon" aria-hidden="true">◎</span><div><p>Same EXP, from Level 1</p><strong id="alternateFact">Loading…</strong></div></article>
+        <article class="xp-insight"><span class="xp-insight-icon" aria-hidden="true">↗</span><div><p>Biggest step on route</p><strong id="biggestFact">Loading…</strong></div></article>
+      </section>
+
+      <section class="xp-breakdown" aria-labelledby="breakdown-title">
+        <div class="xp-section-heading"><div><p class="xp-kicker">Level by level</p><h2 id="breakdown-title">Journey breakdown</h2></div><p id="breakdownSummary"></p></div>
+        <div class="tableWrapper" tabindex="0" aria-label="EXP journey level breakdown">
+          <table class="xp-table"><thead><tr><th>Stage</th><th>EXP for stage</th><th>Running total</th><th>Share</th></tr></thead><tbody id="breakdownBody"></tbody></table>
+        </div>
+      </section>
+
+      <details class="xp-reference">
+        <summary>View full EXP table <span>Levels 1–100</span></summary>
+        <div class="tableWrapper" tabindex="0" aria-label="Full experience table">
+          <table class="xp-table"><thead><tr><th>Level</th><th>Total EXP</th><th>EXP gained to reach level</th></tr></thead><tbody id="referenceBody"></tbody></table>
+        </div>
+      </details>
+    </article>
+
+    <nav class="post-nav" aria-label="Page navigation"><a href="/" class="post-nav-link home">Home</a><a href="calculator.html" class="post-nav-link next"><span>Other tool</span>Enchant Calculator</a></nav>
+    <a href="#top" class="back-to-top-btn" id="backToTop" data-back-to-top aria-label="Back to top" hidden><span>↑</span></a>
+  </main>
+
+  <footer class="site-footer"><div class="footer-inner"><div><strong>BonaLabs</strong><p>Updates, guides &amp; tools.</p></div><nav class="footer-socials" aria-label="BonaLabs social links"><a class="footer-social-link social-discord" href="https://discord.com/invite/RKMz5gC" target="_blank" rel="noopener noreferrer" aria-label="Discord"></a><a class="footer-social-link social-telegram" href="https://t.me/BonaLabs" target="_blank" rel="noopener noreferrer" aria-label="Telegram"></a><a class="footer-social-link social-twitch" href="https://www.twitch.tv/bonalabs" target="_blank" rel="noopener noreferrer" aria-label="Twitch"></a><a class="footer-social-link social-kick" href="https://kick.com/bonalabs" target="_blank" rel="noopener noreferrer" aria-label="Kick"></a><a class="footer-social-link social-youtube" href="https://www.youtube.com/@Bona_Labs" target="_blank" rel="noopener noreferrer" aria-label="YouTube"></a></nav><a href="#content">Back to top ↑</a></div></footer>
+  <script src="site.js"></script>
+  <script src="xp-calculator.js"></script>
+</body>
+</html>
