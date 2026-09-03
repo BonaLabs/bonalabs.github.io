@@ -203,6 +203,106 @@
   transition: color 180ms var(--ease), border-color 180ms var(--ease), background-color 180ms var(--ease);
 }
 
+.tracker-search {
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.tracker-search[hidden],
+.tracker-search-results[hidden],
+.tracker-search-control button[hidden] { display: none; }
+.tracker-search-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+}
+.tracker-search-control { display: flex; gap: 8px; }
+.tracker-search-control input {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 10px 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  outline: 0;
+  background: #0b1017;
+  color: var(--text);
+  font-size: 16px;
+  transition: border-color 180ms var(--ease), box-shadow 180ms var(--ease);
+}
+.tracker-search-control input::placeholder { color: var(--subtle); opacity: 1; }
+.tracker-search-control input:focus {
+  border-color: var(--accent-dim);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.tracker-search-control button {
+  min-height: 46px;
+  padding-inline: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 180ms var(--ease), border-color 180ms var(--ease), background-color 180ms var(--ease);
+}
+.tracker-search-hint,
+.tracker-search-status {
+  margin: 8px 0 0;
+  color: var(--subtle);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.tracker-search-status:not(:empty) { color: var(--muted); }
+.tracker-search-results {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.tracker-search-results li { margin: 0; padding: 0; }
+.tracker-search-results a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 3px 9px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.012);
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 180ms var(--ease), border-color 180ms var(--ease), background-color 180ms var(--ease);
+}
+.tracker-search-result-date {
+  color: var(--accent);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+.tracker-search-result-title {
+  overflow: hidden;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tracker-search-result-excerpt {
+  grid-column: 1 / -1;
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--subtle);
+  font-size: 12px;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 .tracker-month-list { display: grid; gap: 10px; }
 .tracker-month {
   border: 1px solid var(--border-soft);
@@ -406,7 +506,7 @@
 .change-entry { padding: 20px 22px; }
 .change-entry + .change-entry { border-top: 1px solid var(--border-soft); }
 .change-entry-header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin-bottom: 12px; }
-.change-entry-header .character-name { margin: 0; color: var(--text); font-weight: 700; }
+.change-entry-header .character-name { margin: 0; scroll-margin-top: 112px; color: var(--text); font-weight: 700; }
 .change-type.buff { border-color: rgba(135, 188, 139, 0.36); background: var(--buff-muted); color: var(--buff); }
 .change-type.nerf { border-color: rgba(213, 133, 146, 0.36); background: var(--nerf-muted); color: var(--nerf); }
 .change-type.fix { border-color: rgba(214, 184, 107, 0.36); background: var(--fix-muted); color: var(--fix); }
@@ -684,6 +784,8 @@
   .back-to-top-btn:hover { color: var(--bright); }
   .tab-button:hover { background: rgba(255, 255, 255, 0.025); color: var(--text); }
   .post-toc-list a:hover { border-color: var(--line-strong); background: var(--surface-2); color: var(--text); }
+  .tracker-search-control button:hover,
+  .tracker-search-results a:hover { border-color: var(--line-strong); background: var(--surface-2); color: var(--text); }
   .tracker-date-list a:hover { border-color: var(--line-strong); background: var(--surface-2); color: var(--text); }
   .weekly-update:hover { border-left-color: var(--accent-dim); background: var(--surface); }
   .post-main tbody tr:hover td { background: rgba(217, 173, 89, 0.035); }
