@@ -564,6 +564,13 @@
 .post-main tbody tr:nth-child(even) td { background-color: rgba(255, 255, 255, 0.018); }
 .post-main td [data-contents-type='text'] { color: inherit; font-size: inherit; }
 
+/* Rowspans leave later rows with fewer DOM cells, so :last-child is not
+   necessarily the table's visual last column. A collapsed grid keeps every
+   combined-cell boundary continuous without relying on child position. */
+.post-main table:has([rowspan]) { border-collapse: collapse; }
+.post-main table:has([rowspan]) th,
+.post-main table:has([rowspan]) td { border: 1px solid var(--line); }
+
 .post-nav {
   display: flex;
   flex-wrap: wrap;
