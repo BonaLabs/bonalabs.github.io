@@ -604,7 +604,7 @@ a { color: inherit; }
   .archive-grid { grid-template-columns: repeat(2, 1fr); }
   .archive-grid a:not(:last-child) { border-right: 0; }
   .archive-grid a:nth-child(odd) { border-right: 1px solid var(--line); }
-  .archive-grid a:nth-child(-n + 4) { border-bottom: 1px solid var(--line); }
+  .archive-grid a:nth-child(-n + 6) { border-bottom: 1px solid var(--line); }
   .tools-grid { grid-template-columns: 1fr 1fr; }
   .tool-coming { min-height: 230px; }
   .about-section { gap: 48px; }
