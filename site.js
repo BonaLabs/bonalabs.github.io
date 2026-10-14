@@ -19,6 +19,53 @@
     }
   });
 
+  const articleIndex = document.querySelector('[data-article-index]');
+
+  if (articleIndex) {
+    const indexLinks = [...articleIndex.querySelectorAll('a[href^="#"]')];
+    const sections = indexLinks
+      .map((link) => ({ link, section: document.getElementById(link.hash.slice(1)) }))
+      .filter(({ section }) => section);
+    let updatePending = false;
+
+    const updateArticleIndex = () => {
+      const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height || 0;
+      const marker = headerHeight + 64;
+      let active = sections[0];
+      sections.forEach((entry) => {
+        if (entry.section.getBoundingClientRect().top <= marker) active = entry;
+      });
+      if (Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 2) {
+        active = sections.at(-1);
+      }
+      sections.forEach(({ link }) => {
+        if (link === active?.link) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+      updatePending = false;
+    };
+
+    const queueIndexUpdate = () => {
+      if (updatePending) return;
+      updatePending = true;
+      window.requestAnimationFrame(updateArticleIndex);
+    };
+
+    updateArticleIndex();
+    window.addEventListener('scroll', queueIndexUpdate, { passive: true });
+    window.addEventListener('resize', queueIndexUpdate);
+    window.addEventListener('load', queueIndexUpdate);
+  }
+
+  const openAncestorDetails = (element) => {
+    let details = element?.matches('details') ? element : element?.closest('details');
+
+    while (details) {
+      details.open = true;
+      details = details.parentElement?.closest('details');
+    }
+  };
+
   const revealTrackerUpdate = () => {
     if (!window.location.hash) return;
 
@@ -30,12 +77,12 @@
     }
 
     const target = document.getElementById(targetId);
-    const update = target?.matches('details.weekly-update')
+    const update = target?.matches('details')
       ? target
       : target?.closest('details.weekly-update');
 
     if (!update) return;
-    update.open = true;
+    openAncestorDetails(update);
     window.requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
   };
 
@@ -174,7 +221,7 @@
       excerpt.textContent = getExcerpt(entry, tokens);
       link.append(date, title, excerpt);
       link.addEventListener('click', () => {
-        entry.heading.closest('.weekly-update').open = true;
+        openAncestorDetails(entry.heading);
         window.requestAnimationFrame(() => entry.heading.scrollIntoView({ block: 'start' }));
       });
       item.append(link);
