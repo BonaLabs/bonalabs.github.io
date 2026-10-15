@@ -1,4 +1,15 @@
 (() => {
+  document.querySelectorAll('[data-community-platform]').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (typeof window.gtag !== 'function') return;
+      window.gtag('event', 'community_click', {
+        community_platform: link.dataset.communityPlatform,
+        community_placement: link.closest('[data-community-placement]')?.dataset.communityPlacement,
+        transport_type: 'beacon'
+      });
+    });
+  });
+
   const backToTop = document.querySelector('[data-back-to-top]');
 
   if (backToTop) {

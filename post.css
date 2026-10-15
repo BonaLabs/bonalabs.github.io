@@ -596,6 +596,17 @@
 .post-nav-link.home { color: var(--accent); }
 .post-nav-link.disabled { cursor: default; opacity: 0.38; }
 
+.post-main > .community-invite { margin-top: 48px; }
+.post-main > .community-invite + .post-nav { margin-top: 28px; }
+.post-main > .community-invite-compact { margin-top: -24px; margin-bottom: 40px; }
+@media (min-width: 981px) {
+  .post-reading-layout ~ .community-invite { margin-left: 238px; }
+  .tracker-reading-layout ~ .community-invite { margin-left: 326px; }
+}
+@media (max-width: 720px) {
+  .post-main > .community-invite-compact { margin-top: 0; margin-bottom: 28px; }
+}
+
 .back-to-top-btn {
   position: fixed;
   right: max(18px, calc((100vw - 1120px) / 2));
