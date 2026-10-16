@@ -1482,6 +1482,16 @@
 }
 
 /* Long-form editorials use the chronicle shell and the shared site palette. */
+.post-body .article-video { max-width: var(--content); margin: 32px 0; }
+.article-video iframe {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: var(--panel-rule);
+  background: var(--bg);
+}
+
 .editorial-article .editorial-deck {
   margin: 18px 0 0;
   color: var(--text);
