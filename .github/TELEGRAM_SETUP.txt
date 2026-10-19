@@ -1,0 +1,86 @@
+BonaLabs: automatic Telegram news
+================================
+
+Status: prepared locally, not activated. The homepage shows three recent posts
+from @BonaLabs once the bot starts receiving announcements. Until then, it shows
+a direct channel link. No sample announcements are included in the public feed.
+
+ONE-TIME SETUP (channel and repository owner)
+
+1. Open the verified @BotFather account in Telegram and use /newbot.
+   Create a new bot dedicated to this feed. Keep the token private.
+   Official instructions: https://core.telegram.org/bots/features#botfather
+
+2. Add that bot to the BonaLabs channel as an administrator. Disable optional
+   posting, editing, deletion and invitation permissions where Telegram allows;
+   this integration only reads channel posts. Do not connect this bot to another
+   service that uses getUpdates or a webhook.
+
+3. In the GitHub repository, Settings > Secrets and variables > Actions,
+   add a repository secret named TELEGRAM_BOT_TOKEN containing the bot token.
+   https://github.com/BonaLabs/bonalabs.github.io/settings/secrets/actions
+   Never put the token in HTML, JavaScript, JSON, commits, issues or chat.
+
+4. Push the reviewed website changes, including .github/, to main.
+   No commit, push or deployment was performed when preparing this integration.
+
+5. Settings > Pages > Build and deployment: select GitHub Actions as Source.
+   Settings > Secrets and variables > Actions > Variables: add repository
+   variable TELEGRAM_FEED_ENABLED with value true.
+   The workflow explicitly requests contents:write to save feed state; repository
+   or organization policies and branch protection must allow its generated commits.
+
+6. Actions > Telegram news and Pages > Run workflow. Check that build and deploy
+   both finish successfully. Then publish the next normal announcement to the
+   channel. The bot cannot import existing channel history. An empty feed on the
+   first run is expected when no new post is available.
+
+HOW IT WORKS
+
+- GitHub checks Telegram at minutes 7, 22, 37 and 52 of each hour, on main pushes,
+  and on manual runs. Scheduled jobs can be delayed; this is not real-time delivery.
+- The synchronizer receives channel_post and edited_channel_post updates only.
+  It filters the channel identity, extracts text and supported photos, groups
+  albums, and stores a public snapshot in data/telegram-feed.json.
+- The homepage displays three announcements with links to their original posts.
+  It checks that local snapshot every five minutes while the tab is visible.
+- Text, captions and rich-message text are supported. Photos are cached locally.
+  Video, document and other attachments open on Telegram. A photo download error
+  still allows the text and post link to appear.
+- .github/telegram-state.json retains up to 40 normalized messages and the cursor;
+  the public feed retains up to 12 posts. Neither contains bot credentials or raw
+  updates. State is versioned, so pull main before making subsequent local changes.
+- The workflow commits the snapshot and state before the next run acknowledges
+  that batch. It then packages and deploys the public site in the same workflow.
+- Packaging allows only public root files and articles/, icons/, assets/, data/.
+  It excludes local-tools/, internal guidance, .github/ and preview screenshots.
+- A failed synchronization stops the deployment; the already published website
+  and its last news snapshot remain available. Inspect the failed Action and rerun
+  it after fixing the cause. A bot with an existing webhook is rejected unchanged.
+- Telegram retains pending updates for at most 24 hours. Downtime longer than that
+  can lose announcements. GitHub can disable scheduled workflows after 60 days
+  without repository activity; check Actions if the feed stops updating.
+- Telegram does not provide ordinary channel-deletion updates through this API.
+  To hide a removed post, add its numeric message ID to
+  .github/telegram-hidden-posts.json, for example [39, 42], then push or run the
+  workflow. Hiding one album member hides that album. Edits update automatically
+  when Telegram delivers the edited-channel-post event.
+- Old announcements need a separate historical import; this setup starts with
+  posts received after the dedicated bot joins the channel.
+
+LOCAL CHECKS
+
+  python -m unittest discover -s .github/tests -v
+  node --check telegram-news.js
+  python .github/scripts/build_public_site.py
+
+The packaging command requires an empty _site/ output directory.
+Do not run the synchronizer locally against the live bot while Actions is active;
+only one consumer should own its update queue.
+
+References:
+https://core.telegram.org/bots/api#getupdates
+https://core.telegram.org/bots/api#update
+https://core.telegram.org/bots/faq
+https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
+https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule

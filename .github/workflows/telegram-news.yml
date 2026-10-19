@@ -1,0 +1,61 @@
+name: Telegram news and Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: vars.TELEGRAM_FEED_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Test the synchronizer and public packaging
+        run: python -m unittest discover -s .github/tests -v
+      - name: Receive Telegram posts
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: python .github/scripts/sync_telegram.py
+      - name: Persist the feed before acknowledging its Telegram updates
+        run: |
+          git add -- data/telegram-feed.json .github/telegram-state.json assets/telegram
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Refresh Telegram news'
+            git push origin HEAD:main
+          fi
+      - name: Package approved public files
+        run: python .github/scripts/build_public_site.py
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish the site and refreshed news
+        id: deployment
+        uses: actions/deploy-pages@v4
