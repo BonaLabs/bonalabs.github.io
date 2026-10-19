@@ -1,6 +1,6 @@
 (() => {
   const section = document.querySelector('[data-telegram-news]');
-  if (!section) return;
+  if (!section || section.hidden) return;
 
   const feed = section.querySelector('[data-telegram-feed]');
   const empty = section.querySelector('[data-telegram-empty]');

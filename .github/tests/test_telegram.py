@@ -54,6 +54,42 @@ class SyncTests(unittest.TestCase):
     def feed(self):
         return sync.read_json(self.root / "data/telegram-feed.json", {})
 
+    def test_paused_feed_clears_posts_without_api_calls_or_resetting_cursor(self):
+        sync.sync(self.root, FakeTelegram([update(1)]))
+        state_path = self.root / ".github/telegram-state.json"
+        before = sync.read_json(state_path, {})
+        sync.write_json(self.root / ".github/telegram-feed-settings.json", {"enabled": False, "publish_from": None})
+        with patch.object(sync, "Telegram", side_effect=AssertionError("Paused feed must not create an API client")):
+            sync.sync(self.root)
+            sync.sync(self.root)
+        after = sync.read_json(state_path, {})
+        self.assertEqual(after, {**before, "messages": []})
+        self.assertEqual(self.feed()["posts"], [])
+        self.assertIsNone(self.feed()["updated_at"])
+
+    def test_reactivation_ignores_stored_posts_backlog_and_old_edits(self):
+        sync.sync(self.root, FakeTelegram([update(1)]))
+        sync.write_json(self.root / ".github/telegram-feed-settings.json", {
+            "enabled": True, "publish_from": sync.iso(1800000003),
+        })
+        client = FakeTelegram([
+            update(1, "Old post edited after reactivation", edited=True, edit_date=1800000100),
+            update(2, "Backlog"), update(3, "First new announcement"),
+        ])
+        sync.sync(self.root, client)
+        self.assertEqual([p["id"] for p in self.feed()["posts"]], [3])
+        state = sync.read_json(self.root / ".github/telegram-state.json", {})
+        self.assertEqual(state["next_update_id"], 1004)
+        self.assertEqual([m["id"] for m in state["messages"]], [3])
+
+    def test_reactivation_requires_an_explicit_timezone_aware_start(self):
+        for start in (None, "not-a-date", "2026-10-19T12:00:00"):
+            sync.write_json(self.root / ".github/telegram-feed-settings.json", {"enabled": True, "publish_from": start})
+            client = FakeTelegram()
+            with self.assertRaises(sync.SyncError):
+                sync.sync(self.root, client)
+            self.assertEqual(client.calls, [])
+
     def test_new_posts_edits_and_retry_are_idempotent(self):
         client = FakeTelegram([update(1), update(2)])
         sync.sync(self.root, client)

@@ -594,7 +594,7 @@ a { color: inherit; }
   padding: 0;
   list-style: none;
 }
-.telegram-news-grid[hidden], .telegram-news-empty[hidden] { display: none; }
+.telegram-news[hidden], .telegram-news-grid[hidden], .telegram-news-empty[hidden] { display: none; }
 .telegram-news-grid > li { min-width: 0; }
 .telegram-news-card { display: flex; flex-direction: column; height: 100%; border-block: var(--panel-rule); background: var(--panel-wash); }
 .telegram-news-image { display: block; width: 100%; height: 140px; object-fit: cover; }

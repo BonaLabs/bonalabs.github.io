@@ -186,10 +186,38 @@ class Telegram:
         return destination.relative_to(root).as_posix()
 
 
-def sync(root, client):
+def feed_settings(root):
+    settings = read_json(root / ".github" / "telegram-feed-settings.json", {"enabled": True})
+    if type(settings.get("enabled")) is not bool:
+        raise SyncError("Telegram feed settings require an enabled boolean.")
+    if not settings["enabled"]:
+        return False, None
+    start = settings.get("publish_from")
+    # Existing installations without a settings file keep their original behavior.
+    if start is None and not (root / ".github" / "telegram-feed-settings.json").exists():
+        return True, None
+    try:
+        cutoff = datetime.fromisoformat(start.replace("Z", "+00:00"))
+        if cutoff.tzinfo is None:
+            raise ValueError
+    except (AttributeError, TypeError, ValueError):
+        raise SyncError("Set publish_from to the reactivation time, including its timezone.") from None
+    return True, cutoff.timestamp()
+
+
+def sync(root, client=None):
     state_path = root / ".github" / "telegram-state.json"
     feed_path = root / "data" / "telegram-feed.json"
     state = read_json(state_path, {"messages": []})
+    enabled, cutoff = feed_settings(root)
+    if not enabled:
+        state["messages"] = []
+        write_json(feed_path, {"schema_version": 1, "channel": CHANNEL, "updated_at": None, "posts": []})
+        write_json(state_path, state)
+        print("Telegram news is paused; feed cleared. Bot cursor preserved; no API calls made.")
+        return
+    if client is None:
+        client = Telegram(os.environ.get("TELEGRAM_BOT_TOKEN", ""))
     hidden = set(read_json(root / ".github" / "telegram-hidden-posts.json", []))
     if client.call("getWebhookInfo").get("url"):
         raise SyncError("This bot already has a webhook. Use a dedicated bot; its webhook was not changed.")
@@ -206,11 +234,16 @@ def sync(root, client):
     if state.get("bot_id") == bot["id"] and state.get("next_update_id") is not None:
         parameters["offset"] = state["next_update_id"]
     updates = client.call("getUpdates", **parameters)
-    records = {m["id"]: m for m in state.get("messages", [])}
+    records = {
+        m["id"]: m for m in state.get("messages", [])
+        if cutoff is None or datetime.fromisoformat(m["published_at"].replace("Z", "+00:00")).timestamp() >= cutoff
+    }
     for update in sorted(updates, key=lambda u: u["update_id"]):
         message = update.get("channel_post") or update.get("edited_channel_post")
         if not message or message.get("chat", {}).get("id") != chat["id"]:
             continue
+        if cutoff is not None and message.get("date", 0) < cutoff:
+            continue  # Ignore older posts, including edits delivered after reactivation.
         record = normalize(message, client, root)
         if record:
             records[record["id"]] = record
@@ -234,7 +267,7 @@ def sync(root, client):
 
 if __name__ == "__main__":
     try:
-        sync(Path(__file__).resolve().parents[2], Telegram(os.environ.get("TELEGRAM_BOT_TOKEN", "")))
+        sync(Path(__file__).resolve().parents[2])
     except (SyncError, OSError, ValueError) as error:
         print(f"Sync stopped: {error}", file=sys.stderr)
         sys.exit(1)

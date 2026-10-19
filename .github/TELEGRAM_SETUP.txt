@@ -1,9 +1,26 @@
 BonaLabs: automatic Telegram news
 ================================
 
-Status: prepared locally, not activated. The homepage shows three recent posts
-from @BonaLabs once the bot starts receiving announcements. Until then, it shows
-a direct channel link. No sample announcements are included in the public feed.
+Status: paused at the owner's request on October 19, 2026.
+The Home news section is hidden. Its public feed and stored messages are empty.
+Historical imports and the test announcement have been removed. The bot cursor,
+channel identity and credentials remain available for a later restart.
+
+REACTIVATION (only when the owner is ready to publish new announcements)
+
+1. In .github/telegram-feed-settings.json, set enabled to true and publish_from
+   to the chosen start time as an ISO timestamp including its timezone. Set this
+   at reactivation, not to the date on which the bot was originally configured.
+   Posts published before that time are excluded, even if edited afterwards.
+2. Remove the hidden attribute from the section with id="news" in index.html.
+3. Push those changes and wait for build and deploy to finish successfully.
+4. Publish the first new announcement in Telegram and verify the next run.
+
+While paused, the synchronizer makes no Telegram API calls and keeps the public
+feed empty. The Home script makes no feed requests while the section is hidden.
+Keep the GitHub variable TELEGRAM_FEED_ENABLED=true: it gates the entire Pages
+workflow, including ordinary website deployments. The local settings file above
+controls only news collection, so pausing news does not stop website deployment.
 
 ONE-TIME SETUP (channel and repository owner)
 
@@ -22,7 +39,6 @@ ONE-TIME SETUP (channel and repository owner)
    Never put the token in HTML, JavaScript, JSON, commits, issues or chat.
 
 4. Push the reviewed website changes, including .github/, to main.
-   No commit, push or deployment was performed when preparing this integration.
 
 5. Settings > Pages > Build and deployment: select GitHub Actions as Source.
    Settings > Secrets and variables > Actions > Variables: add repository
@@ -65,8 +81,9 @@ HOW IT WORKS
   .github/telegram-hidden-posts.json, for example [39, 42], then push or run the
   workflow. Hiding one album member hides that album. Edits update automatically
   when Telegram delivers the edited-channel-post event.
-- Old announcements need a separate historical import; this setup starts with
-  posts received after the dedicated bot joins the channel.
+- Historical imports are disabled and their manifest and import code were removed.
+  After reactivation, publish_from filters both stored messages and queued bot
+  updates by their original publication date. Older edits cannot restore old posts.
 
 LOCAL CHECKS
 
@@ -75,8 +92,8 @@ LOCAL CHECKS
   python .github/scripts/build_public_site.py
 
 The packaging command requires an empty _site/ output directory.
-Do not run the synchronizer locally against the live bot while Actions is active;
-only one consumer should own its update queue.
+When news is enabled, do not run the synchronizer locally against the live bot
+while Actions is active; only one consumer should own its update queue.
 
 References:
 https://core.telegram.org/bots/api#getupdates
