@@ -1,6 +1,12 @@
 {
   "schema_version": 1,
   "channel": "BonaLabs",
-  "updated_at": null,
-  "posts": []
+  "updated_at": "2026-10-19T13:22:57.061695Z",
+  "posts": [
+    {
+      "id": 40,
+      "published_at": "2026-10-19T13:15:32Z",
+      "text": "Feed test"
+    }
+  ]
 }
