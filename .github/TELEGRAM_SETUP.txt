@@ -1,10 +1,12 @@
 BonaLabs: automatic Telegram news
 ================================
 
-Status: paused at the owner's request on October 19, 2026.
-The Home news section is hidden. Its public feed and stored messages are empty.
-Historical imports and the test announcement have been removed. The bot cursor,
-channel identity and credentials remain available for a later restart.
+Status: reactivation prepared locally at the owner's request on October 21, 2026.
+The Home news section is visible, with an empty feed for reviewing the design.
+Collection is enabled for posts published from 2026-10-21T16:48:11Z onwards
+(13:48:11 in Buenos Aires). Earlier posts, including subsequent edits to them,
+are excluded. Historical imports remain removed; the bot cursor is preserved.
+Push and deploy these changes before publishing the next Telegram announcement.
 
 REACTIVATION (only when the owner is ready to publish new announcements)
 

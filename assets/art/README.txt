@@ -14,7 +14,7 @@ Local delivery copies:
 2. Gludin equipment / sword chamber
 Source page: https://lineage2.plaync.com/conts/2026/261007_update#equipment
 Original asset: https://assets.playnccdn.com/res/lineage2/update/2026/261007_update/2nd/pc/v2.0.0/img/second/equipment-background.webp
-Usage: featured chronicle card, all article covers, and tracker cover.
+Usage: featured article card, all article covers, and tracker cover.
 Local delivery copies:
 - gludin-equipment.jpg: 1920 x 1080
 - gludin-equipment-960.jpg: 960 x 540

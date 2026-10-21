@@ -30,6 +30,52 @@
     }
   });
 
+  const imagePreviewLinks = document.querySelectorAll('.post-body [data-image-preview]');
+
+  if (imagePreviewLinks.length && typeof HTMLDialogElement !== 'undefined'
+    && typeof HTMLDialogElement.prototype.showModal === 'function') {
+    const viewer = document.createElement('dialog');
+    viewer.className = 'article-image-viewer';
+    viewer.setAttribute('aria-label', 'Image viewer');
+    viewer.innerHTML = `
+      <button type="button" class="article-image-stage" aria-label="Close image" autofocus>
+        <img alt="" draggable="false">
+      </button>
+    `;
+    document.body.append(viewer);
+
+    const previewImage = viewer.querySelector('img');
+    const previewButton = viewer.querySelector('.article-image-stage');
+    let activeLink;
+    let readingPosition;
+
+    imagePreviewLinks.forEach((link) => {
+      const thumbnail = link.querySelector('img');
+      if (!thumbnail) return;
+      link.setAttribute('aria-haspopup', 'dialog');
+      link.addEventListener('click', (event) => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        activeLink = link;
+        readingPosition = { left: window.scrollX, top: window.scrollY };
+        previewImage.alt = thumbnail.alt;
+        previewImage.src = link.href;
+        previewButton.setAttribute('aria-label', thumbnail.alt ? `${thumbnail.alt} Close image.` : 'Close image');
+        document.documentElement.style.setProperty('--image-viewer-scrollbar-width', `${window.innerWidth - document.documentElement.clientWidth}px`);
+        document.documentElement.classList.add('article-image-open');
+        viewer.showModal();
+      });
+    });
+
+    previewButton.addEventListener('click', () => viewer.close());
+    viewer.addEventListener('close', () => {
+      document.documentElement.classList.remove('article-image-open');
+      document.documentElement.style.removeProperty('--image-viewer-scrollbar-width');
+      activeLink?.focus({ preventScroll: true });
+      if (readingPosition) window.scrollTo({ ...readingPosition, behavior: 'instant' });
+    });
+  }
+
   const articleIndex = document.querySelector('[data-article-index]');
 
   if (articleIndex) {

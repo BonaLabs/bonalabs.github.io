@@ -20,6 +20,9 @@
   --accent-soft-strong: rgba(217, 173, 89, 0.2);
   --blue: #87aadb;
   --blue-soft: rgba(135, 170, 219, 0.13);
+  --news: #c4a7ed;
+  --news-soft: rgba(196, 167, 237, 0.12);
+  --news-border: rgba(196, 167, 237, 0.36);
   --bg-card: var(--surface);
   --bg-card-hover: var(--surface-2);
   --bg-subtle: var(--surface-2);
@@ -330,6 +333,7 @@ a { color: inherit; }
 }
 .pill-class, .pill-update { border-color: rgba(135, 170, 219, 0.32); background: var(--blue-soft); color: var(--blue); }
 .pill-item { border-color: rgba(217, 173, 89, 0.34); background: var(--accent-soft); color: var(--accent); }
+.pill-news { border-color: var(--news-border); background: var(--news-soft); color: var(--news); }
 .article-kicker { color: var(--accent); font-size: 12px; font-weight: 800; }
 .featured-copy h3 {
   margin: 10px 0 14px;
@@ -407,6 +411,7 @@ a { color: inherit; }
 }
 .ad-slot span { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
 .ad-slot p { margin: 0; font-size: 11px; }
+.ad-slot[hidden] { display: none; }
 
 .tools-section { border-block: 1px solid var(--soft); background: rgba(14, 19, 26, 0.76); }
 .tools-grid { display: grid; grid-template-columns: 1.18fr 1fr; gap: 16px; }
@@ -585,7 +590,7 @@ a { color: inherit; }
 }
 
 /* Channel news is independent of the long-form article archive. */
-.home-page .telegram-news { padding-block: 48px; }
+.home-page .telegram-news { padding-block: clamp(32px, 4vw, 48px); }
 .telegram-news-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -614,9 +619,9 @@ a { color: inherit; }
   line-height: 1.65;
 }
 .telegram-news-read { display: inline-flex; align-items: center; align-self: flex-start; min-height: 44px; margin-top: auto; padding-top: 8px; color: var(--accent); font-size: 14px; font-weight: 600; text-decoration: none; }
-.telegram-news-empty { margin: 0; padding: 20px 0; color: var(--muted); font-size: 15px; }
-.telegram-news-empty a { color: var(--bright); text-underline-offset: 3px; }
+.telegram-news-empty:not([hidden]) + p { display: none; }
 .telegram-news-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; margin-top: 20px; }
+.telegram-news-footer:has(.telegram-news-empty:not([hidden])) { margin-top: 0; }
 .telegram-news-footer p { margin: 0; color: var(--muted); font-size: 14px; }
 .telegram-news-footer .community-link { padding-inline: 18px; }
 .telegram-news-grid:focus-visible { outline: 2px solid var(--bright); outline-offset: 4px; }
@@ -733,7 +738,8 @@ a { color: inherit; }
 .library-link strong { color: var(--text); font: 600 17px/1.4 var(--font-display); }
 .library-link small { margin-top: 6px; color: var(--muted); font-size: 13px; line-height: 1.6; }
 .library-arrow { margin-left: auto; color: var(--accent); }
-.home-page #articles { border-top: 0; }
+.home-page :is(.articles-section, .tools-section, .about-section) { padding-block: clamp(40px, 5vw, 64px); }
+.home-page .articles-section { padding-bottom: 32px; }
 .home-page .section-heading h2,
 .home-page .about-section h2,
 .home-page .support-section h2 {
@@ -744,7 +750,7 @@ a { color: inherit; }
   letter-spacing: -0.025em;
 }
 .home-page .section-heading > p { font-size: 16px; line-height: 1.7; }
-.home-page .section-heading { position: relative; padding-bottom: 25px; border-bottom: 1px solid var(--line); margin-bottom: 30px; }
+.home-page .section-heading { position: relative; padding-bottom: 20px; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
 .home-page .section-heading::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 5px; height: 5px; rotate: 45deg; background: var(--accent); }
 .home-page .tracker-card { background: var(--panel-wash); box-shadow: none; }
 .home-page .tracker-copy h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height: 1.35; letter-spacing: -0.02em; }
@@ -777,9 +783,10 @@ a { color: inherit; }
 .home-page .archive-grid a:nth-child(even) { border-left: var(--panel-rule); }
 .home-page .archive-grid a:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .home-page .archive-grid strong { font: 600 18px/1.45 var(--font-display); letter-spacing: -0.01em; }
-.home-page .tools-section { background: linear-gradient(180deg, rgba(201, 170, 113, 0.035), transparent 75%); }
-.home-page .tools-grid { gap: 0; padding-block: 28px; border-block: var(--panel-rule); background: var(--panel-wash); }
-.home-page .tool-card { min-width: 0; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
+.home-page .tools-section,
+.home-page .articles-section { background: linear-gradient(180deg, rgba(201, 170, 113, 0.035), transparent 75%); }
+.home-page .tools-grid { gap: 0; padding-block: 16px; border-block: var(--panel-rule); background: var(--panel-wash); }
+.home-page .tool-card { min-width: 0; min-height: 280px; padding: 24px; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
 .home-page .tool-card + .tool-card { border-left: var(--panel-rule); }
 .home-page .tool-card h3 { font-family: var(--font-display); font-size: 24px; font-weight: 600; line-height: 1.35; letter-spacing: -0.02em; }
 .home-page .tool-icon { border-radius: 0; border-color: rgba(201, 170, 113, 0.4); background: transparent; font-family: var(--font-serif); font-weight: 500; }
@@ -798,7 +805,8 @@ a { color: inherit; }
 .home-page .archive-grid time { font-size: 12px; }
 .home-page .pill { font-size: 10px; font-weight: 700; letter-spacing: 0.065em; }
 .home-page .tool-card > p:not(.tool-status) { font-size: 16px; line-height: 1.7; }
-.home-page .tool-status { font-size: 11px; }
+.home-page .tool-status { margin-top: 20px; font-size: 11px; }
+.home-page .tool-cta { margin-top: auto; padding-top: 16px; }
 .home-page .about-copy,
 .home-page .support-section > div > p:last-child { font-size: 16px; line-height: 1.8; }
 .home-page .support-action p,
@@ -814,8 +822,10 @@ a { color: inherit; }
 .home-page .tracker-card::before { inset-block: 24px; width: 2px; }
 .home-page .archive-drawer > summary { min-height: 68px; padding-inline: 28px; }
 .home-page .archive-drawer[open] > summary { border-bottom: var(--panel-rule); }
-.home-page .support-section { background: var(--panel-wash); padding-block: 36px; }
+.home-page .support-section { background: var(--panel-wash); padding-block: 36px; margin-bottom: clamp(32px, 4vw, 48px); }
 .home-page .about-copy { padding-left: 32px; border-left: var(--panel-rule); }
+.home-page .about-copy p:last-child,
+.home-page .support-section > div > p:last-child { margin-bottom: 0; }
 .home-page .ad-slot { border: 0; border-block: var(--panel-rule); border-radius: 0; background: var(--panel-wash); }
 
 /* Reading and controls use sans serif; display serif is reserved for the cover and brand. */
@@ -831,6 +841,8 @@ a { color: inherit; }
 .site-page .footer-inner strong { font: 600 20px/1.3 var(--font-display); }
 .site-page .footer-inner > a { min-height: 44px; display: inline-flex; align-items: center; }
 .home-page .article-card > a:focus-visible,
+.home-page .tracker-card > a:focus-visible,
+.home-page .site-nav a:focus-visible,
 .home-page .archive-grid a:focus-visible,
 .home-page .tool-card:focus-visible { outline-offset: -4px; }
 
@@ -883,6 +895,7 @@ a { color: inherit; }
   .home-page .tools-grid { grid-template-columns: minmax(0, 1fr); padding-block: 0; }
   .home-page .tool-card + .tool-card { border-left: 0; border-top: var(--panel-rule); }
   .home-page .about-copy { padding: 26px 0 0; border-left: 0; border-top: var(--panel-rule); }
+  .home-page .about-section { gap: 24px; }
   .site-page .site-nav a,
   .site-page .site-nav .nav-support { min-height: 46px; padding-inline: 10px; font-size: 14px; }
   .site-page .site-nav .nav-support { border: 0; }
@@ -933,6 +946,7 @@ a { color: inherit; }
   .tool-coming { min-height: 230px; }
   .about-section { gap: 48px; }
   .support-section { grid-template-columns: 1fr; }
+  .home-page .support-section { gap: 24px; }
   .support-action { padding: 26px 0 0; border-top: 1px solid var(--line); border-left: 0; }
   .footer-inner { grid-template-columns: 1fr 1fr; padding-block: 36px; }
   .footer-inner > a { grid-column: 1 / -1; }
