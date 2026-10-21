@@ -4,6 +4,13 @@
   "bot_id": 8795154505,
   "messages": [
     {
+      "id": 42,
+      "published_at": "2026-10-21T20:57:09Z",
+      "text": "Lineage II KR — Paid Mail & Adena Exchange Removal\nStarting October 28, 2026, the following changes will take effect on Korean servers:\nMail System\nPaid Mail will be removed.\nUnclaimed sent mail containing attached items will be returned to the sender's Personal Warehouse, including attachments and any L-Coin/Adena fees paid.\nWorld Trade\nAdena Exchange will be removed.\nAll registered items (including fees paid), expired listings, and pending sale proceeds will be transferred to the character's Personal Warehouse.\n🇪🇸 Español",
+      "edited_at": "2026-10-21T20:58:33Z",
+      "image": "assets/telegram/42-4e506cb7688335e2.jpg"
+    },
+    {
       "id": 41,
       "published_at": "2026-10-21T17:47:45Z",
       "text": "Lineage II: BASIC — A Closer Look at Overlord: Bartz\nRead the full article\nWe've published a new article covering the latest details revealed about Overlord: Bartz, the new dual-dagger class arriving with Lineage II: BASIC on October 28.\nNCSOFT has showcased 12 representative skills, giving us a better look at the class's combat mechanics:\nMastery & Passives: Dagger specialization, critical damage bonuses, Afterimage effects, and defensive mechanics.\nAttack Skills: Fast-paced combat, AoE attacks, mobility, Defense Ignore, and debuffs.\nBuffs & Reactions: Offensive enhancements, debuff avoidance, and automatic counterattacks.\nWe also explore how Bartz's combat style might fit into BASIC's progression-focused environment, along with what's still unknown ahead of launch.\n\n🇪🇸 Español",
@@ -11,5 +18,5 @@
       "image": "assets/telegram/41-672517abbbee8129.jpg"
     }
   ],
-  "next_update_id": 185072227
+  "next_update_id": 185072229
 }
