@@ -1,12 +1,14 @@
 BonaLabs: automatic Telegram news
 ================================
 
-Status: reactivation prepared locally at the owner's request on October 21, 2026.
-The Home news section is visible, with an empty feed for reviewing the design.
+Status: news collection and the Home section are enabled.
+Scheduled GitHub runs are active, but several-hour gaps were observed on
+October 23, 2026 despite the configured 15-minute interval. For an external
+15-minute trigger, follow TELEGRAM_SCHEDULER.txt in this directory.
+That external scheduler is not configured or verified yet.
 Collection is enabled for posts published from 2026-10-21T16:48:11Z onwards
 (13:48:11 in Buenos Aires). Earlier posts, including subsequent edits to them,
 are excluded. Historical imports remain removed; the bot cursor is preserved.
-Push and deploy these changes before publishing the next Telegram announcement.
 
 REACTIVATION (only when the owner is ready to publish new announcements)
 
@@ -55,8 +57,10 @@ ONE-TIME SETUP (channel and repository owner)
 
 HOW IT WORKS
 
-- GitHub checks Telegram at minutes 7, 22, 37 and 52 of each hour, on main pushes,
-  and on manual runs. Scheduled jobs can be delayed; this is not real-time delivery.
+- GitHub requests scheduled runs at minutes 7, 22, 37 and 52 of each hour,
+  on main pushes, and on manual/API dispatches. Scheduled runs can be delayed
+  or dropped; this interval is not a delivery guarantee. An external scheduler
+  can dispatch the same workflow without relying on GitHub's cron scheduler.
 - The synchronizer receives channel_post and edited_channel_post updates only.
   It filters the channel identity, extracts text and supported photos, groups
   albums, and stores a public snapshot in data/telegram-feed.json.

@@ -1,0 +1,79 @@
+BonaLabs: external Telegram scheduling
+=====================================
+
+Status: configuration prepared; external account setup and verification pending.
+
+Use cron-job.org to request the existing workflow every 15 minutes. The service
+is free according to its FAQ, checked October 23, 2026. No new Telegram bot or
+webhook is needed. This removes reliance on GitHub's cron scheduler, but runner
+queues, service outages and deployment time can still delay visible updates.
+
+1. Create a free account at https://console.cron-job.org/signup and verify it.
+
+2. Create a dedicated GitHub fine-grained personal access token:
+   https://github.com/settings/personal-access-tokens/new
+   Name: BonaLabs news scheduler
+   Resource owner: BonaLabs
+   Repository access: Only select repositories > bonalabs.github.io
+   Repository permissions: Actions > Read and write
+   Leave other optional permissions unset. GitHub includes Metadata read access.
+   Choose an expiry and remember to renew it before that date. If organization
+   approval is required, wait until the token is approved before testing.
+
+   Store this token only in the scheduler's Authorization header below. Do not
+   paste it into chat, a repository file or the request URL. Actions write access
+   also permits managing runs in this repository; it is not scoped to one
+   workflow. The scheduler does not need the Telegram bot token.
+
+3. Create one cron job in https://console.cron-job.org/ with these settings:
+
+   Title: BonaLabs Telegram news
+   URL: https://api.github.com/repos/BonaLabs/bonalabs.github.io/actions/workflows/telegram-news.yml/dispatches
+   Schedule: every 15 minutes, all hours and days
+   Timezone: America/Argentina/Buenos_Aires
+   Request method: POST
+   Request body: {"ref":"main"}
+
+   Add these request headers in the advanced settings:
+   Accept: application/vnd.github+json
+   Content-Type: application/json
+   X-GitHub-Api-Version: 2026-03-10
+   Authorization: Bearer YOUR_GITHUB_TOKEN
+
+   Replace YOUR_GITHUB_TOKEN in the service's form, keeping the space after
+   Bearer. Enable failure and automatic-disable notifications, then save and
+   enable the job. The existing workflow already accepts workflow_dispatch;
+   no workflow code change is required for this request.
+
+4. Test the job once. A successful API response only means GitHub accepted the
+   dispatch. Open Actions and verify that BOTH build and deploy finish green:
+   https://github.com/BonaLabs/bonalabs.github.io/actions/workflows/telegram-news.yml
+
+   Then allow two scheduled intervals without pressing Run workflow. Check the
+   cron-job.org history and corresponding GitHub runs. External triggers appear
+   as workflow_dispatch, not schedule. Confirm the next normal Telegram post
+   reaches https://bonalabs.net/ after a successful deployment.
+   A homepage left open checks the published snapshot every five minutes;
+   refreshing the page requests it immediately. The snapshot's updated_at only
+   changes when its posts change, so it is not a record of every successful poll.
+
+5. Keep the existing GitHub cron during setup. Its concurrency group serializes
+   workflow runs, so both triggers use the same bot consumer. Once the external
+   schedule is verified, the native cron can be reduced to a less frequent
+   fallback. Do not run a second bot consumer or install a Telegram webhook.
+
+Troubleshooting:
+- 401: check the token or its expiry.
+- 403/404: check token owner, repository selection, Actions write permission,
+  organization approval and the exact workflow URL.
+- 422: check the JSON body and ref main.
+- Accepted request but skipped build: check TELEGRAM_FEED_ENABLED=true in the
+  GitHub repository's Actions variables.
+- Accepted request but failed workflow: inspect its failed step in Actions.
+  Scheduler success alone does not verify collection or deployment.
+- To stop external scheduling, disable this cron job and revoke its dedicated
+  token in GitHub. Existing native scheduled and manual runs remain available.
+
+References:
+https://cron-job.org/en/faq/
+https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event
