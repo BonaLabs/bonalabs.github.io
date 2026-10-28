@@ -579,6 +579,15 @@
 .post-main table:has([rowspan]) th,
 .post-main table:has([rowspan]) td { border: 1px solid var(--line); }
 
+.post-main .class-profile-table { min-width: 0; }
+.class-profile-table th[scope='row'] { width: 40%; text-align: left; }
+.post-main .class-reference-table { min-width: 760px; table-layout: fixed; }
+.class-reference-table .reference-category { width: 16%; }
+.class-reference-table .reference-name { width: 24%; }
+.class-reference-table .reference-effect { width: 60%; }
+.class-reference-table td { vertical-align: top; overflow-wrap: break-word; }
+.class-reference-table p { margin: 0; }
+
 .post-nav {
   display: flex;
   flex-wrap: wrap;
@@ -1484,6 +1493,29 @@
   }
   :is(.chronicle-article, .tracker-page) .post-header-illustrated::before {
     background: linear-gradient(0deg, rgba(12, 14, 16, 0.98), rgba(12, 14, 16, 0.52) 52%, rgba(12, 14, 16, 0.03));
+  }
+}
+
+/* The Bartz cover uses its full class artwork instead of the equipment scene. */
+.chronicle-article .post-cover-bartz .post-cover-art {
+  left: 0;
+  width: 100%;
+  object-position: 28% 25%;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.chronicle-article .post-cover-bartz::before {
+  background: linear-gradient(270deg, rgba(12, 14, 16, 0.94), rgba(12, 14, 16, 0.8) 35%, rgba(12, 14, 16, 0.12) 67%, transparent);
+}
+@media (max-width: 720px) {
+  .chronicle-article .post-cover-bartz .post-cover-art {
+    height: 360px;
+    object-position: 28% 20%;
+    -webkit-mask-image: linear-gradient(#000 55%, transparent);
+    mask-image: linear-gradient(#000 55%, transparent);
+  }
+  .chronicle-article .post-cover-bartz::before {
+    background: linear-gradient(0deg, var(--bg) 10%, rgba(12, 14, 16, 0.92) 40%, rgba(12, 14, 16, 0.1) 72%, transparent);
   }
 }
 
