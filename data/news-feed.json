@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "source": "discord",
+  "guild_id": "673917009897062411",
+  "channel_ids": [
+    "1164209144740458506",
+    "1354084517404737586"
+  ],
+  "updated_at": "2026-11-01T23:17:56.815630Z",
+  "posts": [
+    {
+      "id": "1564834426712629369",
+      "channel_id": "1164209144740458506",
+      "published_at": "2026-10-28T02:53:20.546000Z",
+      "text": "📢 Lineage II KR — October 28 Update Tracker\n\nCheck out the updates\n\nThe BonaLabs Tracker has been updated with a long list of changes from the October 28 Korean update.\n\nLots of new information to go through, all translated into English and organized for easier reading!\n\n🇪🇸 Español → https://discord.com/channels/673917009897062411/1564834426712629369/1564834597773123584",
+      "url": "https://discord.com/channels/673917009897062411/1164209144740458506/1564834426712629369",
+      "edited_at": "2026-10-28T02:54:17.325000Z",
+      "image": "assets/discord/4a6eebb853750d0500ecbbb9.png"
+    },
+    {
+      "id": "1564833988818894858",
+      "channel_id": "1164209144740458506",
+      "published_at": "2026-10-28T02:51:36.144000Z",
+      "text": "📢 Lineage II — Bartz: Complete Class & Skill Breakdown\n\nCheck out the article\n\nWith Bartz arriving in Korea on October 28, we've put together a complete breakdown of its skills, combat mechanics, enhancements, and Skill Enchant effects.\n\nEverything organized into tables to make it easier to explore.\n\n🇪🇸 Español → https://discord.com/channels/673917009897062411/1564833988818894858/1564834132369088654",
+      "url": "https://discord.com/channels/673917009897062411/1164209144740458506/1564833988818894858",
+      "edited_at": "2026-10-28T02:52:24.493000Z",
+      "image": "assets/discord/ec8b36c14244c8ed3d3e75ab.png"
+    },
+    {
+      "id": "1564408329118163057",
+      "channel_id": "1354084517404737586",
+      "published_at": "2026-10-26T22:40:10.963000Z",
+      "text": "Lineage II: BASIC — New Details on Progression, Equipment & Starter Package\n\nWith the October 28 launch approaching, NCSOFT has shared more details about BASIC's equipment systems, character progression, and monetization.\n\nEquipment & Removed Systems\n\n- D-Grade Equipment: Weapons and armor are intended to remain valuable for an extended period. Equipment obtained through hunting or NPC shops will generally be tradable.\n- Removed Systems: Circlet, Mask, Pendant, and Gem Slots, along with Dyes, Potential, Dolls, and Collections, have been removed to simplify progression and reduce the gap between players.\n- Some of these systems may return in future updates, integrated into regular gameplay and character progression.\n\nCharacter Progression & Hunting\n\n- Early Progression: Leveling will initially focus on tutorial quests. After the 3rd Class Transfer, progression will become slower and primarily hunting-based.\n- Field Hunting: Hunting zones will be available up to Dragon Valley, with additional areas planned for future updates.\n- Dungeons & Group Content: Tower of Insolence will offer increasingly difficult encounters on higher floors. Raids and other cooperative activities will also be available.\n\nStarter Package\n\nA paid Starter Package will be available to support early character progression.\n\n- Price: 29,700 KRW\n- Purchase Limit: Once per account\n\n🇪🇸 Español → https://discord.com/channels/673917009897062411/1564408329118163057/1564408451612803145",
+      "url": "https://discord.com/channels/673917009897062411/1354084517404737586/1564408329118163057",
+      "edited_at": "2026-10-26T22:41:01.164000Z",
+      "image": "assets/discord/7db80fb3814e547af064906a.png"
+    },
+    {
+      "id": "1564272577302626509",
+      "channel_id": "1354084517404737586",
+      "published_at": "2026-10-26T13:40:45.208000Z",
+      "text": "Lineage II: BASIC — Overlord: Bartz Skills Preview\n\nNCSOFT has released a new video showcasing 12 skills of the upcoming Overlord: Bartz class.\n\nSkills & Effects\n\n- Luminous Edge: Attacks the target twice and stacks the Gwanghon debuff.\n- Luminous Walk: Dashes toward the target, attacking twice and stacking Gwanghon.\n- Radiant Cutter: Catalyst: Attacks enemies along its path twice. Increases Breaking Veil's Defense Ignore when used immediately afterward.\n- Breaking Veil: Attacks enemies, reduces their Dagger Resistance, and grants Atk. Spd. and Dagger Damage bonuses. Can apply 2 Gwanghon stacks.\n- Radiant Dive: Catalyst: Leaps onto enemies, attacking twice. Triggers additional strikes against Gwanghon-affected targets and reduces the Dagger Resistance of the enemy with the lowest current HP.\n- Blinding Spectrum: Throws daggers to attack enemies twice, applying Occlusion (obstructed vision?), followed by Obscure (reduced P./M. Accuracy).\n- Ambient Knifestorm: Powerful two-hit AoE attack. Enchanting the skill increases its power and number of hits.\n- Distortion: Increases Evasion and Resistance, granting 3 Shell stacks. Consumes Gwanghon stacks from nearby enemies to gain additional Shell stacks, which help avoid debuffs and crowd-control effects.\n- Lumitrix: Greatly increases offensive capabilities. Activates additional strikes when attacking and automatic counterattacks when receiving damage.\n- Ramsheart: Attacks enemies in front and grants defensive buffs to nearby allies and the caster. Requires the Lumitrix: Chromatic state.\n- Trace Link: Attacking Gwanghon-affected targets applies Glottal Slit, sealing their Physical Skills.\n- Lucent Screen: Has a chance to activate Mirroring when hit, reflecting a portion of incoming damage.\n\nWatch the full skill preview\n\n🇪🇸 Español → https://discord.com/channels/673917009897062411/1564272577302626509/1564273116195061821",
+      "url": "https://discord.com/channels/673917009897062411/1354084517404737586/1564272577302626509",
+      "edited_at": "2026-10-26T13:43:14.041000Z"
+    },
+    {
+      "id": "1563289393580740629",
+      "channel_id": "1354084517404737586",
+      "published_at": "2026-10-23T20:33:55.942000Z",
+      "text": "Lineage II: BASIC — Bartz Skill Icons Updated\n\nNCSOFT has refreshed Overlord: Bartz's skill icons.\n\nThe previous ones looked like they came straight out of an AI image generator. Apparently, someone finally found the *\"Make it less AI-generated\"* button. 😂\n\nThe new icons look better, though(?\n\n🇪🇸 Español → https://discord.com/channels/673917009897062411/1563289393580740629/1563289574535331861",
+      "url": "https://discord.com/channels/673917009897062411/1354084517404737586/1563289393580740629",
+      "edited_at": "2026-10-23T20:34:59.745000Z",
+      "image": "assets/discord/d8cce55cab8a55e328dda8c3.png"
+    },
+    {
+      "id": "1562570143702192280",
+      "channel_id": "1354084517404737586",
+      "published_at": "2026-10-21T20:55:53.408000Z",
+      "text": "Lineage II KR — Paid Mail & Adena Exchange Removal\n\nStarting October 28, 2026, the following changes will take effect on Korean servers:\n\nMail System\n- Paid Mail will be removed.\n- Unclaimed sent mail containing attached items will be returned to the sender's Personal Warehouse, including attachments and any L-Coin/Adena fees paid.\n\nWorld Trade\n- Adena Exchange will be removed.\n- All registered items (including fees paid), expired listings, and pending sale proceeds will be transferred to the character's Personal Warehouse.\n\n🇪🇸 Español → https://discord.com/channels/673917009897062411/1562570143702192280/1562570213633818655",
+      "url": "https://discord.com/channels/673917009897062411/1354084517404737586/1562570143702192280",
+      "edited_at": "2026-10-21T20:56:28.662000Z",
+      "image": "assets/discord/9388d25e2a1292299f90b210.png"
+    },
+    {
+      "id": "1562522573772947547",
+      "channel_id": "1354084517404737586",
+      "published_at": "2026-10-21T17:46:51.853000Z",
+      "text": "Lineage II: BASIC — A Closer Look at Overlord: Bartz\n\nRead the full article\n\nWe've published a new article covering the latest details revealed about Overlord: Bartz, the new dual-dagger class arriving with Lineage II: BASIC on October 28.\n\nNCSOFT has showcased 12 representative skills, giving us a better look at the class's combat mechanics:\n\n- Mastery & Passives: Dagger specialization, critical damage bonuses, Afterimage effects, and defensive mechanics.\n- Attack Skills: Fast-paced combat, AoE attacks, mobility, Defense Ignore, and debuffs.\n- Buffs & Reactions: Offensive enhancements, debuff avoidance, and automatic counterattacks.\n\nWe also explore how Bartz's combat style might fit into BASIC's progression-focused environment, along with what's still unknown ahead of launch.\n\n🇪🇸 Español → https://discord.com/channels/673917009897062411/1562522573772947547/1562523655840465036",
+      "url": "https://discord.com/channels/673917009897062411/1354084517404737586/1562522573772947547",
+      "edited_at": "2026-10-21T17:51:32.865000Z",
+      "image": "assets/discord/a19d5c7861e1014c61da280c.png"
+    },
+    {
+      "id": "1561696388075495481",
+      "channel_id": "1354084517404737586",
+      "published_at": "2026-10-19T11:03:53.833000Z",
+      "text": "Lineage II: BASIC — Pre-Registration Rewards Adjusted\n\nNCSOFT has announced changes to the pre-registration rewards for the upcoming Gludin server.\n\nThe originally announced equipment rewards will now be provided without enchantment:\n\n- ⚔️ Falchion: +7 → +0\n- 🛡️ Bronze Armor: +5 → +0\n- 🎁 Growth Support Pack: remains included.\n\nEquipment exchange coupons will allow players to select the appropriate type for their class.\n\nAccording to NCSOFT, this adjustment is intended to encourage players to obtain equipment through hunting while preserving the importance and value of D-Grade equipment as they progress, reinforcing BASIC's gradual progression philosophy.\n\n🇪🇸 Español → https://discord.com/channels/673917009897062411/1561696388075495481/1561703896928227339",
+      "url": "https://discord.com/channels/673917009897062411/1354084517404737586/1561696388075495481",
+      "edited_at": "2026-10-19T11:35:37.864000Z",
+      "image": "assets/discord/61bd28f36d547504e14f638f.png"
+    },
+    {
+      "id": "1560722454823833771",
+      "channel_id": "1354084517404737586",
+      "published_at": "2026-10-16T18:33:50.051000Z",
+      "text": "BonaLabs\n\n🇪🇺 New Article\n- We published a new article: Lineage II: BASIC — Everything We Know So Far.\n- An in-depth look at Lineage II: BASIC, the new server experience scheduled to launch in Korea on October 28, 2026.\n- We cover everything revealed so far: equipment progression, crafting, the Adena-based economy, Raid Bosses, Castle Sieges, and the new Overlord: Bartz class.\n- We also explore what's still unconfirmed and what players can expect from this attempt to bring back some of the core elements that defined Lineage II.\n\n🇪🇸 Nuevo artículo\n- Publicamos un nuevo artículo: Lineage II: BASIC — Todo lo que sabemos hasta ahora.\n- Analizamos en detalle la propuesta de Lineage II: BASIC, la nueva experiencia de juego que llegará a los servidores coreanos el 28 de octubre de 2026.\n- Repasamos todo lo anunciado hasta el momento: progresión y equipamiento, crafting, economía basada en Adena, Raid Bosses, Castle Sieges y la nueva clase Overlord: Bartz.\n- También analizamos qué aspectos siguen sin confirmarse y qué podemos esperar de esta propuesta que busca recuperar parte de la esencia de Lineage II.\n\n@everyone",
+      "url": "https://discord.com/channels/673917009897062411/1354084517404737586/1560722454823833771",
+      "image": "assets/discord/9ca7edf797bfb9ece273acdc.png"
+    },
+    {
+      "id": "1560264076028805170",
+      "channel_id": "1164209144740458506",
+      "published_at": "2026-10-15T12:12:24.030000Z",
+      "text": "BonaLabs\n\n🇪🇸 Actualizaciones\n- Se añadió una nueva entrada al Tracker con los cambios del 14 de octubre de 2026, incluyendo modificaciones en skills y en la World Zone Tower of Insolence.\n\n🇪🇺 Updates\n- A new entry covering the October 14, 2026 changes has been added to the Tracker, including skill adjustments and changes to the Tower of Insolence World Zone.",
+      "url": "https://discord.com/channels/673917009897062411/1164209144740458506/1560264076028805170",
+      "image": "assets/discord/43b990691b59a858c0be00e2.png"
+    },
+    {
+      "id": "1560075071828131900",
+      "channel_id": "1164209144740458506",
+      "published_at": "2026-10-14T23:41:21.917000Z",
+      "text": "BonaLabs\n\n🇪🇸 Actualizaciones\n- Se añadió un nuevo artículo:\n  - Server Battle\n- El artículo incluye información sobre la nueva Outpost Occupation Battle, sus mecánicas, horarios, recompensas, misión diaria, cambios en los rankings individuales y el intercambio de Pitch-Black Coins.\n\n🇪🇺 Updates\n- A new article was added:\n  - Server Battle\n- The article covers the new Outpost Occupation Battle, including its mechanics, schedule, rewards, daily mission, updated individual rankings, and Pitch-Black Coin exchange.",
+      "url": "https://discord.com/channels/673917009897062411/1164209144740458506/1560075071828131900",
+      "image": "assets/discord/f58e355193558fbf09e89c3f.png"
+    },
+    {
+      "id": "1557197470344155226",
+      "channel_id": "1354084517404737586",
+      "published_at": "2026-10-07T01:06:48.260000Z",
+      "text": "[Lineage 2] New Class: Tyrant – Bartz ???\nhttps://youtu.be/QxWwW0KFEKU",
+      "url": "https://discord.com/channels/673917009897062411/1354084517404737586/1557197470344155226",
+      "edited_at": "2026-10-07T01:11:37.634000Z"
+    }
+  ]
+}
