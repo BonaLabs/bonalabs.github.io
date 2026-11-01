@@ -5,9 +5,12 @@ import subprocess
 
 ROOT_FILES = (
     "index.html", "calculator.html", "xp-calculator.html", "style.css", "post.css",
-    "site.js", "xp-calculator.js", "telegram-news.js", "robots.txt", "sitemap.xml",
+    "site.js", "xp-calculator.js", "news-feed.js", "robots.txt", "sitemap.xml",
     "CNAME", "favicon.png", "logo-mark.png",
 )
+
+# Retain the old feed assets in version control, but retire their public URLs.
+RETIRED_FILES = {"data/telegram-feed.json", "icons/social/telegram.svg"}
 
 
 def build(root, destination):
@@ -21,6 +24,8 @@ def build(root, destination):
         files.extend(p for p in (root / name).rglob("*") if p.is_file() and not any(part.startswith(".") for part in p.relative_to(root).parts))
     for source in files:
         relative = source.relative_to(root)
+        if relative.as_posix() in RETIRED_FILES or relative.parts[:2] == ("assets", "telegram"):
+            continue
         if source.is_symlink() or not source.resolve().is_relative_to(root.resolve()):
             raise ValueError("Public file resolves outside the site.")
         if source.suffix in (".html", ".css", ".js", ".json", ".xml", ".txt"):

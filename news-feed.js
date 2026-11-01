@@ -1,9 +1,9 @@
 (() => {
-  const section = document.querySelector('[data-telegram-news]');
+  const section = document.querySelector('[data-news]');
   if (!section || section.hidden) return;
 
-  const feed = section.querySelector('[data-telegram-feed]');
-  const empty = section.querySelector('[data-telegram-empty]');
+  const feed = section.querySelector('[data-news-feed]');
+  const empty = section.querySelector('[data-news-empty]');
   const dateFormat = new Intl.DateTimeFormat('en-GB', {
     day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC'
   });
@@ -18,20 +18,17 @@
         valid: (post) => snowflake(post.id) && data.channel_ids.includes(post.channel_id),
         url: (post) => `https://discord.com/channels/${data.guild_id}/${post.channel_id}/${post.id}` };
     }
-    if (data.source && data.source !== 'telegram') throw new Error('Unknown source');
-    return { key: 'telegram', label: 'Telegram', join: 'https://t.me/BonaLabs',
-      valid: (post) => Number.isSafeInteger(post.id) && post.id > 0,
-      url: (post) => `https://t.me/BonaLabs/${post.id}` };
+    throw new Error('Unknown source');
   };
 
   const createCard = (post, source) => {
     const item = document.createElement('li');
     const article = document.createElement('article');
-    article.className = 'telegram-news-card';
+    article.className = 'news-feed-card';
 
-    if (typeof post.image === 'string' && /^assets\/(telegram|discord)\/[\w-]+\.(jpg|png|webp|gif)$/.test(post.image)) {
+    if (typeof post.image === 'string' && /^assets\/discord\/[\w-]+\.(jpg|png|webp|gif)$/.test(post.image)) {
       const image = document.createElement('img');
-      image.className = 'telegram-news-image';
+      image.className = 'news-feed-image';
       image.src = post.image;
       image.alt = '';
       image.loading = 'lazy';
@@ -41,7 +38,7 @@
     }
 
     const copy = document.createElement('div');
-    copy.className = 'telegram-news-copy';
+    copy.className = 'news-feed-copy';
     const time = document.createElement('time');
     time.dateTime = post.published_at;
     time.textContent = dateFormat.format(new Date(post.published_at));
@@ -60,7 +57,7 @@
     const excerpt = hasTitle ? lines.join('\n') : text;
     if (excerpt) {
       const body = document.createElement('p');
-      body.className = 'telegram-news-excerpt';
+      body.className = 'news-feed-excerpt';
       body.textContent = excerpt;
       copy.append(body);
     }
@@ -68,7 +65,7 @@
     read.href = link.href;
     read.target = '_blank';
     read.rel = 'noopener noreferrer';
-    read.className = 'telegram-news-read';
+    read.className = 'news-feed-read';
     read.textContent = `Read on ${source.label} →`;
     copy.append(read);
     article.append(copy);
@@ -82,11 +79,7 @@
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), 8000);
     try {
-      let response = await fetch('data/news-feed.json', {
-        cache: 'no-cache', signal: controller.signal
-      });
-      // Old checkouts retain the Telegram snapshot until the first new build.
-      if (response.status === 404) response = await fetch('data/telegram-feed.json', {
+      const response = await fetch('data/news-feed.json', {
         cache: 'no-cache', signal: controller.signal
       });
       if (!response.ok) throw new Error('Feed unavailable');
@@ -105,12 +98,11 @@
       if (content === lastContent || feed.contains(document.activeElement)) return;
       feed.replaceChildren(...posts.map((post) => createCard(post, source)));
       feed.setAttribute('aria-label', `Latest ${source.label} updates`);
-      section.querySelector('[data-news-origin]').textContent = `From the ${source.label} ${source.key === 'discord' ? 'community' : 'channel'}`;
+      section.querySelector('[data-news-origin]').textContent = 'From the Discord community';
       section.querySelector('[data-news-footer]').textContent = `More from BonaLabs, directly on ${source.label}.`;
       const join = section.querySelector('[data-news-join]');
       join.href = source.join;
-      join.classList.toggle('social-discord', source.key === 'discord');
-      join.classList.toggle('social-telegram', source.key === 'telegram');
+      join.classList.add('social-discord');
       join.dataset.communityPlatform = source.key;
       join.querySelector('[data-news-join-label]').textContent = `Join ${source.label}`;
       feed.hidden = posts.length === 0;

@@ -45,7 +45,7 @@ SETUP
    discord, the collector makes no Telegram API calls.
 
 5. Commit and push the migration files to main, including the new scripts,
-   tests, assets/discord/.gitkeep, index.html and telegram-news.js. Wait for the
+   tests, assets/discord/.gitkeep, index.html and news-feed.js. Wait for the
    "BonaLabs news and Pages" workflow to complete build and deploy.
 
    IMPORTANT: the workflow file remains .github/workflows/telegram-news.yml.
@@ -59,14 +59,14 @@ SETUP
    or Gateway connection is used. The bot may appear offline in Discord.
 
 7. After confirming the switch, the Telegram bot secret can be removed if no
-   other integration uses it. Existing social invitation links elsewhere on the
-   site are independent of the news source and have not been removed here.
+   other integration uses it. Telegram invitation links and buttons have been
+   removed from public pages; community panels now invite readers to Discord.
 
 DETAILS
 
-- The public snapshot is data/news-feed.json. The old Telegram snapshot is only
-  a compatibility fallback when the new file does not yet exist (HTTP 404).
-  A Discord API failure never switches back to Telegram automatically.
+- The public snapshot is data/news-feed.json. Only Discord posts are displayed.
+  There is no Telegram fallback. Its old snapshot, cached images and social icon
+  are retained in the repository but excluded from the Pages package.
 - A first Discord run with no eligible announcements fails rather than clearing
   the Telegram feed: verify permissions, channel selection and include_bots.
 - Each successful run reconstructs the recent feed, reflecting edits/deletions.
@@ -87,7 +87,7 @@ DETAILS
 CHECKS (offline; never run a live collector locally while Actions is active)
 
   python -m unittest discover -s .github/tests -v
-  node --check telegram-news.js
+  node --check news-feed.js
 
 References:
 https://docs.discord.com/developers/resources/message#get-channel-messages

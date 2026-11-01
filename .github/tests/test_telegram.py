@@ -181,7 +181,8 @@ class SyncTests(unittest.TestCase):
     def test_public_packaging_excludes_private_files(self):
         for name in package.ROOT_FILES:
             (self.root / name).write_text("public", encoding="utf-8")
-        for name in ("local-tools/private.html", ".github/telegram-state.json", "preview-test.png", "importer.html"):
+        for name in ("local-tools/private.html", ".github/telegram-state.json", "preview-test.png", "importer.html",
+                     "data/telegram-feed.json", "icons/social/telegram.svg", "assets/telegram/old.jpg"):
             path = self.root / name
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("private", encoding="utf-8")
