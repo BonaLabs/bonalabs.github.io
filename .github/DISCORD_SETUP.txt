@@ -1,0 +1,95 @@
+BonaLabs: migrate the website newsfeed to Discord
+================================================
+
+Prepared November 1, 2026. The owner confirmed DISCORD_BOT_TOKEN was added to
+GitHub Actions secrets. Discord is selected locally in news-feed-settings.json.
+Commit/push and the first successful Discord build/deploy are still pending.
+Never store credentials in the settings file.
+
+Approved server: 673917009897062411
+Approved channels:
+  https://discord.com/channels/673917009897062411/1164209144740458506
+  https://discord.com/channels/673917009897062411/1354084517404737586
+
+The owner requested recent existing publications as well as future announcements.
+publish_from is therefore null. The collector reads the latest 100 messages per
+channel, keeps the 12 newest eligible posts combined, and the Home displays 3.
+Messages are ordered together by publication time. Identical announcements in
+different channels remain separate posts; publish each announcement once.
+Bots/webhooks and system messages are excluded by default. If announcements are
+posted by a bot/webhook, review and set include_bots to true before activation.
+
+SETUP
+
+1. Create an application at https://discord.com/developers/applications (or use
+   an existing bot you own). In Bot, enable Message Content Intent. Other
+   privileged intents are unnecessary for this integration.
+
+2. Install the bot in the approved server, with the bot scope and only View
+   Channels + Read Message History. No Administrator or Send Messages permission
+   is needed. In each of the two channel permission settings, ensure the bot
+   can View Channel and Read Message History. Restrict its access to the news
+   channels. Anyone reading the website will be able to see the copied content;
+   use channels whose announcements are intended for public distribution.
+
+3. Copy the bot token directly into a new GitHub Actions repository secret:
+   Name: DISCORD_BOT_TOKEN
+   https://github.com/BonaLabs/bonalabs.github.io/settings/secrets/actions
+   Do not paste the token into chat, screenshots, the site, or a repository file.
+   Do not reset an existing bot's token unless you also update its other users.
+
+4. In .github/news-feed-settings.json source is already set to "discord".
+   The server and both channel IDs are also configured. Keep the existing
+   TELEGRAM_FEED_ENABLED=true repository variable: its historical name still
+   gates the Pages workflow, including the Discord source. When source is
+   discord, the collector makes no Telegram API calls.
+
+5. Commit and push the migration files to main, including the new scripts,
+   tests, assets/discord/.gitkeep, index.html and telegram-news.js. Wait for the
+   "BonaLabs news and Pages" workflow to complete build and deploy.
+
+   IMPORTANT: the workflow file remains .github/workflows/telegram-news.yml.
+   The cron-job.org URL, POST body and GitHub token can stay exactly as configured.
+   The workflow display name changes; the dispatch URL does not.
+
+6. Verify the Home displays recent Discord posts and Read on Discord links.
+   Check two scheduled intervals without manual runs. Edits should update on
+   the next successful sync, and deleted posts should disappear. API failures
+   stop deployment and preserve the previous public feed. No permanent server
+   or Gateway connection is used. The bot may appear offline in Discord.
+
+7. After confirming the switch, the Telegram bot secret can be removed if no
+   other integration uses it. Existing social invitation links elsewhere on the
+   site are independent of the news source and have not been removed here.
+
+DETAILS
+
+- The public snapshot is data/news-feed.json. The old Telegram snapshot is only
+  a compatibility fallback when the new file does not yet exist (HTTP 404).
+  A Discord API failure never switches back to Telegram automatically.
+- A first Discord run with no eligible announcements fails rather than clearing
+  the Telegram feed: verify permissions, channel selection and include_bots.
+- Each successful run reconstructs the recent feed, reflecting edits/deletions.
+  If a channel returns an empty history, previously published messages are
+  checked individually. Only Unknown Message (404/code 10008) counts as deleted;
+  revoked permissions, missing channels and service errors preserve the feed.
+- IDs remain strings throughout to avoid JavaScript rounding Discord snowflakes.
+- Attached JPG/PNG/WebP/GIF images up to 8 MiB are cached under assets/discord;
+  signed Discord CDN URLs are not exposed. Spoiler attachments are skipped.
+  Video/files/stickers are accessed through the original Discord message link.
+- Text and basic formatting are normalized to safe plain text. Raw author data,
+  roles, tokens and full API payloads are never written to the public snapshot.
+- Source message links require Discord access. The site's copies need no login.
+- Native GitHub cron remains a fallback. Neither scheduler nor runner latency
+  guarantees an exact 15-minute publication deadline. Open Home tabs refresh
+  their snapshot every five minutes.
+
+CHECKS (offline; never run a live collector locally while Actions is active)
+
+  python -m unittest discover -s .github/tests -v
+  node --check telegram-news.js
+
+References:
+https://docs.discord.com/developers/resources/message#get-channel-messages
+https://docs.discord.com/developers/events/gateway#message-content-intent
+https://docs.discord.com/developers/reference#signed-attachment-cdn-urls

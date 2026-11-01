@@ -1,4 +1,4 @@
-name: Telegram news and Pages
+name: BonaLabs news and Pages
 
 on:
   push:
@@ -30,15 +30,16 @@ jobs:
           python-version: '3.12'
       - name: Test the synchronizer and public packaging
         run: python -m unittest discover -s .github/tests -v
-      - name: Receive Telegram posts
+      - name: Receive news from the configured source
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        run: python .github/scripts/sync_telegram.py
-      - name: Persist the feed before acknowledging its Telegram updates
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+        run: python .github/scripts/sync_news.py
+      - name: Persist the news snapshot and source state
         run: |
-          git add -- data/telegram-feed.json .github/telegram-state.json assets/telegram
+          git add -- data/news-feed.json data/telegram-feed.json .github/telegram-state.json assets/telegram assets/discord
           if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Refresh Telegram news'
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Refresh BonaLabs news'
             git push origin HEAD:main
           fi
       - name: Package approved public files

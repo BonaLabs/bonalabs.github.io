@@ -1,0 +1,9 @@
+{
+  "source": "discord",
+  "discord": {
+    "guild_id": "673917009897062411",
+    "channel_ids": ["1164209144740458506", "1354084517404737586"],
+    "include_bots": false,
+    "publish_from": null
+  }
+}

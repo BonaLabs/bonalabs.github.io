@@ -1,6 +1,9 @@
 BonaLabs: automatic Telegram news
 ================================
 
+Migration to Discord: see DISCORD_SETUP.txt. The active source is selected in
+news-feed-settings.json; Telegram settings apply only while source is telegram.
+
 Status: news collection and the Home section are enabled.
 Scheduled GitHub runs are active, but several-hour gaps were observed on
 October 23, 2026 despite the configured 15-minute interval. For an external

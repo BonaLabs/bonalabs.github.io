@@ -1,6 +1,10 @@
 BonaLabs: external Telegram scheduling
 =====================================
 
+Discord migration: the workflow display name becomes BonaLabs news and Pages.
+Its filename and dispatch URL stay unchanged, so this scheduler also triggers
+the Discord collector once activated. See DISCORD_SETUP.txt.
+
 Status: configuration prepared; external account setup and verification pending.
 
 Use cron-job.org to request the existing workflow every 15 minutes. The service
