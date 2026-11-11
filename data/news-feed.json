@@ -6,8 +6,17 @@
     "1164209144740458506",
     "1354084517404737586"
   ],
-  "updated_at": "2026-11-01T23:17:56.815630Z",
+  "updated_at": "2026-11-02T12:46:05.444423Z",
   "posts": [
+    {
+      "id": "1566791591803359323",
+      "channel_id": "1354084517404737586",
+      "published_at": "2026-11-02T12:30:25.066000Z",
+      "text": "Lineage II — Magic Class Update: New Skills & Combat Improvements\n\nMagic classes are receiving a major update, introducing new passive skills, stronger abilities, and improved combat performance.\n\nKey Skill Upgrades\n\nLearning Rare-grade buff skills will upgrade several abilities into double-hit attacks.\n\n- Archmage, Storm Screamer & Soul Taker: Prominence, Hurricane, and Death Spike receive double-hit upgrades through their respective Expert skills.\n- Mystic Muse: New Mystic Expert skill upgrades Hydro Blast and Mystic Buster.\n- Elemental Master: Elemental Bolt receives a double-hit upgrade.\n- Arcana Lord & Spectral Master: New Expert skills upgrade their respective attacks, while Magic Spike is removed.\n- Dominator & Doomcryer: Inferno Strike receives a double-hit upgrade.\n\nNew Passive Skills\n\n- Archmage, Storm Screamer & Soul Taker: New passives improve Sleep, Silence, and Paralysis Accuracy, alongside HP/MP and recovery bonuses when wearing Robe armor.\n- New Mastery Skills: Increase M. Atk., Magic Skill Power, Max HP, and Defense.\n- Arcana Lord & Spectral Master: Arcana Harmony and Phantom Resonance improve combat capabilities and increase the maximum Magic Skill Critical Rate.\n\nAdditional Improvements\n\n- Mystic Muse: Relic gains a chance to trigger an additional hit at +3 Enchant, while its Mystic Buster upgrade effect moves to Mystic Expert.\n- Magic Booster: New skill increases Casting Speed before the 3rd Class Transfer, replacing Concentration and remaining available after learning higher-level skills.\n\nThese changes strengthen magic-based combat with improved damage, debuff effectiveness, and survivability.\n\n🇪🇸 Español → https://discord.com/channels/673917009897062411/1566791591803359323/1566791774490464272",
+      "url": "https://discord.com/channels/673917009897062411/1354084517404737586/1566791591803359323",
+      "edited_at": "2026-11-02T12:31:22.817000Z",
+      "image": "assets/discord/fbc96c9a75088a4873bba6b1.png"
+    },
     {
       "id": "1564834426712629369",
       "channel_id": "1164209144740458506",
@@ -102,14 +111,6 @@
       "text": "BonaLabs\n\n🇪🇸 Actualizaciones\n- Se añadió un nuevo artículo:\n  - Server Battle\n- El artículo incluye información sobre la nueva Outpost Occupation Battle, sus mecánicas, horarios, recompensas, misión diaria, cambios en los rankings individuales y el intercambio de Pitch-Black Coins.\n\n🇪🇺 Updates\n- A new article was added:\n  - Server Battle\n- The article covers the new Outpost Occupation Battle, including its mechanics, schedule, rewards, daily mission, updated individual rankings, and Pitch-Black Coin exchange.",
       "url": "https://discord.com/channels/673917009897062411/1164209144740458506/1560075071828131900",
       "image": "assets/discord/f58e355193558fbf09e89c3f.png"
-    },
-    {
-      "id": "1557197470344155226",
-      "channel_id": "1354084517404737586",
-      "published_at": "2026-10-07T01:06:48.260000Z",
-      "text": "[Lineage 2] New Class: Tyrant – Bartz ???\nhttps://youtu.be/QxWwW0KFEKU",
-      "url": "https://discord.com/channels/673917009897062411/1354084517404737586/1557197470344155226",
-      "edited_at": "2026-10-07T01:11:37.634000Z"
     }
   ]
 }
