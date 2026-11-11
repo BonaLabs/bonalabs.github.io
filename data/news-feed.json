@@ -6,8 +6,17 @@
     "1164209144740458506",
     "1354084517404737586"
   ],
-  "updated_at": "2026-11-02T12:46:05.444423Z",
+  "updated_at": "2026-11-11T01:15:50.276374Z",
   "posts": [
+    {
+      "id": "1569882726708936854",
+      "channel_id": "1164209144740458506",
+      "published_at": "2026-11-11T01:13:29.058000Z",
+      "text": "📢 BonaLabs — Weekly KR Patch Notes, Reworked!\n\nThe old Tracker has evolved into a more complete Weekly Patch Notes section!\n\nFrom now on, we'll cover all relevant changes from Korea's weekly updates for both BASIC and Essence, skipping events, limited-time offers, and other promotional content.\n\nWe've been a bit busy lately and couldn't cover the November 4 update on time. But we're back on track, and both updates are now available!\n\nNovember 11, 2026\nCheck out the patch notes\n\n- Melee class improvements and skill adjustments.\n- New Ant Nest hunting zone (BASIC), where auto-hunting is disabled, plus 10 new Field Raid Bosses.\n\nNovember 4, 2026\nCheck out the patch notes\n\n- Major skill updates for Wizard, Summoner, and Shaman classes.\n- New Timak Outpost hunting zone (BASIC), along with other gameplay changes.\n\n🇪🇸 Español → https://discord.com/channels/673917009897062411/1569882726708936854/1569882852131344435",
+      "url": "https://discord.com/channels/673917009897062411/1164209144740458506/1569882726708936854",
+      "edited_at": "2026-11-11T01:14:22.686000Z",
+      "image": "assets/discord/4d46553294f64c57ff353301.png"
+    },
     {
       "id": "1566791591803359323",
       "channel_id": "1354084517404737586",
@@ -103,14 +112,6 @@
       "text": "BonaLabs\n\n🇪🇸 Actualizaciones\n- Se añadió una nueva entrada al Tracker con los cambios del 14 de octubre de 2026, incluyendo modificaciones en skills y en la World Zone Tower of Insolence.\n\n🇪🇺 Updates\n- A new entry covering the October 14, 2026 changes has been added to the Tracker, including skill adjustments and changes to the Tower of Insolence World Zone.",
       "url": "https://discord.com/channels/673917009897062411/1164209144740458506/1560264076028805170",
       "image": "assets/discord/43b990691b59a858c0be00e2.png"
-    },
-    {
-      "id": "1560075071828131900",
-      "channel_id": "1164209144740458506",
-      "published_at": "2026-10-14T23:41:21.917000Z",
-      "text": "BonaLabs\n\n🇪🇸 Actualizaciones\n- Se añadió un nuevo artículo:\n  - Server Battle\n- El artículo incluye información sobre la nueva Outpost Occupation Battle, sus mecánicas, horarios, recompensas, misión diaria, cambios en los rankings individuales y el intercambio de Pitch-Black Coins.\n\n🇪🇺 Updates\n- A new article was added:\n  - Server Battle\n- The article covers the new Outpost Occupation Battle, including its mechanics, schedule, rewards, daily mission, updated individual rankings, and Pitch-Black Coin exchange.",
-      "url": "https://discord.com/channels/673917009897062411/1164209144740458506/1560075071828131900",
-      "image": "assets/discord/f58e355193558fbf09e89c3f.png"
     }
   ]
 }
