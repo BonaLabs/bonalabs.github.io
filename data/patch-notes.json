@@ -1,0 +1,183 @@
+{
+    "version": 2,
+    "notes": [
+        {
+            "editions": [
+                "basic",
+                "essence"
+            ],
+            "date": "2026-11-11",
+            "title": "KR Patch Notes — November 11, 2026",
+            "url": "/articles/patch-notes/2026-11-11.html",
+            "topics": [
+                {
+                    "id": "classes",
+                    "scope": "common",
+                    "title": "Classes",
+                    "text": "Classes 1. A new skill, Swift Tempo , has been added to Warrior- and Knight-type classes of the Human, Elf, Dark Elf, Orc and Dwarf races. Learning Swift Tempo reduces P. Skill Cooldown by 2%. It can be learned from Lv. 40 by consuming 5 Magic Tablets. 2nd Class Transfer 3rd Class Transfer SP Cost Gladiator Duelist 55 Warlord Dreadnought 82 Paladin Phoenix Knight 62 Dark Avenger Hell Knight 62 Temple Knight Eva's Templar 67 Shillien Knight Shillien Templar 56 Destroyer Titan 67 Tyrant Grand Khavatari 70 Lancer Vanguard 80 Warsmith Maestro 90 Bounty Hunter Fortune Seeker 82 2. The range of certain skills and basic attacks for melee classes has been increased. Class Changes Death Knight Demolition skill range: 70 → 200 Punishment skill range: 70 → 200 Death Force basic attack range: 30 → 60 Vanguard Wild Instinct basic attack range: 40 → 60 Titan Formula of Demolition skill range: 40 → 200 Formula of Demolition +3 enchant Defense Ignore: 10% → 15% Demolition Impact skill range: 40 → 150 A basic attack range increase has been added to the following mastery skills. The increased range applies from character Lv. 40. Classes Skill Hell Knight, Phoenix Knight Knight Weapon Mastery Sword Muse, Spectral Dancer Bard Weapon Mastery Grand Khavatari Spirit of Wolf, from skill Lv. 2 Fortune Seeker, Maestro Dwarven Weapon Mastery, from skill Lv. 2 The range of Power Strike, Fatal Strike, Wild Sweep, Iron Punch, Burning Fist (skill Lv. 1–45) and Guard Crush has been increased to 100. Tooltips for skills that increase basic attack range now consistently display “Basic Attack Range +[increase amount]”. 3. Fixed an issue where Vanguard could learn Sain Thrust (사인 스러스트) without consuming SP. Learning the skill now costs 5,900 SP. 4. The visual effects of Inferno , Blizzard , Demon Wind and Rush have been changed. 5. The icons for Full Swing and Gigantic Swing have been changed."
+                },
+                {
+                    "id": "common-changes",
+                    "scope": "common",
+                    "title": "Shared fixes and improvements",
+                    "text": "Shared fixes and improvements World Trade now displays the Adena market price (lowest price) at the top. Fixed an issue where the “Insert Soul Crystal” option appeared in shield item menus. The MP Drain skill used by Shackle and Royal Cave Servant monsters in Dragon Valley has been changed to HP Drain. Fixed abnormal monster spawn locations in National Cemetery. Removed the mechanic that caused raid bosses to go berserk after a certain time in combat. Sel Mahum Assault Soldier monsters in Sel Mahum Barracks no longer use Stun skills. Fixed incorrect sound playback for Transcendent Lethal Shot. Fixed an issue where the Elemental Unicorn would not attack when Elemental Master used Elemental Bolt while Elemental Expert was active."
+                },
+                {
+                    "id": "hunting-zones",
+                    "scope": "basic",
+                    "title": "Hunting zones",
+                    "text": "Hunting zones 1. The number of monsters placed in the following hunting zones has been reduced: National Cemetery Fields of Massacre Plains of Glory Plains of Fierce Battle Silent Valley"
+                },
+                {
+                    "id": "ant-nest",
+                    "scope": "basic",
+                    "title": "Seasonal hunting zone — Ant Nest",
+                    "text": "Seasonal hunting zone — Ant Nest 1. The seasonal Ant Nest hunting zone opens after scheduled maintenance on 11.11.2026 and remains available until scheduled maintenance begins on 09.12.2026 . Use Teleport (Alt+F) to travel to Ant Nest. Only manual hunting is available; auto-hunting cannot be used. A Cocoon Imbued with Ant Power NPC appears at a random location inside Ant Nest. Attacking it within 10 seconds gives a chance to spawn an Ancient Drone Ant . Defeating monsters in Ant Nest restores MP. A party bonus applies when defeating monsters while in a party. Monster Acquisition Item Quantity Ancient Drone Ant Chance drop Scroll: Enchant Weapon 1 Scroll: Enchant Armor 1 D-grade Equipment 1 Basic Materials 10–50 Additional chance drop Lucky Adena Box (Sealed) 1 Augmenting Stone: Weapon 1 Augmenting Stone: Armor 1 Augmenting Stone: Accessory 1 Augmenting Stone: Special Equipment 1 2. A new quest can be undertaken using an Ant Nest Exploration Permit (Time-limited) (Sealed) , obtained by speaking with Camilla and paying Adena or L-Coins. The quest is available to characters at Lv. 78 or higher until scheduled maintenance begins on 09.12.2026 . Camilla is located near the Ant Nest entrance. The first permit purchase costs 300,000 Adena. The second and subsequent purchases cost 300 L-Coins each. Up to five permits can be purchased per day. Quest Objective Kills Completion Reward Ant Nest Exploration Defeat Ant Nest monsters 100 Ant Nest Exploration Reward Box (Time-limited) (Sealed) x1 Green Arc — EXP (Time-limited) (Sealed) x1 Using an Ant Nest Exploration Reward Box (Time-limited) (Sealed) gives a chance to obtain the following items: Possible Items Ignis Agathion Pack (Sealed) x1 Nebula Agathion Pack (Sealed) x1 Procella Agathion Pack (Sealed) x1 Petram Agathion Pack (Sealed) x1 Shabang Agathion Pack (Sealed) x1 Additional Possible Items Attack Enhancement Scroll (Time-limited) (Sealed) x3 Defense Enhancement Scroll (Time-limited) (Sealed) x3 Additional Possible Items Scroll: Enchant Weapon (D-grade) x1 Scroll: Enchant Armor (D-grade) x1"
+                },
+                {
+                    "id": "tower-of-insolence",
+                    "scope": "basic",
+                    "title": "Hunting zone — Tower of Insolence",
+                    "text": "Hunting zone — Tower of Insolence 1. Monster rewards in the Tower of Insolence have been adjusted. Certain monsters on Floor 5 and above can now drop Aden's Soul Crystal Lv. 1 — Weapon and Aden's Soul Crystal Lv. 1 — Armor . 2. The frequency at which bosses and elite monsters use skills has been adjusted."
+                },
+                {
+                    "id": "orbis-hall",
+                    "scope": "basic",
+                    "title": "Special hunting zone — Orbis Hall",
+                    "text": "Special hunting zone — Orbis Hall 1. Boss respawn times in the lower and upper levels are now randomly determined within a 10–30 minute interval. 2. Boss social aggro range has been increased, and their leash distance has been reduced."
+                },
+                {
+                    "id": "field-raids",
+                    "scope": "basic",
+                    "title": "Field raids",
+                    "text": "Field raids 1. Ten field raids have been added to the Gludio and Giran territories. Location Raid Boss Level Gludio Territory Shilen's Messenger Cabrio 80 Blood Priest Rudelto 80 Sorcerer Isirr 80 Antharas' Priest Cloe 80 Hekaton Press 80 Giran Territory Sealed Zombie Lord Crowl 80 Soul Collector Acheron 80 Archon Susceptor 80 Gorgolos 80 Millinous 80 If a boss is not defeated within 10 minutes of the raid starting, its HP recovers. Bosses respawn four hours after being defeated. Their locations can be checked through Raid Information and reached using Teleport. Defeating them can yield Basic Materials and D-grade weapon and armor enchant scrolls, with a chance to obtain Elemental Evolution Stones (Water, Fire, Wind or Earth) and Common Spellbooks."
+                },
+                {
+                    "id": "seven-star-apostles",
+                    "scope": "basic",
+                    "title": "Raid — Seven Star Apostles",
+                    "text": "Raid — Seven Star Apostles 1. The stats of Seven Star Apostles (칠성 사도) raid bosses have been reduced. 2. If a boss is not defeated within 10 minutes of the raid starting, its HP now recovers."
+                },
+                {
+                    "id": "special-crafting",
+                    "scope": "basic",
+                    "title": "Special Crafting",
+                    "text": "Special Crafting 1. The daily crafting limit for Magic Tablets has been increased from three to five times per account."
+                },
+                {
+                    "id": "other-changes",
+                    "scope": "basic",
+                    "title": "Other changes",
+                    "text": "Other changes The Dye and Guardian categories are no longer displayed in World Trade. Hero's Escort Soldier and Hero's Royal Guard monsters in Orbis Hall no longer use Petrification skills. Fixed abnormal monster spawn locations in Timak Outpost. Sel Mahum Knight monsters no longer use Stun skills."
+                },
+                {
+                    "id": "essence-changes",
+                    "scope": "essence",
+                    "title": "Other changes",
+                    "text": "Other changes Fixed an issue where characters could enter the interior of the Totem of Challenge in Turek Orc Camp. Fixed an issue where monsters in some parts of Hot Springs spawned on rocks and could not be attacked. Bartz's Heroic and Legendary Spellbooks have been added to the Tempest raid rewards."
+                }
+            ]
+        },
+        {
+            "editions": [
+                "basic",
+                "essence"
+            ],
+            "date": "2026-11-04",
+            "title": "KR Patch Notes — November 4, 2026",
+            "url": "/articles/patch-notes/2026-11-04.html",
+            "topics": [
+                {
+                    "id": "classes",
+                    "scope": "common",
+                    "title": "Classes",
+                    "text": "Classes 1. Rare buff skills for Wizard-, Summoner- and Shaman-type classes have been reworked. Using these buffs enhances class-specific skills. Class Rare Buff Skill Enhanced Skills Archmage Flame Expert Prominence: more hits Flame Buster: increased skill power and more hits Mystic Muse Mystic Expert Hydro Blast: more hits Mystic Buster: increased skill power and more hits Storm Screamer Gale Expert Hurricane: more hits Gale Buster: increased skill power and more hits Soultaker Abyssal Expert Death Spike: more hits Abyssal Buster: increased skill power and more hits Dominator Doomcryer Crimson Flame Pyro Vortex: increased skill power and more targets Inferno Strike: more hits Blood Strike → Burning Blood Strike: more hits, reduced cooldown and HP recovery when used Arcana Lord Arcana Expert Arcana Burst: more hits Ethereal Strike → Arcana Strike: increased skill power and more hits Elemental Master Elemental Expert Elemental Bolt: more hits Elemental Strike: increased skill power and more hits Spectral Master Phantom Expert Phantom Strike: more hits Ethereal Strike → Spectral Strike: increased skill power and more hits The new Rare buffs Mystic Expert, Arcana Expert and Phantom Expert can be learned by their respective classes from Lv. 76 using one Rare Spellbook. Enchanting Relic to +3 no longer changes Mystic Buster into Mystic Buster: Relic. Instead, using a magic skill has a 50% chance to deal an additional hit. 2. Blaze, Aqua Swirl and Twister, learned from the Wizard, Elven Wizard and Dark Wizard stages, have been replaced by Magic Spike . 3. Arcana Burst has been added to Arcana Lord. It can be learned from the Warlock stage after completing the Lv. 40 class transfer. It requires a two-handed magic blunt weapon. Learning it removes Magic Spike, Fireball, Ice Bolt and Wind Strike. 4. Phantom Strike has been added to Spectral Master. It can be learned from the Phantom Summoner stage after completing the Lv. 40 class transfer. It requires a two-handed magic blunt weapon. Learning it removes Magic Spike, Fireball, Ice Bolt and Wind Strike. 5. Soultaker's Death Spike maximum skill level has been increased to Lv. 45, and its icon and visual effects have changed. Learning levels have been adjusted; already learned skill levels remain unchanged. 6. Enhanced passive skills have been added to Wizard-type classes. Each can be learned from Lv. 76 using one Enhanced Spellbook. Class Enhanced Passive — Enchantable Enhanced Passive Archmage Mana Stone Flame Mastery Storm Screamer Mana Flow Storm Mastery Soultaker Abyssal Draw Abyssal Mastery With Mana Stone, Mana Flow or Abyssal Draw enchanted to +3, using a magic skill has a 50% chance to trigger an additional-hit skill against the target. Flame Mastery, Storm Mastery and Abyssal Mastery only take effect while wearing robes. 7. Passive skills have been added to Arcana Lord and Spectral Master. Class Enhanced Passive Rare Passive Arcana Lord Arcana Mastery Arcana Harmony Spectral Master Phantom Mastery Phantom Resonance The Enhanced passives require an Enhanced Spellbook, and the Rare passives require a Rare Spellbook. They can be learned from Lv. 76. Arcana Mastery and Phantom Mastery can be enchanted. Arcana Harmony and Phantom Resonance increase certain combat stats and the maximum M. Skill Critical Rate. 8. Magic Booster , a buff that improves Casting Speed before the third class transfer, has been added. It replaces Concentration and consumes two Spirit Ore when used. It can be learned from Lv. 20. Available class lines: Archmage, Mystic Muse, Storm Screamer, Soultaker, Arcana Lord, Elemental Master, Spectral Master, Hierophant, Cardinal, Eva's Saint and Shillien Saint. Learning Elemental Concentration as an Elemental Master does not remove Magic Booster. 9. Soultaker's Dark Burst maximum target count has been adjusted to five, and its visual effects have changed. 10. Archmage's Fire Vortex and Blazing Skin visual effects have changed. 11. Mystic Muse's Ice Vortex , Freezing Skin and Aqua Splash visual effects have changed. 12. Mystic Muse's Mystic Buster icon has changed. 13. Storm Screamer's Wind Vortex and Tempest visual effects have changed. 14. Soultaker's Dark Vortex visual effects have changed. 15. Elemental Master's Elemental Resonance and Elemental Mastery icons have changed. 16. Applying an appearance to a Sacred Templar now gives it the unique male High Elf appearance. The statement that appearance changes are unavailable has been removed from the Lord Knight skill description. 17. Weight limits for certain classes have been increased. Class Learning Level Weight Limit Bonus Dark Mage 1 10,000 Elven Mage Spirit Mage Kamael Soldier Rose Vain Dominator 76 Doomcryer Shillien Templar Spectral Dancer Ghost Hunter Ghost Sentinel Archmage 76 20,000 Soultaker Arcana Lord Cardinal Hierophant Mystic Muse Elemental Master Eva's Saint Storm Screamer Spectral Master Shillien Saint Spirit (3rd Class Transfer) Doombringer Soul Hound Trickster Rose Vain (3rd Class Transfer) 18. Blessed by Sayha now increases the weight limit. Skill Skill Level Learning Level Additional Weight Limit Blessed by Sayha 1 70 3,000 2 80 5,000 3 85 10,000 4 90 15,000"
+                },
+                {
+                    "id": "common-changes",
+                    "scope": "common",
+                    "title": "Shared fixes and improvements",
+                    "text": "Shared fixes and improvements Fixed an issue where EXP earned on World Servers was not counted in the Weekly EXP Acquisition Ranking. Fixed an issue where the Class No. 1 emblem was intermittently not applied to the top-ranked character of certain classes. Fixed an issue where items sometimes could not be registered in World Trade. Fixed misaligned text in the memo field of the Contacts window. Fixed an issue where enchant effects for B-grade and lower weapons displayed differently only for the Crow class. Del Lizardman Rogue monsters in Eva's Underwater Garden no longer attack first."
+                },
+                {
+                    "id": "hunting-zones",
+                    "scope": "basic",
+                    "title": "Hunting zones",
+                    "text": "Hunting zones 1. The number of monsters in the following hunting zones has been reduced: National Cemetery Fields of Massacre Plains of Glory Plains of Fierce Battle Silent Valley 2. Adena rewards from monsters in Silent Valley and Plains of the Lizardmen have been adjusted."
+                },
+                {
+                    "id": "tower-of-infinity",
+                    "scope": "basic",
+                    "title": "Special hunting zone — Tower of Infinity",
+                    "text": "Special hunting zone — Tower of Infinity Magic skills obtained in the Tower of Infinity (무한의 탑) can no longer be manually deleted."
+                },
+                {
+                    "id": "orbis-hall",
+                    "scope": "basic",
+                    "title": "Special hunting zone — Orbis Hall",
+                    "text": "Special hunting zone — Orbis Hall Boss HP on the lower and upper levels has been increased, and a damage cap has been added. Lower- and upper-level bosses no longer spawn at the same location. Boss rewards on both levels have changed: one Dragon's Belt Box can be obtained when their HP reaches 66%, again at 33%, and upon defeating them."
+                },
+                {
+                    "id": "timak-outpost",
+                    "scope": "basic",
+                    "title": "New hunting zone — Timak Outpost",
+                    "text": "New hunting zone — Timak Outpost Timak Outpost has been added as a hunting zone, with a new destination in the Teleport menu. Teleport Destination Recommended Level Teleport Cost Timak Outpost 76–90 0 Adena The following monsters have been placed in the new hunting zone: Location Monster Level Timak Outpost Timak Orc 76 Timak Orc Archer 76 Timak Orc Soldier 76 Timak Orc Warrior 76 Timak Orc Shaman 76 Timak Orc Overlord 76"
+                },
+                {
+                    "id": "monster-invasions",
+                    "scope": "basic",
+                    "title": "Monster invasions",
+                    "text": "Monster invasions Attack and defense capabilities have been reduced for monsters in the Monster Invasion and Dark Legion Invasion encounters in Plains of the Lizardmen and Western Dragon Valley ."
+                },
+                {
+                    "id": "basic-boss-subjugation",
+                    "scope": "basic",
+                    "title": "Boss Subjugation Battle",
+                    "text": "Boss Subjugation Battle The attack and defense capabilities of the intermediate bosses Kesma (케스마), Plas (플라스), Vira (뷔라), Hiter (히테르) and Hirak (히라크) have been reduced."
+                },
+                {
+                    "id": "basic-changes",
+                    "scope": "basic",
+                    "title": "Other changes",
+                    "text": "Other changes Fixed an issue where Barkas (바르카스) and Crow could not progress the quests “Unleash the Power of Barkas” (바르카스의 힘을 해방하라) and “A Step Toward the Strongest” (최강을 향한 한 걸음) after their first class transfer. Certain monsters in Orbis Hall no longer use Stun skills. Tower Watcher monsters on Floor 1 of the Tower of Insolence no longer use Sleep or HP Drain skills."
+                },
+                {
+                    "id": "raid-rewards",
+                    "scope": "essence",
+                    "title": "Raid rewards",
+                    "text": "Raid rewards Bartz-specific Spellbooks have been added to raid rewards."
+                },
+                {
+                    "id": "outpost-conquest",
+                    "scope": "essence",
+                    "title": "Outpost Conquest",
+                    "text": "Outpost Conquest Five Black Coins (칠흑의 주화) have been added to the rewards for the “Defeat Outpost Monsters” mission in Outpost Conquest (전초기지 점령전)."
+                },
+                {
+                    "id": "essence-boss-subjugation",
+                    "scope": "essence",
+                    "title": "Boss Subjugation Battle",
+                    "text": "Boss Subjugation Battle The intermediate bosses Kesma (케스마), Plas (플라스), Vira (뷔라), Hiter (히테르) and Hirak (히라크) no longer award EXP."
+                },
+                {
+                    "id": "lindraco-canyon",
+                    "scope": "essence",
+                    "title": "Instance zone — Lindraco Canyon",
+                    "text": "Instance zone — Lindraco Canyon The area covered by tornadoes generated by Storm Seeds has been reduced. P. Atk. and M. Atk. have been reduced for all monsters in Lindraco Canyon, including area bosses."
+                },
+                {
+                    "id": "ancient-adena-shop",
+                    "scope": "essence",
+                    "title": "L2 Store — Main Servers",
+                    "text": "L2 Store — Main Servers The following permanent product has been added to the Ancient Adena Shop : Product Availability Cost Purchase Limit Enhanced Spellbook (Sealed) Permanent 10,000 Ancient Adena Once per account per month"
+                },
+                {
+                    "id": "essence-changes",
+                    "scope": "essence",
+                    "title": "Other changes",
+                    "text": "Other changes Fixed an issue where the expired daily mission “Cyrax Temple Subjugation” was still displayed in the mission list. Fixed an issue where the hostile effects of certain skills affected characters from the same server group in the Black Citadel (칠흑의 성채). Fixed an issue where Bartz-class Spellbooks could not be selected from certain Heroic and Legendary Spellbook Exchange Coupons. Fixed a missing percentage symbol for Debuff and Control Resistance in the Abyssal Defense special-effect tooltip of Boots of the Deep Sea."
+                }
+            ]
+        }
+    ]
+}
